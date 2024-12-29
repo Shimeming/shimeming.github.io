@@ -7,7 +7,7 @@ const ThemeProviderWrapper = ({
   children: React.ReactNode;
 }>): React.JSX.Element => {
   return (
-    <ThemeProvider>
+    <ThemeProvider attribute='data-mode' enableSystem={true}>
       {children}
     </ThemeProvider>
   );
