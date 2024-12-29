@@ -23,7 +23,7 @@ const Page = () => {
               About me
             </h2>
             <div className='flex flex-col items-start justify-start'>
-              <div className='flex flex-col font-medium gap-2 text-blue-700 dark:text-blue-100'>
+              <div className='flex flex-col font-medium gap-2'>
                 <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
                 <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
                 <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
