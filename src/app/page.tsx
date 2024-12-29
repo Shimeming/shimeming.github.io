@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import profilePic from '@public/profilePic_softEdge.png';
+import profilePic from '@public/home-page-pic_softEdge.png';
 import AnimatedHeading from '@/components/AnimatedHeading';
 import Link from 'next/link';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
@@ -22,7 +22,7 @@ const Page = () => {
               // text="I think there should be some really awesome text here, but I can't come up with anything."
               text="Imagine some really awesome text here!"
             />
-            <p className='my-4 text-base font-medium'>
+            <p className='my-4 text-xl font-medium font-caveat'>
               If a thing is worth doing, it is worth doing badly.
             </p>
             <div className='flex items-center mt-2'>

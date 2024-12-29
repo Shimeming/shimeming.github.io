@@ -23,7 +23,7 @@ const Logo = (): React.JSX.Element => {
             '#a855f7', // purple-500
             '#ec4899', // pink-500
           ],
-          transition:{duration:3, repeat: Infinity}
+          transition:{duration:3, repeat: Infinity},
         }}
       >
         銘
