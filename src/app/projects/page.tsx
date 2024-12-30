@@ -1,23 +1,15 @@
 import { Metadata } from 'next';
-import ProjectCard from '@/components/ProjectCard';
+import Projects from './projects';
 
 export const metadata: Metadata = {
   title: 'Projects',
 };
 
-const projects = [
-  {
-    name: 'Hallucination',
-    description: 'A single player 2D platformer game made with Unity',
-    repoUrl: 'https://github.com/seantsao00/Hallucination',
-  },
-];
-
 const Page = () => {
   return (
     <>
       <main>
-        <ProjectCard content={projects[0]} />
+        <Projects />
       </main>
     </>
   );

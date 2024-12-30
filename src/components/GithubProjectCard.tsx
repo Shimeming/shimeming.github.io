@@ -4,17 +4,18 @@ import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { Octokit } from '@octokit/rest';
 
-const ProjectCard = ({
+const GithubProjectCard = ({
   content,
   enableFetchInformation = false,
 }: {
   content: {
+    projectName: string;
     repoUrl: string;
     description: string;
   };
   enableFetchInformation?: boolean;
 }) => {
-  const { repoUrl, description } = content;
+  const { projectName, repoUrl, description } = content;
   const { owner = 'shimeming', repo = 'error' } = extractRepoUrlInformation(repoUrl) || {};
 
   const [repoLanguages, setRepoLanguages] = useState<{ languages: { [language: string]: number }, totalCount: number } | undefined>(undefined);
@@ -75,13 +76,13 @@ const ProjectCard = ({
 
   return (
     <>
-      <div className='block max-w-md p-6 border rounded-lg shadow-lg
+      <div className='block p-6 border rounded-lg shadow-lg
       border-gray-200 hover:bg-gray-100
       dark:border-gray-700 dark:hover:bg-gray-700'
       >
         <div className='flex justify-between items-center'>
           <h5 className="text-xl font-bold tracking-tight">
-            {repo}
+            {projectName}
           </h5>
           <a href={repoUrl} target='_blank'
             className='text-2xl'>
@@ -144,4 +145,4 @@ const updateTimeToString = (updateTime?: Date) => {
   }
 };
 
-export default ProjectCard;
+export default GithubProjectCard;
