@@ -36,7 +36,7 @@ const NavBar = (): React.JSX.Element => {
           >
             {page.title}
             <span className={`
-              h-0.5 inline-block bg-dark absolute left-0 -bottom-0.5
+              h-0.5 inline-block bg-foreground absolute left-0 -bottom-0.5
               group-hover:w-full transition-[width] ease duration-300
               ${pathName === page.href ? 'w-full' : 'w-0'}
             `}>

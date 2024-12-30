@@ -10,7 +10,7 @@ const Logo = (): React.JSX.Element => {
       <MotionLink
         href='/'
         className='
-          w-16 h-16 bg-dark text-light flex items-center justify-center
+          w-14 h-14 bg-background outline text-foreground flex items-center justify-center
           rounded-full font-bold text-2xl
         '
         whileHover={{

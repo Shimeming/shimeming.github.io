@@ -28,9 +28,9 @@ const Education = () => {
 
   return (
     <>
-      <h3 className='text-xl font-bold text-dark/75 mb-2'>Education</h3>
+      <h3 className='text-xl font-bold opacity-75 mb-2'>Education</h3>
       <div ref={ref} className='w-full mx-auto relative flex'>
-        <motion.div className='absolute left-[2.5px] w-1 h-full bg-dark origin-top mx-2 my-1'
+        <motion.div className='absolute left-[2.5px] w-1 h-full bg-foreground origin-top mx-2 my-1'
           style={{ scaleY: scrollYProgress }}
         />
         <ul className='list-none p-0 m-0'>

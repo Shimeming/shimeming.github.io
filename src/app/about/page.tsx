@@ -19,7 +19,7 @@ const Page = () => {
         />
         <div className='grid grid-cols-8'>
           <section className='col-span-5'>
-            <h2 className='mb-2 text-xl font-bold uppercase text-dark/75'>
+            <h2 className='mb-2 text-xl font-bold uppercase opacity-75'>
               About me
             </h2>
             <div className='flex flex-col items-start justify-start'>

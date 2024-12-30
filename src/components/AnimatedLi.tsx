@@ -20,10 +20,10 @@ const AnimatedLi = ({
     <li ref={ref} className='flex gap-2'>
       <figure>
         <svg width='25' height='25' viewBox='0 0 100 100'
-          className={`-rotate-90 ${className} stroke-dark z-10`}
+          className={`-rotate-90 ${className} stroke-primary z-10`}
         >
           <circle cx='50' cy='50' r='40' className='stroke-primary stroke-1 fill-none' />
-          <motion.circle cx='50' cy='50' r='40' className='stroke-[4px] fill-light'
+          <motion.circle cx='50' cy='50' r='40' className='stroke-[4px] fill-background'
             style={{
               pathLength: scrollYProgress,
             }}

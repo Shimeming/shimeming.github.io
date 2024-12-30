@@ -12,6 +12,8 @@ export default {
       colors: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
+        foreground: 'var(--foreground)',
+        background: 'var(--background)',
       },
       fontFamily: {
         sans: ['var(--font-noto-sans)'],

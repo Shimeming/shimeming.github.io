@@ -8,7 +8,7 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 const Page = () => {
   return (
     <>
-      <main className='flex items-center text-dark w-full'>
+      <main className='flex items-center w-full'>
         <div className="flex items-center justify-between w-full">
           <div className='pl-12 w-2/5'>
             <Image
