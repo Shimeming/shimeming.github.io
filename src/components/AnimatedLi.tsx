@@ -22,13 +22,13 @@ const AnimatedLi = ({
         <svg width='25' height='25' viewBox='0 0 100 100'
           className={`-rotate-90 ${className} stroke-primary z-10`}
         >
-          <circle cx='50' cy='50' r='40' className='stroke-primary stroke-1 fill-none' />
-          <motion.circle cx='50' cy='50' r='40' className='stroke-[4px] fill-background'
+          <circle cx='50' cy='50' r='40' className='stroke-primary stroke-1 fill-none transition-colors duration-1000' />
+          <motion.circle cx='50' cy='50' r='40' className='stroke-[4px] fill-background transition-colors duration-1000'
             style={{
               pathLength: scrollYProgress,
             }}
           />
-          <circle cx='50' cy='50' r='20' className='animate-pulse stroke-1 fill-primary' />
+          <circle cx='50' cy='50' r='20' className='animate-pulse stroke-1 fill-primary transition-colors duration-1000' />
         </svg>
       </figure>
       <div>

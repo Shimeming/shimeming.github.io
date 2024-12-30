@@ -35,12 +35,19 @@ const NavBar = (): React.JSX.Element => {
             className='relative group text-xl'
           >
             {page.title}
-            <span className={`
-              h-0.5 inline-block bg-foreground absolute left-0 -bottom-0.5
-              group-hover:w-full transition-[width] ease duration-300
-              ${pathName === page.href ? 'w-full' : 'w-0'}
-            `}>
-            </span>
+            <span
+              className={`
+                h-0.5 inline-block bg-foreground absolute left-0 -bottom-0.5
+                group-hover:w-full
+                ${pathName === page.href ? 'w-full' : 'w-0'}
+              `}
+              style={{
+                transition: `
+                  width 300ms ease-in-out,
+                  background-color 1000ms linear
+                `,
+              }}
+            />
           </Link>
         ))}
       </nav>

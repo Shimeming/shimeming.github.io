@@ -11,7 +11,7 @@ const Logo = (): React.JSX.Element => {
         href='/'
         className='
           w-14 h-14 bg-background outline text-foreground flex items-center justify-center
-          rounded-full font-bold text-2xl
+          rounded-full font-bold text-2xl transition-colors duration-1000
         '
         whileHover={{
           backgroundColor:[
