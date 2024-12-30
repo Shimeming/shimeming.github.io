@@ -56,16 +56,17 @@ const DarkModeToggle = ({
       strokeLinecap="round"
       strokeLinejoin="round"
       onClick={toggleDarkMode}
-      className={`w-8 h-8 cursor-pointer ${className}`}
+      className={`no-transition w-8 h-8 cursor-pointer ${className}`}
       animate={{ transform }}
       transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
     >
       <mask id="moon-mask">
         <rect x="0" y="0" width="100%" height="100%" fill="white" />
         <motion.circle
+          stroke="none"
           fill="black"
           cx={cx} cy={cy} r={r}
-          transition={{ duration: 0.5, type: 'spring' }}
+          transition={{ duration: 0.5, type: 'spring'}}
         />
       </mask>
       <motion.circle
