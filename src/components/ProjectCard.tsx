@@ -2,17 +2,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-import axios from 'axios';
 import { Octokit } from '@octokit/rest';
-import { get } from 'http';
 
 const ProjectCard = ({
   content,
+  enableFetchInformation = false,
 }: {
   content: {
     repoUrl: string;
     description: string;
-  }
+  };
+  enableFetchInformation?: boolean;
 }) => {
   const { repoUrl, description } = content;
   const { owner = 'shimeming', repo = 'error' } = extractRepoUrlInformation(repoUrl) || {};
@@ -21,6 +21,7 @@ const ProjectCard = ({
   const [updateTime, setUpdateTime] = useState<Date | undefined>(undefined);
 
   const getRepoInformation = useCallback(async () => {
+    if (!enableFetchInformation) return;
     const octokit = new Octokit();
     try {
       // Fetch the branch details to get the latest commit SHA
@@ -48,9 +49,10 @@ const ProjectCard = ({
       if (error instanceof Error) console.error(error.message);
       else console.error('An unknown error occurred');
     }
-  }, [owner, repo]);
+  }, [owner, repo, enableFetchInformation]);
 
   const getRepoLanguages = useCallback(async () => {
+    if (!enableFetchInformation) return;
     const octokit = new Octokit();
     try {
       const response = (await octokit.repos.listLanguages({
@@ -62,7 +64,7 @@ const ProjectCard = ({
       if (error instanceof Error) console.error(error.message);
       else console.error('An unknown error occurred');
     }
-  }, [owner, repo]);
+  }, [owner, repo, enableFetchInformation]);
 
   useEffect(() => {
     getRepoLanguages().then(
@@ -89,31 +91,32 @@ const ProjectCard = ({
         <p className="font-normal">
           {description}
         </p>
-        <hr className='my-2' />
-        <div className='my-2'>
-          {'Languages: '}
-          {repoLanguages
-            ? Object.keys(repoLanguages.languages).slice(
-              Math.min(4, Object.keys(repoLanguages.languages).length),
-            ).map((language) => (
-              <a key={language}
-                href={`${repoUrl}/search?l=${encodeURIComponent(language)}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 text-sm font-medium  ring-1 ring-inset'
-              >
-                {language}{': '}{Math.trunc((repoLanguages.languages[language] / repoLanguages.totalCount) * 1000) / 10} %
-              </a>
-            ))
-            : repoLanguages === undefined
-              ? <Skeleton count={2} />
-              : 'No code'
-          }
-        </div>
-        {updateTime
-          ? (<p className='opacity-60 text-sm'>{'Updated '}{updateTimeToString(updateTime)}</p>)
-          : <Skeleton />
-        }
+        {enableFetchInformation && <>
+          <hr className='my-2' />
+          <div className='my-2'>
+            {'Languages: '}
+            {repoLanguages
+              ? Object.keys(repoLanguages.languages).slice(
+                Math.min(4, Object.keys(repoLanguages.languages).length),
+              ).map((language) => (
+                <a key={language}
+                  href={`${repoUrl}/search?l=${encodeURIComponent(language)}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 text-sm font-medium  ring-1 ring-inset'
+                >
+                  {language}{': '}{Math.trunc((repoLanguages.languages[language] / repoLanguages.totalCount) * 1000) / 10} %
+                </a>
+              ))
+              : repoLanguages === undefined
+                ? <Skeleton count={2} />
+                : 'No code'
+            }
+          </div>
+          {updateTime
+            ? (<p className='opacity-60 text-sm'>{'Updated '}{updateTimeToString(updateTime)}</p>)
+            : <Skeleton />
+          } </>}
       </div>
     </>
   );

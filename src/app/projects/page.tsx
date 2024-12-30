@@ -14,7 +14,6 @@ const projects = [
 ];
 
 const Page = () => {
-
   return (
     <>
       <main>
