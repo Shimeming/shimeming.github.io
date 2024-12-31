@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import typography from '@tailwindcss/typography';
 
 export default {
   darkMode: ['selector', '[data-mode="dark"]'],
@@ -21,7 +22,15 @@ export default {
         mono: ['var(--font-geist-mono)'],
         caveat: ['var(--font-caveat)', 'cursive'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    typography,
+  ],
 } satisfies Config;
