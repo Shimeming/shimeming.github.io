@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 
 const projects = [
   {
+    projectName: 'Personal Website',
+    description: 'My personal website made with Next.js and Tailwind CSS.',
+    repoUrl: 'https://github.com/Shimeming/shimeming.github.io',
+  },
+  {
     projectName: 'Hallucination',
     description: 'A single player 2D platformer game made by Unity.',
     repoUrl: 'https://github.com/seantsao00/Hallucination',

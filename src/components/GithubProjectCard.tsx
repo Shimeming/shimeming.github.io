@@ -98,7 +98,7 @@ const GithubProjectCard = ({
             {'Languages: '}
             {repoLanguages
               ? Object.keys(repoLanguages.languages).slice(
-                Math.min(4, Object.keys(repoLanguages.languages).length),
+                0, Math.min(4, Object.keys(repoLanguages.languages).length),
               ).map((language) => (
                 <a key={language}
                   href={`${repoUrl}/search?l=${encodeURIComponent(language)}`}
