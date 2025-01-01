@@ -4,6 +4,50 @@ import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { Octokit } from '@octokit/rest';
 import Link from 'next/link';
+import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
+import matter from 'gray-matter';
+
+const ProjectCard = ({
+  project,
+}: {
+  project: string
+}) => {
+  const [projectMetadata, setProjectMetadata] = useState<{
+    href: string, data: ProjectMetadata
+  }>();
+
+  useEffect(() => {
+    (async () => {
+      const href = `/projects/${project}`;
+      const res = await fetch(`/projects/${project}.md`);
+      if (res.ok) {
+        const text = await res.text();
+        const data = matter(text).data as unknown as ProjectMetadata;
+        setProjectMetadata({ href, data });
+      } else {
+        console.error('Error fetching project metadata');
+      }
+    })();
+  }, [project]);
+
+  if (!projectMetadata) return <Skeleton count={3} />;
+  return (
+    <div className='relative block p-6 border rounded-lg shadow-lg
+      border-gray-200 hover:bg-gray-100
+      dark:border-gray-700 dark:hover:bg-gray-700'
+    >
+      <Link href={projectMetadata.href}
+        className='absolute inset-0'
+      />
+      <div className='[&_*]:z-10'>
+        {(projectMetadata.data as GithubProjectMetadata).repoUrl !== undefined
+          ? <GithubProjectCard content={projectMetadata.data as GithubProjectMetadata} />
+          : <div>{projectMetadata.data.projectName}</div>
+        }
+      </div>
+    </div>
+  );
+};
 
 const GithubProjectCard = ({
   content,
@@ -77,49 +121,47 @@ const GithubProjectCard = ({
 
   return (
     <>
-      <div className='block p-6 border rounded-lg shadow-lg
-      border-gray-200 hover:bg-gray-100
-      dark:border-gray-700 dark:hover:bg-gray-700'
-      >
-        <div className='flex justify-between items-center'>
-          <h5 className="text-xl font-bold tracking-tight">
-            {projectName}
-          </h5>
-          <a href={repoUrl} target='_blank'
-            className='text-2xl'>
-            <FaGithub />
-          </a>
-        </div>
-        <p className="font-normal">
-          {description}
-        </p>
-        {enableFetchInformation && <>
-          <hr className='my-2' />
-          <div className='my-2'>
-            {'Languages: '}
-            {repoLanguages
-              ? Object.keys(repoLanguages.languages).slice(
-                0, Math.min(4, Object.keys(repoLanguages.languages).length),
-              ).map((language) => (
+      <div className='flex justify-between items-center'>
+        <h5 className="text-xl font-bold tracking-tight">
+          {projectName}
+        </h5>
+        <a href={repoUrl} target='_blank'
+          className='text-2xl hover:text-black dark:hover:text-white active:scale-90'>
+          <FaGithub />
+        </a>
+      </div>
+      <p className="font-normal">
+        {description}
+      </p>
+      {enableFetchInformation && <>
+        <hr className='my-2' />
+        <div className='my-2'>
+          {'Languages: '}
+          {repoLanguages
+            ? Object.keys(repoLanguages.languages).slice(
+              0, Math.min(4, Object.keys(repoLanguages.languages).length),
+            ).map((language) => (
+              <span key={language}
+                className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 text-sm font-medium ring-1 ring-inset'
+              >
                 <a key={language}
                   href={`${repoUrl}/search?l=${encodeURIComponent(language)}`}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 text-sm font-medium  ring-1 ring-inset'
                 >
                   {language}{': '}{Math.trunc((repoLanguages.languages[language] / repoLanguages.totalCount) * 1000) / 10} %
                 </a>
-              ))
-              : repoLanguages === undefined
-                ? <Skeleton count={2} />
-                : 'No code'
-            }
-          </div>
-          {updateTime
-            ? (<p className='opacity-60 text-sm'>{'Updated '}{updateTimeToString(updateTime)}</p>)
-            : <Skeleton />
-          } </>}
-      </div>
+              </span>
+            ))
+            : repoLanguages === undefined
+              ? <Skeleton count={2} />
+              : 'No code'
+          }
+        </div>
+        {updateTime
+          ? (<p className='opacity-60 text-sm'>{'Updated '}{updateTimeToString(updateTime)}</p>)
+          : <Skeleton />
+        } </>}
     </>
   );
 };
@@ -146,4 +188,4 @@ const updateTimeToString = (updateTime?: Date) => {
   }
 };
 
-export default GithubProjectCard;
+export default ProjectCard;
