@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import matter from 'gray-matter';
-import ReactMarkdown from 'react-markdown';
+import MarkdownWrapper from '@/helpers/MarkdownWrapper';
 // import { ProjectMetadata } from '@/types/projects';
 
 const Page = ({
@@ -39,14 +39,15 @@ const Page = ({
       document.querySelector('meta[name="description"]')?.setAttribute('content', description);
   }, [description]);
 
-
-
   return (
     <>
-      <div className='w-full'>
-        <ReactMarkdown className='prose dark:prose-invert'>
-          {content || 'Loading...'}
-        </ReactMarkdown>
+      <div className='mt-8'>
+        {content
+          ? <MarkdownWrapper
+            content={content}
+            className='mx-auto'
+          />
+          : <p>Loading...</p>}
       </div>
     </>
   );

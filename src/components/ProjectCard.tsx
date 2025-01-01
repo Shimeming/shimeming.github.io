@@ -135,14 +135,14 @@ const GithubProjectCard = ({
       </p>
       {enableFetchInformation && <>
         <hr className='my-2' />
-        <div className='my-2'>
+        <div className='my-2 text-sm'>
           {'Languages: '}
           {repoLanguages
             ? Object.keys(repoLanguages.languages).slice(
               0, Math.min(4, Object.keys(repoLanguages.languages).length),
             ).map((language) => (
               <span key={language}
-                className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 text-sm font-medium ring-1 ring-inset'
+                className='bg-slate-400 inline-flex items-center rounded-md px-1 mx-2 font-medium ring-1 ring-inset'
               >
                 <a key={language}
                   href={`${repoUrl}/search?l=${encodeURIComponent(language)}`}
@@ -159,8 +159,8 @@ const GithubProjectCard = ({
           }
         </div>
         {updateTime
-          ? (<p className='opacity-60 text-sm'>{'Updated '}{updateTimeToString(updateTime)}</p>)
-          : <Skeleton />
+          ? (<p className='opacity-60'>{'Updated '}{updateTimeToString(updateTime)}</p>)
+          : <Skeleton className='text-sm' />
         } </>}
     </>
   );
