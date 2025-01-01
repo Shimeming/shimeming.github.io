@@ -30,7 +30,7 @@ const ProjectContent = ({
   }, [projectName]);
 
   useEffect(() => {
-    document.title = title + '| Projects';
+    if (document) document.title = title + '| Projects';
   }, [title]);
   useEffect(() => {
     if (description)
