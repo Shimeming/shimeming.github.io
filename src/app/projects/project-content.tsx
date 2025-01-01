@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import matter from 'gray-matter';
-import MarkdownWrapper from '@/helpers/MarkdownWrapper';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeHighlight from 'rehype-highlight';
 // import { ProjectMetadata } from '@/types/projects';
 
 const ProjectContent = ({
@@ -40,12 +42,12 @@ const ProjectContent = ({
   return (
     <>
       <div className='mt-8'>
-        {content
-          ? <MarkdownWrapper
-            content={content}
-            className='mx-auto'
-          />
-          : <></>}
+        <ReactMarkdown
+          className='prose dark:prose-invert mx-auto'
+          rehypePlugins={[rehypeRaw, rehypeHighlight]}
+        >
+          {content}
+        </ReactMarkdown>
       </div>
     </>
   );
