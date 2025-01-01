@@ -6,14 +6,13 @@ import { Octokit } from '@octokit/rest';
 import Link from 'next/link';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
 import matter from 'gray-matter';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const ProjectCard = ({
   project,
 }: {
   project: string
 }) => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -40,7 +39,7 @@ const ProjectCard = ({
         console.error('Error fetching project metadata');
       }
     })();
-  }, [project]);
+  }, [createQueryString, project, pathname]);
 
   if (!projectMetadata) return <Skeleton count={3} />;
   return (

@@ -45,7 +45,7 @@ const ProjectContent = ({
             content={content}
             className='mx-auto'
           />
-          : <p>Loading...</p>}
+          : <></>}
       </div>
     </>
   );

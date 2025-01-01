@@ -1,4 +1,6 @@
 'use client';
+import { Suspense } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import ProjectsList from './projects-list';
 import ProjectContent from './project-content';
 import { useSearchParams } from 'next/navigation';
@@ -10,11 +12,13 @@ const Page = () => {
   return (
     <>
       <main>
-        {projectName ? (
-          <ProjectContent projectName={projectName} />
-        ) : (
-          <ProjectsList />
-        )}
+        <Suspense fallback={<Skeleton count={3} />}>
+          {projectName ? (
+            <ProjectContent projectName={projectName} />
+          ) : (
+            <ProjectsList />
+          )}
+        </Suspense>
       </main>
     </>
   );
