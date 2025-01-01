@@ -1,31 +1,34 @@
 'use client';
 import GithubProjectCard from '@/components/GithubProjectCard';
 import { motion } from 'framer-motion';
-
-const projects = [
-  {
-    projectName: 'Personal Website',
-    description: 'My personal website made with Next.js and Tailwind CSS.',
-    repoUrl: 'https://github.com/Shimeming/shimeming.github.io',
-  },
-  {
-    projectName: 'Hallucination',
-    description: 'A single player 2D platformer game made by Unity.',
-    repoUrl: 'https://github.com/seantsao00/Hallucination',
-  },
-  {
-    projectName: 'Phantom Arena - 2024 CSIE Camp Challenge Game',
-    description: 'A 2D game made for education purpose.',
-    repoUrl: 'https://github.com/seantsao00/Challenge2024',
-  },
-  {
-    projectName: 'Hogwarts Tag - 2023 CSIE Camp Challenge Game',
-    description: 'A 2D tag game with various items and abilities for educational purposes.',
-    repoUrl: 'https://github.com/Ccucumber12/Challenge2023',
-  },
-];
+import projectList from '@/data/projects';
+import { useState, useEffect } from 'react';
+import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
+import matter from 'gray-matter';
 
 const Projects = () => {
+  const [projectsMetadata, setProjectsMetadata] = useState<{
+    href: string, data: ProjectMetadata
+  }[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const metadata: { href: string; data: ProjectMetadata }[] = [];
+      await Promise.all(projectList.map(async (project) => {
+        const href = `/projects/${project}`;
+        const res = await fetch(`/projects/${project}.md`);
+        if (res.ok) {
+          const text = await res.text();
+          const data = matter(text).data as unknown as ProjectMetadata;
+          metadata.push({ href, data });
+        } else {
+          console.error('Error fetching project metadata');
+        }
+      }));
+      setProjectsMetadata(metadata);
+    })();
+  }, []);
+
   return (
     <>
       <motion.div
@@ -40,8 +43,8 @@ const Projects = () => {
         initial='initial'
         animate='animate'
       >
-        {projects.map((project) => (
-          <motion.div key={project.projectName}
+        {projectsMetadata.map((metadata) => (
+          <motion.div key={metadata.data.projectName}
             variants={{
               initial: { opacity: 0, y: 50 },
               animate: {
@@ -50,7 +53,11 @@ const Projects = () => {
               },
             }}
           >
-            <GithubProjectCard content={project} key={project.projectName} />
+            {(metadata.data as GithubProjectMetadata).repoUrl !== undefined ? (
+              <GithubProjectCard content={metadata.data as GithubProjectMetadata} />
+            ) : (
+              <div>{metadata.data.projectName}</div>
+            )}
           </motion.div>
         ))}
       </motion.div>

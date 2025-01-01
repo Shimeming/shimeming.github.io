@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
-import { ProjectMetadata } from '@/types/projects';
+// import { ProjectMetadata } from '@/types/projects';
 
 const Page = ({
   params,
@@ -17,11 +17,11 @@ const Page = ({
   useEffect(() => {
     (async () => {
       const { slug } = await params;
-      const res = await fetch(`/projects/${slug}.md`);
+      const projectName = decodeURIComponent(slug);
+      const res = await fetch(`/projects/${projectName}.md`);
       if (res.ok) {
         const text = await res.text();
         const { content, data } = matter(text);
-        data as unknown as ProjectMetadata;
         setTitle(data.projectName);
         setDescription(data.description);
         setContent(content);
@@ -32,7 +32,7 @@ const Page = ({
   }, [params]);
 
   useEffect(() => {
-    document.title = title;
+    document.title = title + '| Projects';
   }, [title]);
   useEffect(() => {
     if (description)
@@ -44,7 +44,7 @@ const Page = ({
   return (
     <>
       <div className='w-full'>
-        <ReactMarkdown className='prose dark:prose-invert max-w-none'>
+        <ReactMarkdown className='prose dark:prose-invert'>
           {content || 'Loading...'}
         </ReactMarkdown>
       </div>

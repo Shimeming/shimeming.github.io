@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { Octokit } from '@octokit/rest';
+import Link from 'next/link';
 
 const GithubProjectCard = ({
   content,

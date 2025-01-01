@@ -3,6 +3,6 @@ export interface ProjectMetadata {
   description: string;
 }
 
-export interface GithubProjectData extends ProjectMetadata {
-  githubUrl: string;
+export interface GithubProjectMetadata extends ProjectMetadata {
+  repoUrl: string;
 }
