@@ -3,7 +3,8 @@ import ProjectCard from '@/components/ProjectCard';
 import { motion } from 'framer-motion';
 import projectList from '@/data/projects';
 
-const Projects = () => {
+const ProjectsList = () => {
+
   return (
     <>
       <motion.ul
@@ -37,4 +38,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectsList;

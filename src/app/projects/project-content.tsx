@@ -4,10 +4,10 @@ import matter from 'gray-matter';
 import MarkdownWrapper from '@/helpers/MarkdownWrapper';
 // import { ProjectMetadata } from '@/types/projects';
 
-const Page = ({
-  params,
+const ProjectContent = ({
+  projectName,
 }: {
-  params: Promise<{ slug: string }>
+  projectName: string;
 }) => {
 
   const [title, setTitle] = useState(document.title);
@@ -16,8 +16,6 @@ const Page = ({
 
   useEffect(() => {
     (async () => {
-      const { slug } = await params;
-      const projectName = decodeURIComponent(slug);
       const res = await fetch(`/projects/${projectName}.md`);
       if (res.ok) {
         const text = await res.text();
@@ -29,7 +27,7 @@ const Page = ({
         setContent('Article not found');
       }
     })();
-  }, [params]);
+  }, [projectName]);
 
   useEffect(() => {
     document.title = title + '| Projects';
@@ -53,4 +51,4 @@ const Page = ({
   );
 };
 
-export default Page;
+export default ProjectContent;

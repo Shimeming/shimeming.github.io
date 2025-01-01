@@ -6,19 +6,31 @@ import { Octokit } from '@octokit/rest';
 import Link from 'next/link';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
 import matter from 'gray-matter';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 const ProjectCard = ({
   project,
 }: {
   project: string
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback((name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(name, value);
+    return params.toString();
+  }, [searchParams]);
+
   const [projectMetadata, setProjectMetadata] = useState<{
     href: string, data: ProjectMetadata
   }>();
 
   useEffect(() => {
     (async () => {
-      const href = `/projects/${project}`;
+      // const href = `/projects/${project}`;
+      const href = pathname + '?' + createQueryString('projectName', project);
       const res = await fetch(`/projects/${project}.md`);
       if (res.ok) {
         const text = await res.text();
