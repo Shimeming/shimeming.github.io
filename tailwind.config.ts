@@ -26,6 +26,14 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: '64rem',
+            pre: {
+              // backgroundColor: 'var(--foreground)',
+              'border-width': '2px',
+              'border-color': '#ededed',
+            },
+            'pre code': {
+              'line-height': '1.2',
+            },
           },
         },
       },

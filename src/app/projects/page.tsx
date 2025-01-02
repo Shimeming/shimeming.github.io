@@ -9,7 +9,7 @@ const Page = () => {
 
   return (
     <>
-      <main>
+      <main className='mb-20'>
         {projectName ? (
           <ProjectContent projectName={projectName} />
         ) : (
