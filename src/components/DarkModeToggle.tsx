@@ -41,7 +41,7 @@ const DarkModeToggle = ({
     } else {
       setTheme('dark');
     }
-    if(theme) document.documentElement.setAttribute('data-theme', theme);
+    // if(theme) document.documentElement.setAttribute('data-theme', theme);
   };
 
   const { r, transform, cx, cy, opacity } = isDarkMode ? properties.sun : properties.moon;

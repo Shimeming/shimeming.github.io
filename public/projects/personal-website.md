@@ -94,22 +94,141 @@ theme: {
 body {
   color: var(--foreground);
   background: var(--background);
-  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 ```
 
-To be continue...
+再搭配 [next-themes](https://github.com/pacocoursey/next-themes) 控制黑白，效果不錯。因為 `<Theme Provider>` 只能在 client side 用，但整個 app 都需要，所以我額外包了個 Wrapper ，再從 RootLayout 中 import ，把整個 body 內的東西包起來:
+```ts
+'use client';
+import { ThemeProvider } from 'next-themes';
 
+const ThemeProviderWrapper = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>): React.JSX.Element => {
+  return (
+    <ThemeProvider attribute='data-mode' enableSystem={true}>
+      {children}
+    </ThemeProvider>
+  );
+};
 
+export default ThemeProviderWrapper;
+```
+
+沒想到 Tailwind `dark:*` selector 壞掉了，嘗試了很多方法，才發現是我耍笨把 config 中的 `  darkMode: ['selector', '[data-mode="dark"]']` 塞在錯的位置，移到對的位置就好了。
+
+再來是感覺黑白的切畫過於生硬，想在中間加個酷炫的動畫，但查了查[教學](https://www.youtube.com/watch?v=oIHuvg38qLE)感覺很麻煩，花很多時間在這上面，寫心得的最初目標會一直被往後拖，於是改成在 global CSS 加淡入淡出，效果也挺不錯：
+```css
+/* globals.css */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  @apply transition-colors duration-1000;
+}
+```
+
+如果在 `body *` 也 apply 一樣的 transition，會產生一個個元素漸漸變色的效果，我不太知道其中的原理(我猜跟 tag 的層數有關)，一開始覺得很酷炫，後來看多了覺得太花，就刪掉了。有一些本來就有動畫的物件則需要手動加上 transition 。
+
+### GitHub API
+在找模板的過程中，[有個模板](https://github.com/hashirshoaeb/home)的 project 頁面我很喜歡，想要復刻到自己的頁面中。
+從 [Flowbite](https://flowbite.com/) 選個 [Card](https://flowbite.com/docs/components/card/) 的 code 貼上來，看起來就不錯。
+
+模板有使用 [axios](https://github.com/axios/axios) 向 github fetch Language & Last update 等資訊，查了查發現官方有提供 [Octokit](https://github.com/octokit/octokit.js) ，使用這個 package 就不用手動處理 type 的問題了~
+
+寫一寫，突然 fetch 不到資訊，才發現超過 API 的 rate limit (60 requests per hour per IP)，不知道怎麼解決只好在 component 加個 switch ，把 fetch 的部分先關了。
 
 ### Fill In Content
 我參考的 personal websites 每個都像是要求職用的，一個比一個牛逼，導致我的網頁也像是 LinkedIn 可以直接貼過來的樣子。
 我本意不是要做求職網站，原本各種填牛逼語句的地方挺讓我困擾，我根本沒想過網站上會需要寫 About。
-但都幫那頁做了酷炫動畫，不用實在太可惜，就只好隨便亂填充些字，等未來有時間再
+但都幫那頁做了酷炫動畫，不用實在太可惜，就只好隨便亂填充些字，等未來有時間再說。
 
-### ESLint
+### Markdown
+Build 這個網站的主要目的就是讓我有地方丟我的心得、可以有更高的自由度。
+想了一陣子心得文要用什麼格式，最後還是選擇 Markdown，這是我想到最容易、方便的。
+
+有幾個可選的 packages：
+[`react-markdown`](https://github.com/remarkjs/react-markdown)、
+[`remark`](https://github.com/remarkjs/remark/tree/main)、
+[`marked`](https://github.com/markedjs/marked)、
+[`markdown-it](https://github.com/markdown-it/markdown-it)
+
+因為有個有 react ，我就使用了 react-markdown 。
+再搭配 [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)，
+效果還不錯。
+就是 code 的高亮不知道為什麼加了 `rehypeHighlight` 的 plugin 後依然不會動，我猜它和 topography 有點打架之類的。
+
+原本我打算把 Markdown 的部分包成一個 Wrapper，像是
+```ts
+const MarkdownWrapper = ({
+  content,
+  className = '',
+}: {
+  content: string
+  className?: string
+}) => {
+  return (
+    <ReactMarkdown
+      className={`prose dark:prose-invert ${className}`}
+      rehypePlugins={[rehypeRaw, rehypeHighlight]}
+    >
+      {content}
+    </ReactMarkdown>
+  );
+};
+```
+但不知道為何包起來後 topography 就不會動了，只好作罷。
 
 ### Should I Have a Backend?
+寫好的 markdown 應該丟在哪ㄋ？
+因為不想維護一個後端，就把 content 全部丟到 public 去，再用 query fetch。
+原本我是用 dynamic routing，像是
+```ts
+// src/app/projects/[slug]/page.tsx
+'use client';
+const Page = ({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) => {
+
+  const [content, setContent] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { slug } = await params;
+      const res = await fetch(`/projects/${slug}.md`);
+      if (res.ok) {
+        const text = await res.text();
+        const { content, data } = matter(text);
+        setContent(content);
+      } else {
+        setContent('Article not found');
+      }
+    })();
+  }, [params]);
+
+  // ...
+}
+```
+再用 [`generateStaticParams`](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 來生靜態網頁，不過這 function 只能用在 server component， fetch public 又只能在 client side，要的話應該是也可以切開，但太麻煩了。乾脆就用同一個網址，加 query 就好：
+```ts
+'use client';
+const Page = () => {
+  const searchParams = useSearchParams();
+  const projectName = searchParams.get('projectName');
+  // ...
+};
+```
+
+不過有個簡單的後端還是挺有吸引力的，
+像是用另一個 github repo 、 google drive 之類的，這樣只是要更新 content 的內容時，不需要創造額外的 commit。
+維護修改時間、查詢所有文章之類的也比較容易，不過比起真正的 database，還是頗麻煩。
+
+當然，只是要拿修改時間的話，大概也可以以直接向這個 repository 發 request 的方式拿到，不過就當未來展望吧。
 
 ## Reflection
+過程中學到挺多不知道有沒有用的知識，就是比較費時間。
+想到去年暑假後半，我也在寫網頁，明明有些經驗了，寫起來還是不太順-w-

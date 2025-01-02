@@ -43,7 +43,7 @@ const ProjectContent = ({
     <>
       <div className='mt-8'>
         <ReactMarkdown
-          className='prose dark:prose-invert mx-auto'
+          className='prose dark:prose-invert mx-auto font-sanstc'
           rehypePlugins={[rehypeRaw, rehypeHighlight]}
         >
           {content}
