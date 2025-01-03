@@ -137,7 +137,7 @@ const GithubProjectCard = ({
           {projectName}
         </h5>
         <a href={repoUrl} target='_blank'
-          className='text-2xl hover:text-black dark:hover:text-white active:scale-90'>
+          className='text-2xl hover:text-black dark:hover:text-white active:scale-90 duration-300'>
           <FaGithub />
         </a>
       </div>

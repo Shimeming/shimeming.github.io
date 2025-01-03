@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import AnimatedHeading from '@/components/AnimatedHeading';
+import AnimatedHeading from '@/components/animated-heading';
 import Education from './education';
 
 export const metadata: Metadata = {
@@ -10,15 +10,18 @@ const Page = () => {
 
   return (
     <>
-      <main>
+      <main className='pb-20'>
         <AnimatedHeading
           text="I am shimeming"
-          className="!text-9xl !uppercase mb-16"
+          className="md:!text-9xl !uppercase md:mb-8"
           wordAppearInterval={1}
           wordAnimateDuration={0}
         />
-        <div className='grid grid-cols-8'>
-          <section className='col-span-5'>
+        <div className='
+          flex flex-col items-start justify-start gap-4
+          md:grid md:grid-cols-8
+        '>
+          <section className='md:col-span-5'>
             <h2 className='mb-2 text-xl font-bold uppercase opacity-75'>
               About me
             </h2>
@@ -35,7 +38,7 @@ const Page = () => {
               </div>
             </div>
           </section>
-          <section className='ml-4 col-span-3 flex flex-col'>
+          <section className='md:ml-4 md:col-span-3 flex flex-col'>
             <Education />
           </section>
         </div>

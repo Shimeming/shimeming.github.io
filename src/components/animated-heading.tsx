@@ -44,7 +44,7 @@ const AnimatedHeading = ({
     >
       <motion.h1
         className={`
-          inline-block w-full font-bold capitalize text-6xl leading-tight
+          inline-block w-full font-bold capitalize text-2xl md:text-6xl leading-tight
           ${className}
         `}
         variants={quote}

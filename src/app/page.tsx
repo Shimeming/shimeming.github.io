@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import profilePic from '@public/home-page-pic_softEdge.png';
-import AnimatedHeading from '@/components/AnimatedHeading';
+import AnimatedHeading from '@/components/animated-heading';
 import Link from 'next/link';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 
@@ -10,7 +10,7 @@ const Page = () => {
     <>
       <main className='flex items-center w-full'>
         <div className="flex items-center justify-between w-full">
-          <div className='pl-12 w-2/5'>
+          <div className='md:pl-12 w-2/5 hidden md:block'>
             <Image
               src={profilePic}
               alt="Profile Picture"
@@ -19,7 +19,7 @@ const Page = () => {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
-          <div className='w-1/2'>
+          <div className='md:w-1/2'>
             <AnimatedHeading
               // text="I think there should be some really awesome text here, but I can't come up with anything."
               text="Imagine some really awesome text here!"

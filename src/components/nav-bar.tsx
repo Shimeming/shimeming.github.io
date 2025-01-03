@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import Logo from '@/components/Logo';
+// import Logo from '@/components/logo';
 import { usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -23,7 +23,7 @@ const NavBar = (): React.JSX.Element => {
   return (
     <header
       className={`
-        w-full px-32 py-8 font-medium
+        w-full md:px-32 py-8 font-medium
         flex items-center justify-between
       `}
     >
@@ -64,9 +64,9 @@ const NavBar = (): React.JSX.Element => {
         ))}
       </nav>
 
-      <div className='absolute left-1/2 -translate-x-1/2'>
+      {/* <div className='absolute left-1/2 -translate-x-1/2'>
         <Logo />
-      </div>
+      </div> */}
     </header>
   );
 };
