@@ -27,12 +27,13 @@ export default function RootLayout({
           font-sans antialiased
           text-dark
           w-full min-h-screen
+          px-4 md:px-0
         `}
       >
         <ThemeProviderWrapper>
           <NavBar />
           <div className='
-            w-full h-full z-0 px-32
+            w-full h-full z-0 md:px-32
           '>
             {children}
             <div className='fixed bottom-4 right-8 z-30 p-4'>

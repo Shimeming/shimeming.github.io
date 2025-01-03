@@ -23,7 +23,7 @@ const NavBar = (): React.JSX.Element => {
   return (
     <header
       className={`
-        w-full px-32 py-8 font-medium
+        w-full md:px-32 py-8 font-medium
         flex items-center justify-between
       `}
     >
