@@ -10,7 +10,7 @@ const Page = () => {
 
   return (
     <>
-      <main>
+      <main className='pb-20'>
         <AnimatedHeading
           text="I am shimeming"
           className="!text-9xl !uppercase mb-16"
