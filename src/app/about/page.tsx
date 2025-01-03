@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import AnimatedHeading from '@/components/AnimatedHeading';
+import AnimatedHeading from '@/components/animated-heading';
 import Education from './education';
 
 export const metadata: Metadata = {
