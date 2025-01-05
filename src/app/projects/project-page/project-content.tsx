@@ -1,9 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import matter from 'gray-matter';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
+import MarkdownWrapper from '@/helpers/markdown-wrapper';
+// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 // import { ProjectMetadata } from '@/types/projects';
 
 const ProjectContent = ({
@@ -42,12 +42,7 @@ const ProjectContent = ({
   return (
     <>
       <div className='mt-8'>
-        <ReactMarkdown
-          className='prose dark:prose-invert mx-auto font-sanstc'
-          rehypePlugins={[rehypeRaw, rehypeHighlight]}
-        >
-          {content}
-        </ReactMarkdown>
+        <MarkdownWrapper content={content || ''} />
       </div>
     </>
   );

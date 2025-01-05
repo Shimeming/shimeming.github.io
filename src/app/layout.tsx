@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import NavBar from '@/components/nav-bar';
 import { notoSans, notoSansTC, geistMono, caveat } from '@/helpers/fonts';
-import ThemeProviderWrapper from '@/helpers/ThemeProviderWrapper';
+import ThemeProviderWrapper from '@/helpers/theme-provider-wrapper';
 import DarkModeToggle from '@/components/dark-mode-toggle';
 
 import './globals.css';

@@ -27,14 +27,7 @@ const Page = () => {
             </h2>
             <div className='flex flex-col items-start justify-start'>
               <div className='flex flex-col font-medium gap-2'>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
-                <p>lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala lalalala lala lalalala lalala lalala</p>
+                我實在不知道這裡要寫什麼呀！
               </div>
             </div>
           </section>

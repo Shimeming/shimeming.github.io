@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import profilePic from '@public/home-page-pic_softEdge.png';
+import profilePic from '@public/pictures/home-page-pic_softEdge.png';
 import AnimatedHeading from '@/components/animated-heading';
 import Link from 'next/link';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
