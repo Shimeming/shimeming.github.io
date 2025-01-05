@@ -3,7 +3,7 @@
 This is my personal website.
 Currently under construction.
 
-The process of writing this webpage is documented **URL**.
+The process of writing this webpage is documented at [here](https://shimeming.github.io/projects/project-page?projectName=personal-website).
 
 ## Run code
 
