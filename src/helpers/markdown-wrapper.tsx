@@ -1,28 +1,8 @@
-import Markdown, { ExtraProps, Components } from 'react-markdown';
+import Markdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-
-import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
-import scss from 'react-syntax-highlighter/dist/esm/languages/prism/scss';
-import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
-import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
-import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
-
-const languages = [
-  ['tsx', tsx],
-  ['typescript', typescript],
-  ['scss', scss],
-  ['bash', bash],
-  ['markdown', markdown],
-  ['json', json],
-];
-
-languages.forEach((language) => {
-  SyntaxHighlighter.registerLanguage(language[0], language[1]);
-});
 
 const MarkdownWrapper = ({
   content,

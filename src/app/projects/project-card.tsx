@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
 import matter from 'gray-matter';
 import { usePathname, useSearchParams } from 'next/navigation';
+import path from 'path';
 
 const ProjectCard = ({
   project,
@@ -28,8 +29,7 @@ const ProjectCard = ({
 
   useEffect(() => {
     (async () => {
-      // const href = `/projects/${project}`;
-      const href = pathname + '?' + createQueryString('projectName', project);
+      const href = path.join(pathname, 'project-page') + '?' + createQueryString('projectName', project);
       const res = await fetch(`/projects/${project}.md`);
       if (res.ok) {
         const text = await res.text();
