@@ -6,6 +6,7 @@ export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/helpers/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -30,6 +31,7 @@ export default {
               // backgroundColor: 'var(--foreground)',
               'border-width': '2px',
               'border-color': '#ededed',
+              'padding': '0',
             },
             'pre code': {
               'line-height': '1.2',

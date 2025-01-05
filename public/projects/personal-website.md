@@ -95,7 +95,6 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
-
 ```
 
 再搭配 [next-themes](https://github.com/pacocoursey/next-themes) 控制黑白，效果不錯。因為 `<Theme Provider>` 只能在 client side 用，但整個 app 都需要，所以我額外包了個 Wrapper ，再從 RootLayout 中 import ，把整個 body 內的東西包起來:
@@ -180,6 +179,9 @@ const MarkdownWrapper = ({
 };
 ```
 但不知道為何包起來後 topography 就不會動了，只好作罷。
+
+我發現為什麼了！在 `tailwind.config.ts` 中，有個 `content`，要把 `'./src/helpers/**/*.{js,ts,jsx,tsx,mdx}',`
+也加上去(因為我把 Wrapper 丟在 helpers)，其他東西放在 `components` 會動是因為 tailwind 最一開始很貼心地也把 `components` 放在 list 裡面。
 
 ### Should I Have a Backend?
 寫好的 markdown 應該丟在哪ㄋ？
