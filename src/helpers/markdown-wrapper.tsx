@@ -40,6 +40,7 @@ const MarkdownWrapper = ({
           style={syntaxTheme}
           language={match[1]}
           PreTag="div"
+          className="!m-0"
           // children={String(children).replace(/\n$/, '')}
           {...rest}
         >
