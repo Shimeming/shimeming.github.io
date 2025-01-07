@@ -26,5 +26,8 @@ repoUrl: 'https://github.com/seantsao00/Hallucination'
   ```
 
 ### Journey Start
-這是我第一次使用 Unity 做專案
+這是我第一次使用 Unity 做專案，也是第一次做目標是要好玩的遊戲，不太知道如何開始。
+
+和組員討論後，決定做 2D platformer 遊戲，整組只有我玩比較多這類遊戲，有幾個是完全沒玩過，於是我趁機推銷我大 [Celeste](https://store.steampowered.com/app/504230/Celeste/)，大家都應該要去玩！
+
 
