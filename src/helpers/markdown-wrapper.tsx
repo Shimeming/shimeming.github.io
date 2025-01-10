@@ -6,8 +6,10 @@ import rehypeRaw from 'rehype-raw';
 
 const MarkdownWrapper = ({
   content,
+  className = '',
 }: {
   content: string
+  className?: string
 }) => {
   const syntaxTheme = oneDark;
 
@@ -36,7 +38,7 @@ const MarkdownWrapper = ({
 
   return (
     <Markdown
-      className='prose dark:prose-invert mx-auto font-sanstc'
+      className={`prose dark:prose-invert mx-auto font-sanstc ${className}`}
       rehypePlugins={[rehypeRaw]} // , rehypeHighlight
       components={MarkdownComponents}
     >

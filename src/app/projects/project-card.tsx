@@ -2,7 +2,9 @@
 import path from 'path';
 import { Octokit } from '@octokit/rest';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 import matter from 'gray-matter';
+import { AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -10,6 +12,7 @@ import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { extractFirstNonEmptyLines } from '@/helpers/utils';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
+import MarkdownWrapper from '@/helpers/markdown-wrapper';
 
 const ProjectCard = ({
   project,
@@ -26,8 +29,8 @@ const ProjectCard = ({
   }, [searchParams]);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [projectMetadata, setProjectMetadata] = useState<{
-    href: string, data: ProjectMetadata
+  const [projectData, setProjectData] = useState<{
+    href: string, metadata: ProjectMetadata, content: string,
   }>();
 
   useEffect(() => {
@@ -36,47 +39,73 @@ const ProjectCard = ({
       const res = await fetch(`/projects/${project}.md`);
       if (res.ok) {
         const text = await res.text();
-        const data = matter(text).data as unknown as ProjectMetadata;
-        setProjectMetadata({ href, data });
+        const parsed = matter(text); // Parse without generics
+        const content = parsed.content;
+        const metadata = parsed.data as ProjectMetadata;
+        setProjectData({ href, metadata, content });
       } else {
         console.error('Error fetching project metadata');
       }
     })();
   }, [createQueryString, project, pathname]);
 
-  if (!projectMetadata) return <Skeleton count={3} />;
+  if (!projectData) return <Skeleton count={3} />;
   return (
     <div className={clsx(
-      `relative block p-6 border rounded-lg shadow-lg
+      `relative block border rounded-lg shadow-lg overflow-hidden
+      dark:bg-gray-800
       border-gray-200 dark:border-gray-700`,
-      {
-        'hover:bg-gray-100 dark:hover:bg-gray-700': projectMetadata.href,
-      },
     )}
     >
-      {projectMetadata.href &&
-        <Link href={projectMetadata.href}
+      {/* {projectData.href &&
+        <Link href={projectData.href}
           className='absolute inset-0'
         />
-      }
-      <div className='[&_*]:z-10'>
-        {(projectMetadata.data as GithubProjectMetadata).repoUrl !== undefined
-          ? <GithubProjectCard content={projectMetadata.data as GithubProjectMetadata} />
-          : (
-            <>
+      } */}
+      {(projectData.metadata as GithubProjectMetadata).repoUrl !== undefined
+        ? <GithubProjectCard content={projectData.metadata as GithubProjectMetadata} />
+        : (
+          <>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={clsx(
+                'flex flex-col w-full p-6',
+                {
+                  'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
+                })}
+            >
               <div className='flex justify-between items-center'>
                 <h5 className="text-xl font-bold tracking-tight">
-                  {projectMetadata.data.projectName}
+                  {projectData.metadata.projectName}
                 </h5>
               </div>
               <p className="font-normal">
-                {projectMetadata.data.description}
+                {projectData.metadata.description}
               </p>
-            </>
-          )
-        }
-      </div>
-    </div>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <div className='dark:bg-gray-900 bg-neutral-200 px-6 py-2'>
+                  <motion.div
+                    initial="collapsed"
+                    animate="open"
+                    exit="collapsed"
+                    variants={{
+                      open: { opacity: 1, y: 0 },
+                      collapsed: { opacity: 0, y: -20 },
+                    }}
+                    transition={{ duration: 0.5 }}
+                    key={isOpen ? 'open' : 'closed'}
+                  >
+                    <MarkdownWrapper content={extractFirstNonEmptyLines(projectData.content, 10)} className='!mx-0' />
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
+          </>
+        )
+      }
+    </div >
   );
 };
 
