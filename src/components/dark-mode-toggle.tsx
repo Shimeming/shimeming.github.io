@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 
 // ref: https://jfelix.info/blog/using-react-spring-to-animate-svg-icons-dark-mode-toggle
 

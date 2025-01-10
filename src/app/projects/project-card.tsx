@@ -1,13 +1,15 @@
 'use client';
+import path from 'path';
+import { Octokit } from '@octokit/rest';
+import clsx from 'clsx';
+import matter from 'gray-matter';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-import { Octokit } from '@octokit/rest';
-import Link from 'next/link';
+import { extractFirstNonEmptyLines } from '@/helpers/utils';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
-import matter from 'gray-matter';
-import { usePathname, useSearchParams } from 'next/navigation';
-import path from 'path';
 
 const ProjectCard = ({
   project,
@@ -23,6 +25,7 @@ const ProjectCard = ({
     return params.toString();
   }, [searchParams]);
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [projectMetadata, setProjectMetadata] = useState<{
     href: string, data: ProjectMetadata
   }>();
@@ -43,17 +46,34 @@ const ProjectCard = ({
 
   if (!projectMetadata) return <Skeleton count={3} />;
   return (
-    <div className='relative block p-6 border rounded-lg shadow-lg
-      border-gray-200 hover:bg-gray-100
-      dark:border-gray-700 dark:hover:bg-gray-700'
+    <div className={clsx(
+      `relative block p-6 border rounded-lg shadow-lg
+      border-gray-200 dark:border-gray-700`,
+      {
+        'hover:bg-gray-100 dark:hover:bg-gray-700': projectMetadata.href,
+      },
+    )}
     >
-      <Link href={projectMetadata.href}
-        className='absolute inset-0'
-      />
+      {projectMetadata.href &&
+        <Link href={projectMetadata.href}
+          className='absolute inset-0'
+        />
+      }
       <div className='[&_*]:z-10'>
         {(projectMetadata.data as GithubProjectMetadata).repoUrl !== undefined
           ? <GithubProjectCard content={projectMetadata.data as GithubProjectMetadata} />
-          : <div>{projectMetadata.data.projectName}</div>
+          : (
+            <>
+              <div className='flex justify-between items-center'>
+                <h5 className="text-xl font-bold tracking-tight">
+                  {projectMetadata.data.projectName}
+                </h5>
+              </div>
+              <p className="font-normal">
+                {projectMetadata.data.description}
+              </p>
+            </>
+          )
         }
       </div>
     </div>

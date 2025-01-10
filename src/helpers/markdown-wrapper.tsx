@@ -1,8 +1,8 @@
-import Markdown, { Components } from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
+import Markdown, { type Components } from 'react-markdown';
 // import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import rehypeRaw from 'rehype-raw';
 
 const MarkdownWrapper = ({
   content,

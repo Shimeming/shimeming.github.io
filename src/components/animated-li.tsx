@@ -1,6 +1,6 @@
 'use client';
-import { useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
+import { useRef } from 'react';
 
 const AnimatedLi = ({
   className = '',

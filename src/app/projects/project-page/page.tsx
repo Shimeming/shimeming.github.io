@@ -1,6 +1,6 @@
 'use client';
-import ProjectContent from './project-content';
 import { useSearchParams, redirect } from 'next/navigation';
+import ProjectContent from './project-content';
 
 const Page = () => {
   const searchParams = useSearchParams();

@@ -1,4 +1,5 @@
 const projectList = [
+  'cns-final-project',
   'hallucination',
   'personal-website',
 ];
