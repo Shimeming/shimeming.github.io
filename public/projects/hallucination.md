@@ -1,6 +1,10 @@
 ---
 projectName: 'Hallucination'
 description: 'A single player 2D platformer game made by Unity.'
+overview: [
+  'Utilized multiple design patterns, including Observer, State, Singleton, Event-Driven Architecture, Command, Component, and Prototype, to create a well-organized and scalable codebase.',
+  'Contributed to both gameplay mechanics and architectural decisions, ensuring smooth development and extensibility.'
+]
 repoUrl: 'https://github.com/seantsao00/Hallucination'
 ---
 

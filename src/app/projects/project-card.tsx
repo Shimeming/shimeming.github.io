@@ -10,9 +10,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-import { extractFirstNonEmptyLines } from '@/helpers/utils';
 import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
-import MarkdownWrapper from '@/helpers/markdown-wrapper';
+import { containsPrintable } from '@/helpers/utils';
 
 const ProjectCard = ({
   project,
@@ -51,61 +50,70 @@ const ProjectCard = ({
 
   if (!projectData) return <Skeleton count={3} />;
   return (
-    <div className={clsx(
+    <motion.div className={clsx(
       `relative block border rounded-lg shadow-lg overflow-hidden
       dark:bg-gray-800
       border-gray-200 dark:border-gray-700`,
     )}
     >
-      {/* {projectData.href &&
-        <Link href={projectData.href}
-          className='absolute inset-0'
-        />
-      } */}
-      {(projectData.metadata as GithubProjectMetadata).repoUrl !== undefined
-        ? <GithubProjectCard content={projectData.metadata as GithubProjectMetadata} />
-        : (
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={clsx(
+          'flex flex-col w-full p-6',
+          {
+            'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
+          })}
+      >
+        <div className='flex justify-between items-center'>
+          <h5 className="text-xl font-bold tracking-tight">
+            {projectData.metadata.projectName}
+          </h5>
+        </div>
+        <p className="font-normal">
+          {projectData.metadata.description}
+        </p>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
           <>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={clsx(
-                'flex flex-col w-full p-6',
-                {
-                  'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
-                })}
-            >
-              <div className='flex justify-between items-center'>
-                <h5 className="text-xl font-bold tracking-tight">
-                  {projectData.metadata.projectName}
-                </h5>
-              </div>
-              <p className="font-normal">
-                {projectData.metadata.description}
-              </p>
-            </button>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <div className='dark:bg-gray-900 bg-neutral-200 px-6 py-2'>
-                  <motion.div
-                    initial="collapsed"
-                    animate="open"
-                    exit="collapsed"
-                    variants={{
-                      open: { opacity: 1, y: 0 },
-                      collapsed: { opacity: 0, y: -20 },
-                    }}
-                    transition={{ duration: 0.5 }}
-                    key={isOpen ? 'open' : 'closed'}
+            <div className='dark:bg-gray-900 bg-neutral-200 px-6 py-3'>
+              <motion.div
+                initial="collapsed"
+                animate="open"
+                exit="collapsed"
+                variants={{
+                  open: { opacity: 1, y: 0 },
+                  collapsed: { opacity: 0, y: -20 },
+                }}
+                transition={{ duration: 0.5 }}
+                key={isOpen ? 'open' : 'closed'}
+              >
+                <ul className='list-disc list-inside'>
+                  {projectData.metadata.overview.map((overview, index) => (
+                    <li key={index}>
+                      {overview}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+              {containsPrintable(projectData.content) && (
+                <div className='flex justify-end'>
+                  <Link
+                    href={projectData.href}
+                    className='
+                          block bg-foreground text-background p-1 rounded-md hover:opacity-80
+                          active:scale-90 duration-300
+                        '
                   >
-                    <MarkdownWrapper content={extractFirstNonEmptyLines(projectData.content, 10)} className='!mx-0' />
-                  </motion.div>
+                    Reflection
+                  </Link>
                 </div>
               )}
-            </AnimatePresence>
+            </div>
           </>
-        )
-      }
-    </div >
+        )}
+      </AnimatePresence>
+    </motion.div >
   );
 };
 
