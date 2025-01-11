@@ -50,13 +50,17 @@ const ProjectCard = ({
 
   if (!projectData) return <Skeleton count={3} />;
   return (
-    <motion.div className={clsx(
-      `relative block border rounded-lg shadow-lg overflow-hidden
+    <motion.div
+      layout
+      transition={{ duration: 0.5 }}
+      className={clsx(
+        `relative block border rounded-lg shadow-lg overflow-hidden
       dark:bg-gray-800
       border-gray-200 dark:border-gray-700`,
-    )}
+      )}
     >
-      <button
+      <motion.button
+        layout='position'
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
           'flex flex-col w-full p-6',
@@ -72,11 +76,14 @@ const ProjectCard = ({
         <p className="font-normal">
           {projectData.metadata.description}
         </p>
-      </button>
+      </motion.button>
       <AnimatePresence initial={false}>
         {isOpen && (
           <>
-            <div className='dark:bg-gray-900 bg-neutral-200 px-6 py-3'>
+            <motion.div
+              layout='position'
+              className='dark:bg-gray-900 bg-neutral-200 px-6 py-3'
+            >
               <motion.div
                 initial="collapsed"
                 animate="open"
@@ -95,6 +102,7 @@ const ProjectCard = ({
                     </li>
                   ))}
                 </ul>
+                {/* <span className=''></span> */}
               </motion.div>
               {containsPrintable(projectData.content) && (
                 <div className='flex justify-end'>
@@ -109,7 +117,7 @@ const ProjectCard = ({
                   </Link>
                 </div>
               )}
-            </div>
+            </motion.div>
           </>
         )}
       </AnimatePresence>
