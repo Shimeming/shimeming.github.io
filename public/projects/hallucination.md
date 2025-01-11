@@ -5,7 +5,18 @@ overview: [
   'Utilized multiple design patterns, including Observer, State, Singleton, Event-Driven Architecture, Command, Component, and Prototype, to create a well-organized and scalable codebase.',
   'Contributed to both gameplay mechanics and architectural decisions, ensuring smooth development and extensibility.'
 ]
-repoUrl: 'https://github.com/seantsao00/Hallucination'
+links: [
+  {
+    href: 'https://github.com/seantsao00/Hallucination',
+    icon: 'FaGithub',
+    description: 'Repo'
+  },
+  {
+    href: 'https://seantsao00.itch.io/hallucination',
+    icon: 'FaGamepad',
+    description: 'Game'
+  },
+]
 ---
 
 <!-- ([`remark-toc`](https://github.com/remarkjs/remark-toc)). -->

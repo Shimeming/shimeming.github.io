@@ -38,7 +38,7 @@ const MarkdownWrapper = ({
 
   return (
     <Markdown
-      className={`prose dark:prose-invert mx-auto font-sanstc ${className}`}
+      className={`prose dark:prose-invert mx-auto ${className}`} // font-sanstc
       rehypePlugins={[rehypeRaw]} // , rehypeHighlight
       components={MarkdownComponents}
     >

@@ -10,8 +10,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-import { GithubProjectMetadata, ProjectMetadata } from '@/types/projects';
-import { containsPrintable } from '@/helpers/utils';
+import { containsPrintable, iconNameToFaIcon } from '@/helpers/utils';
+import { ProjectMetadata } from '@/types/projects';
 
 const ProjectCard = ({
   project,
@@ -63,15 +63,35 @@ const ProjectCard = ({
         layout='position'
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
-          'flex flex-col w-full p-6',
+          'flex flex-col w-full px-6 py-3',
           {
             'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
           })}
       >
-        <div className='flex justify-between items-center'>
+        <div className='flex w-full justify-between items-center'>
           <h5 className="text-xl font-bold tracking-tight">
             {projectData.metadata.projectName}
           </h5>
+          <div className='lg:text-sm flex gap-3'>
+            {projectData.metadata.links?.map((link, index) => (
+              <Link
+                key={index}
+                href={link.href}
+                target={'_blank'}
+                className='
+                  hover:text-black dark:hover:text-white active:scale-90 duration-300
+                '
+              >
+                {/* {link.icon} */}
+                <p className=''>
+                  <LinkIcon iconName={link.icon} />
+                  <span className='hidden lg:inline-block pl-1'>
+                    {link.description}
+                  </span>
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
         <p className="font-normal">
           {projectData.metadata.description}
@@ -109,11 +129,11 @@ const ProjectCard = ({
                   <Link
                     href={projectData.href}
                     className='
-                          block bg-foreground text-background p-1 rounded-md hover:opacity-80
+                          block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
                           active:scale-90 duration-300
                         '
                   >
-                    Reflection
+                    Note
                   </Link>
                 </div>
               )}
@@ -122,6 +142,26 @@ const ProjectCard = ({
         )}
       </AnimatePresence>
     </motion.div >
+  );
+};
+
+const LinkIcon = ({
+  iconName,
+}: {
+  iconName: string
+}) => {
+  const [IconComponent, setIconComponent] = useState<React.ComponentType>();
+  useEffect(() => {
+    (async () => {
+      const Icon = await iconNameToFaIcon(iconName);
+      console.log(Icon);
+      setIconComponent(() => Icon);
+    })();
+  }, [iconName]);
+  return (
+    <span className='inline-block'>
+      {IconComponent ? <IconComponent /> : 'link'}
+    </span>
   );
 };
 
