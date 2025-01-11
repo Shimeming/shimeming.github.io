@@ -1,13 +1,15 @@
-import Markdown, { Components } from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
+import Markdown, { type Components } from 'react-markdown';
 // import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import rehypeRaw from 'rehype-raw';
 
 const MarkdownWrapper = ({
   content,
+  className = '',
 }: {
   content: string
+  className?: string
 }) => {
   const syntaxTheme = oneDark;
 
@@ -36,7 +38,7 @@ const MarkdownWrapper = ({
 
   return (
     <Markdown
-      className='prose dark:prose-invert mx-auto font-sanstc'
+      className={`prose dark:prose-invert mx-auto ${className}`} // font-sanstc
       rehypePlugins={[rehypeRaw]} // , rehypeHighlight
       components={MarkdownComponents}
     >

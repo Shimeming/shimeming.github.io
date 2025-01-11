@@ -1,6 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
 import matter from 'gray-matter';
+import { useState, useEffect } from 'react';
 import MarkdownWrapper from '@/helpers/markdown-wrapper';
 // import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -32,7 +32,7 @@ const ProjectContent = ({
   }, [projectName]);
 
   useEffect(() => {
-    if (document) document.title = title + ' | Projects';
+    if (typeof window !== 'undefined' && document) document.title = title + ' | Projects';
   }, [title]);
   useEffect(() => {
     if (description)

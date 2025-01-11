@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import profilePic from '@public/pictures/home-page-pic_softEdge.png';
-import AnimatedHeading from '@/components/animated-heading';
 import Link from 'next/link';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
+import AnimatedHeading from '@/components/animated-heading';
+import profilePic from '@public/pictures/home-page-pic_softEdge.png';
 
 
 const Page = () => {

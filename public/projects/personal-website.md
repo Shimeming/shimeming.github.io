@@ -1,7 +1,21 @@
 ---
 projectName: 'Personal Website'
 description: 'My personal website made with Next.js and Tailwind CSS.'
-repoUrl: 'https://github.com/Shimeming/shimeming.github.io'
+overview: [
+  'Utilized NextJS, Typescript, TailwindCSS, Framer Motion, to create a responsive personal website.',
+]
+links: [
+  {
+    href: 'https://github.com/Shimeming/shimeming.github.io',
+    icon: 'FaGithub',
+    description: 'Repo',
+  },
+  {
+    href: 'https://shimeming.github.io/',
+    icon: 'FaUserCircle',
+    description: 'Website',
+  }
+]
 ---
 
 # Personal Website 個人網站

@@ -1,7 +1,7 @@
 'use client';
+import { motion, useScroll } from 'framer-motion';
 import { useRef } from 'react';
 import AnimatedLi from '@/components/animated-li';
-import { motion, useScroll } from 'framer-motion';
 
 const educationList = [
   {

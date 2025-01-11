@@ -1,9 +1,9 @@
 'use client';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 // import Logo from '@/components/logo';
 import { usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 
 const NavBar = (): React.JSX.Element => {
 

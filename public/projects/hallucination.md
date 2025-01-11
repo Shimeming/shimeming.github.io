@@ -1,7 +1,22 @@
 ---
 projectName: 'Hallucination'
 description: 'A single player 2D platformer game made by Unity.'
-repoUrl: 'https://github.com/seantsao00/Hallucination'
+overview: [
+  'Utilized multiple design patterns, including Observer, State, Singleton, Event-Driven Architecture, Command, Component, and Prototype, to create a well-organized and scalable codebase.',
+  'Contributed to both gameplay mechanics and architectural decisions, ensuring smooth development and extensibility.'
+]
+links: [
+  {
+    href: 'https://github.com/seantsao00/Hallucination',
+    icon: 'FaGithub',
+    description: 'Repo'
+  },
+  {
+    href: 'https://seantsao00.itch.io/hallucination',
+    icon: 'FaGamepad',
+    description: 'Game'
+  },
+]
 ---
 
 <!-- ([`remark-toc`](https://github.com/remarkjs/remark-toc)). -->
@@ -26,5 +41,8 @@ repoUrl: 'https://github.com/seantsao00/Hallucination'
   ```
 
 ### Journey Start
-這是我第一次使用 Unity 做專案
+這是我第一次使用 Unity 做專案，也是第一次做目標是要好玩的遊戲，不太知道如何開始。
+
+和組員討論後，決定做 2D platformer 遊戲，整組只有我玩比較多這類遊戲，有幾個是完全沒玩過，於是我趁機推銷我大 [Celeste](https://store.steampowered.com/app/504230/Celeste/)，大家都應該要去玩！
+
 

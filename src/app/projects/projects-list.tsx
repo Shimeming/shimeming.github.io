@@ -1,6 +1,6 @@
 'use client';
-import ProjectCard from '@/app/projects/project-card';
 import { motion } from 'framer-motion';
+import ProjectCard from '@/app/projects/project-card';
 import projectList from '@/data/projects';
 
 const ProjectsList = () => {
