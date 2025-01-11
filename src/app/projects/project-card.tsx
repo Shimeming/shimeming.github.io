@@ -154,7 +154,6 @@ const LinkIcon = ({
   useEffect(() => {
     (async () => {
       const Icon = await iconNameToFaIcon(iconName);
-      console.log(Icon);
       setIconComponent(() => Icon);
     })();
   }, [iconName]);
@@ -191,7 +190,6 @@ const GithubProjectCard = ({
         owner,
         repo,
       });
-      console.log(repoInfo);
       const defaultBranch = repoInfo.data.default_branch;
       const branchInfo = await octokit.repos.getBranch({
         owner,
