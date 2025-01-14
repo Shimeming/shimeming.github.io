@@ -62,7 +62,7 @@ const ProjectCard = ({
         layout='position'
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
-          'relative flex flex-col w-full px-6 py-3',
+          'relative flex flex-col w-full px-6 py-3 text-left',
           {
             'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
           })}
