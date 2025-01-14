@@ -1,6 +1,7 @@
 const projectList = [
-  'cns-final-project',
   'hallucination',
   'personal-website',
+  'cns-final-project',
+  'hogwarts-tag',
 ];
 export default projectList;

@@ -34,7 +34,7 @@ links: [
 ### Journey Start
 前陣子從 UbuntuWSL 換到 ArchWSL ，電腦裡還沒有 node 和 npm ，剛好藉這個機會載一載。
 
-Next JS 的教學算非常完善、易懂的，有[新手向的教學](https://nextjs.org/learn)，文檔也有許多範例，比 C# 好多了。(前陣子在寫 [unity 遊戲](/projects?projectName=hallucination)，C# 的文檔真的是一字千金)
+Next JS 的教學算非常完善、易懂的，有[新手向的教學](https://nextjs.org/learn)，文檔也有許多範例，比 Unity 好多了。(前陣子在寫 [unity 遊戲](/projects/project-page?projectName=hallucination)，Unity 的文檔真的是一字千金)
 
 執行個
 ```shell
