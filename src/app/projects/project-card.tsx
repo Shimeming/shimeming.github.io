@@ -1,6 +1,5 @@
 'use client';
 import path from 'path';
-import { Octokit } from '@octokit/rest';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import matter from 'gray-matter';
@@ -8,10 +7,10 @@ import { AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
-import { FaGithub } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { containsPrintable, iconNameToFaIcon } from '@/helpers/utils';
 import { ProjectMetadata } from '@/types/projects';
+import { FaChevronDown } from "react-icons/fa";
 
 const ProjectCard = ({
   project,
@@ -63,7 +62,7 @@ const ProjectCard = ({
         layout='position'
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
-          'flex flex-col w-full px-6 py-3',
+          'relative flex flex-col w-full px-6 py-3',
           {
             'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
           })}
@@ -96,6 +95,13 @@ const ProjectCard = ({
         <p className="font-normal">
           {projectData.metadata.description}
         </p>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.5 }}
+          className='absolute right-6 bottom-2 transform -translate-y-1/2'
+        >
+          <FaChevronDown />
+        </motion.span>
       </motion.button>
       <AnimatePresence initial={false}>
         {isOpen && (
