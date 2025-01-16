@@ -1,15 +1,11 @@
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Articles',
-};
+import ArticleList from './article-list';
 
 const Page = () => {
 
   return (
     <>
-      <main>
-        TB Implemented...
+      <main className='mb-20'>
+        <ArticleList />
       </main>
     </>
   );

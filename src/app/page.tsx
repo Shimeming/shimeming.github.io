@@ -22,7 +22,9 @@ const Page = () => {
           <div className='md:w-1/2'>
             <AnimatedHeading
               // text="I think there should be some really awesome text here, but I can't come up with anything."
-              text="Imagine some really awesome text here!"
+              // text="Imagine some really awesome text here!"
+              text="Here's Shimeming"
+              wordAppearInterval={0.3}
             />
             <p className='my-4 text-xl font-medium font-caveat'>
               If a thing is worth doing, it is worth doing badly.
