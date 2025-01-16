@@ -69,18 +69,29 @@ const ProjectCard = ({
           })}
       >
         <div className='flex w-full justify-between items-center'>
-          <h5 className="text-xl font-bold tracking-tight">
-            {projectData.metadata.projectName}
-          </h5>
+          <div className='flex gap-2 items-end'>
+            <h5 className="text-xl font-bold tracking-tight text-black dark:text-white">
+              {projectData.metadata.projectName}
+            </h5>
+            {containsPrintable(projectData.content) && (
+              <span>
+                <Link
+                  href={projectData.href}
+                  className='hover:opacity-80 active:scale-90 duration-300'
+                >
+                  <MdEditNote className='inline' />
+                  Note
+                </Link>
+              </span>
+            )}
+          </div>
           <div className='lg:text-sm flex gap-3'>
             {projectData.metadata.links?.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
                 target={'_blank'}
-                className='
-                  hover:text-black dark:hover:text-white active:scale-90 duration-300
-                '
+                className='hover:opacity-80 active:scale-90 duration-300'
               >
                 {/* {link.icon} */}
                 <p className=''>
@@ -135,10 +146,10 @@ const ProjectCard = ({
                 <div className='flex justify-end'>
                   <Link
                     href={projectData.href}
-                    // className='
-                    //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
-                    //       active:scale-90 duration-300
-                    //     '
+                  // className='
+                  //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
+                  //       active:scale-90 duration-300
+                  //     '
                   >
                     <MdEditNote className='inline' />
                     Note
