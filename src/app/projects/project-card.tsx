@@ -11,7 +11,7 @@ import { FaChevronDown } from 'react-icons/fa';
 import { MdEditNote } from 'react-icons/md';
 import Skeleton from 'react-loading-skeleton';
 import { containsPrintable, iconNameToFaIcon } from '@/helpers/utils';
-import { ProjectMetadata } from '@/types/projects';
+import { ProjectMetadata } from '@/types/project';
 
 const ProjectCard = ({
   project,
