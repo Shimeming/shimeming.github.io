@@ -7,10 +7,11 @@ import { AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
+import { FaChevronDown } from 'react-icons/fa';
+import { MdEditNote } from 'react-icons/md';
 import Skeleton from 'react-loading-skeleton';
 import { containsPrintable, iconNameToFaIcon } from '@/helpers/utils';
 import { ProjectMetadata } from '@/types/projects';
-import { FaChevronDown } from "react-icons/fa";
 
 const ProjectCard = ({
   project,
@@ -134,11 +135,12 @@ const ProjectCard = ({
                 <div className='flex justify-end'>
                   <Link
                     href={projectData.href}
-                    className='
-                          block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
-                          active:scale-90 duration-300
-                        '
+                    // className='
+                    //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
+                    //       active:scale-90 duration-300
+                    //     '
                   >
+                    <MdEditNote className='inline' />
                     Note
                   </Link>
                 </div>
