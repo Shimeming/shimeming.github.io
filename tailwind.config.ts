@@ -16,6 +16,8 @@ export default {
         secondary: 'var(--color-secondary)',
         foreground: 'var(--foreground)',
         background: 'var(--background)',
+        hovered: 'var(--color-hovered)',
+        decorative: 'var(--color-decorative)',
       },
       fontFamily: {
         sans: ['var(--font-noto-sans)'],

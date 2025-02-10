@@ -1,0 +1,306 @@
+{
+  "education": [
+    {
+      "school": "National Taiwan University",
+      "degree": "Bachelor of Science in Computer Science",
+      "years": "2022-2026",
+      "defaultDisplay": true,
+      "courses": [
+        {
+          "courseNumber": "CSIE 1000",
+          "chineseName": "計算機概論",
+          "englishName": "Introduction to Computer",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2022/2023",
+          "repoLink": "https://github.com/tuanrongshan/IntroCS-Final-Project",
+          "projectPageLink": "/projects/project-page?projectName=introcs-final-project",
+          "skills": [
+            "Jack",
+            "computer architecture"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 1210",
+          "chineseName": "計算機程式設計",
+          "englishName": "Introduction to Computer Programming",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2022/2023",
+          "skills": [
+            "C"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 2136",
+          "chineseName": "演算法設計與分析",
+          "englishName": "Algorithm Design and Analysis",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2022/2023",
+          "skills": [
+            "algorithm",
+            "C++"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 1212",
+          "chineseName": "資料結構與演算法",
+          "englishName": "Data Structures and Algorithms",
+          "credits": 3,
+          "grade": "A",
+          "semester": "2nd Semester 2022/2023",
+          "skills": [
+            "C",
+            "data structure"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 2311 & CSIE 1310",
+          "chineseName": "網路管理與系統管理 & 實驗",
+          "englishName": "Network Administration and System Administration & Laboratory",
+          "credits": 3,
+          "grade": "A-",
+          "semester": "2nd Semester 2022/2023",
+          "skills": [
+            "Cisco",
+            "Docker",
+            "shell script",
+            "linux",
+            "Network",
+            "security",
+            "file system",
+            "OPNSense",
+            "LDAP",
+            "Nginx"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 2122",
+          "chineseName": "離散數學",
+          "englishName": "Discrete Mathematics",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2022/2023"
+        },
+        {
+          "courseNumber": "CSIE 2344",
+          "chineseName": "數位系統與實驗",
+          "englishName": "Digital Systems Design and Laboratory",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2022/2023",
+          "skills": [
+            "Verilog",
+            "Circuit Design"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 2120",
+          "chineseName": "線性代數",
+          "englishName": "Linear Algebra",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024"
+        },
+        {
+          "courseNumber": "CSIE 2210",
+          "chineseName": "系統程式設計",
+          "englishName": "Systems Programming",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "C",
+            "Linux"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3003",
+          "chineseName": "程式設計技巧",
+          "englishName": "Programming Techniques",
+          "credits": 3,
+          "grade": "A",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "C++",
+            "algorithm",
+            "ICPC"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3110",
+          "chineseName": "自動機與形式語言",
+          "englishName": "Formal Languages and Automata Theory",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "automata",
+            "computer theorem"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 5043",
+          "chineseName": "機器學習",
+          "englishName": "Machine Learning",
+          "credits": 3,
+          "grade": "A",
+          "semester": "1st Semester 2023/2024",
+          "skills":[
+            "machine learning",
+            "Python",
+            "data processing"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 2121",
+          "chineseName": "機率",
+          "englishName": "Probability",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024"
+        },
+        {
+          "courseNumber": "CSIE 3005",
+          "chineseName": "人工智慧導論",
+          "englishName": "Foundations of Artificial Intelligence",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024",
+          "skills": [
+            "Python",
+            "constraint satisfaction problems",
+            "Poker"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3310",
+          "chineseName": "作業系統",
+          "englishName": "Operating Systems",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024",
+          "skills": [
+            "C"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 5371",
+          "chineseName": "進階網路管理與系統管理",
+          "englishName": "Advanced Network Administration and System Administration",
+          "credits": 2,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024",
+          "skills":[
+            "Proxmox",
+            "Network"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 7190",
+          "chineseName": "密碼學與資訊安全",
+          "englishName": "Cryptography and Network Security",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024",
+          "link": "https://drive.google.com/file/d/1VZ44v_03IkEJoGKOrXUWPe0IJMVk5EDl/view?usp=sharing",
+          "projectPageLink": "/projects/project-page?projectName=cns-final-project",
+          "skills": [
+            "Cryptography",
+            "Network",
+            "reading papers"
+          ]
+        },
+        {
+          "courseNumber": "EE 5200",
+          "chineseName": "生成式人工智慧導論",
+          "englishName": "Introduction to Generative Artificial Intelligence",
+          "credits": 2,
+          "grade": "A+",
+          "semester": "2nd Semester 2023/2024"
+        },
+        {
+          "courseNumber": "CSIE3510",
+          "chineseName": "計算機網路",
+          "englishName": "Computer Networks",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "C++",
+            "Network",
+            "socket programming",
+            "HTTP protocol",
+            "reliable data transfer"
+          ]
+        },
+        {
+          "courseNumber": "CSIE3340",
+          "chineseName": "計算機結構",
+          "englishName": "Computer Architecture",
+          "credits": 3,
+          "grade": "A",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "computer architecture",
+            "Verilog",
+            "RISC-V"
+          ]
+        },
+        {
+          "courseNumber": "CSIE5121",
+          "chineseName": "遊戲設計",
+          "englishName": "Game Programming",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "repoLink": "https://github.com/seantsao00/Hallucination",
+          "projectPageLink": "/projects/project-page?projectName=hallucination",
+          "skills": [
+            "Unity",
+            "C#",
+            "game design"
+          ]
+        },
+        {
+          "courseNumber": "CSIE5431",
+          "chineseName": "深度學習之應用",
+          "englishName": "Applied Deep Learning",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "Python",
+            "TensorFlow",
+            "Torch",
+            "deep learning",
+            "data processing",
+            "LLM",
+            "transformer"
+          ]
+        },
+        {
+          "courseNumber": "CSIE5060",
+          "chineseName": "分散式金融導論",
+          "englishName": "Introduction to Decentralized Finance",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2023/2024",
+          "skills": [
+            "blockchain",
+            "smart contract",
+            "Solidity",
+            "DeFi"
+          ]
+        }
+      ],
+      "CGPA": 4.16
+    },
+    {
+      "school": "The Affiliated Senior High School of National Taiwan Normal University",
+      "degree": "High School (Science Class)",
+      "years": "2019-2022"
+    }
+  ]
+}
