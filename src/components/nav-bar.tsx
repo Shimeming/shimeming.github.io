@@ -11,7 +11,7 @@ const NavBar = (): React.JSX.Element => {
 
   const pages = [
     { href: '/', title: 'Home' },
-    // { href: '/about', title: 'About' },
+    { href: '/about', title: 'About' },
     { href: '/projects', title: 'Projects' },
     { href: '/articles', title: 'Articles' },
   ];
