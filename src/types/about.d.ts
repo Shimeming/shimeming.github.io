@@ -5,10 +5,11 @@ export interface CourseData {
   credits: number;
   grade: string;
   semester: string;
+  skills?: string[];
+
   link?: string;
   repoLink?: string;
   projectPageLink?: string;
-  skills?: string[];
 }
 
 export interface EducationData {
@@ -18,4 +19,10 @@ export interface EducationData {
   defaultDisplay?: boolean;
   courses?: CourseData[];
   CGPA?: number;
+}
+
+export interface AwardData {
+  englishTitle: string;
+  chineseTitle?: string;
+  description?: string;
 }
