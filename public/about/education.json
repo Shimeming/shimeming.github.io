@@ -14,7 +14,7 @@
           "grade": "A+",
           "semester": "1st Semester 2022/2023",
           "repoLink": "https://github.com/tuanrongshan/IntroCS-Final-Project",
-          "projectPageLink": "/projects/project-page?projectName=introcs-final-project",
+          "projectPageLinkEmpty": "/projects/project-page?projectName=introcs-final-project",
           "skills": [
             "Jack",
             "computer architecture"
@@ -205,7 +205,7 @@
           "grade": "A+",
           "semester": "2nd Semester 2023/2024",
           "link": "https://drive.google.com/file/d/1VZ44v_03IkEJoGKOrXUWPe0IJMVk5EDl/view?usp=sharing",
-          "projectPageLink": "/projects/project-page?projectName=cns-final-project",
+          "projectPageLinkEmpty": "/projects/project-page?projectName=cns-final-project",
           "skills": [
             "Cryptography",
             "Network",

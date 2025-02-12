@@ -13,7 +13,7 @@ const NavBar = (): React.JSX.Element => {
     { href: '/', title: 'Home' },
     { href: '/about', title: 'About' },
     { href: '/projects', title: 'Projects' },
-    { href: '/articles', title: 'Articles' },
+    // { href: '/articles', title: 'Articles' },
   ];
 
   const links = [
