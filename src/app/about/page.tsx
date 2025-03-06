@@ -12,7 +12,7 @@ const Page = () => {
 
   return (
     <>
-      <main className='pb-20'>
+      <main className='pb-20 md:px-32'>
         <h2 className='mb-2 text-xl font-bold uppercase opacity-75'>
           About me
         </h2>

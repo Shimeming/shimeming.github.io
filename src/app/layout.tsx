@@ -28,12 +28,14 @@ export default function RootLayout({
           font-sans antialiased
           text-dark
           w-full min-h-screen
-          px-4 md:px-0
         `}
       >
         <ThemeProviderWrapper>
           <NavBar />
-          <div className="flex-grow flex justify-center items-center">
+          {/* <div className="flex-grow flex justify-center items-center"> */}
+          <div className='
+            w-full h-full z-0
+          '>
             {children}
             <div className='fixed bottom-4 right-8 z-30 p-4'>
               <DarkModeToggle />

@@ -8,7 +8,7 @@ import profilePic from '@public/pictures/home-page-pic_softEdge.png';
 const Page = () => {
   return (
     <>
-      <main className='flex items-center w-full'>
+      <main className='flex items-center w-full md:px-32'>
         <div className="flex items-center justify-between w-full">
           <div className='md:pl-12 w-2/5 hidden md:block'>
             <Image
