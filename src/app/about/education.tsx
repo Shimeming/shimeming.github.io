@@ -1,11 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { FaChevronDown, FaLink, FaGithub } from 'react-icons/fa';
-import { FaPlus, FaMinus } from "react-icons/fa6";
-import { PiNotePencilBold } from "react-icons/pi";
+import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { IoSchool } from 'react-icons/io5';
+import { PiNotePencilBold } from 'react-icons/pi';
 import { Tag, Collapsible } from '@/components/capsules';
 import { CourseData, EducationData } from '@/types/about';
 

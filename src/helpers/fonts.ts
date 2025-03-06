@@ -1,4 +1,4 @@
-import { Geist_Mono, Noto_Sans, Noto_Sans_TC, Caveat } from 'next/font/google';
+import { Geist_Mono, Noto_Sans, Noto_Sans_TC, Caveat, Poppins } from 'next/font/google';
 
 export const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
@@ -17,5 +17,11 @@ export const geistMono = Geist_Mono({
 
 export const caveat = Caveat({
   variable: '--font-caveat',
+  subsets: ['latin'],
+});
+
+export const poppinsSemiBold = Poppins({
+  weight: '600',
+  variable: '--font-poppins-semi-bold',
   subsets: ['latin'],
 });
