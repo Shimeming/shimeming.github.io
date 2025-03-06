@@ -24,6 +24,7 @@ export default {
         sanstc: ['var(--font-noto-sans-tc)'],
         mono: ['var(--font-geist-mono)'],
         caveat: ['var(--font-caveat)', 'cursive'],
+        poppins: ['var(--font-poppins-semi-bold)'],
       },
       typography: {
         DEFAULT: {

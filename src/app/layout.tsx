@@ -1,6 +1,6 @@
 import DarkModeToggle from '@/components/dark-mode-toggle';
 import NavBar from '@/components/nav-bar';
-import { notoSans, notoSansTC, geistMono, caveat } from '@/helpers/fonts';
+import { poppinsSemiBold, notoSans, notoSansTC, geistMono, caveat } from '@/helpers/fonts';
 import ThemeProviderWrapper from '@/helpers/theme-provider-wrapper';
 import type { Metadata } from 'next';
 
@@ -24,6 +24,7 @@ export default function RootLayout({
       <body
         className={`
           ${notoSans.variable} ${notoSansTC.variable} ${geistMono.variable} ${caveat.variable}
+          ${poppinsSemiBold.variable}
           font-sans antialiased
           text-dark
           w-full min-h-screen
@@ -32,9 +33,7 @@ export default function RootLayout({
       >
         <ThemeProviderWrapper>
           <NavBar />
-          <div className='
-            w-full h-full z-0 md:px-32
-          '>
+          <div className="flex-grow flex justify-center items-center">
             {children}
             <div className='fixed bottom-4 right-8 z-30 p-4'>
               <DarkModeToggle />
