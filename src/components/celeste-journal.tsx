@@ -65,7 +65,6 @@ const CelesteProgressJournal = ({
   }, 0);
   const totalTime = celesteProgress.chapterData.reduce((total, chapter) => {
     const [hours, minutes, seconds] = chapter.time.split(':').map(Number);
-    console.log(hours, minutes, seconds);
     return total + hours * 3600 + minutes * 60 + seconds;
   }, 0);
   const totalTimeFormatted = `${Math.floor(totalTime / 3600)}:${Math.floor(totalTime / 60) % 60}:${(totalTime % 60).toFixed(3)}`;
