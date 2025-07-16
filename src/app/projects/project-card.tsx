@@ -17,6 +17,8 @@ const ProjectCard = ({
 }: {
   project: string
 }) => {
+  const placeHolderCoverPath = '/projects/_placeholder/cover.avif';
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -30,18 +32,20 @@ const ProjectCard = ({
     href: string, metadata: ProjectMetadata, content: string,
   }>();
 
-  const placeHolderCoverPath = '/projects/placeholder/cover.avif';
+  const [coverImage, setCoverImage] = useState<string>(placeHolderCoverPath);
 
   useEffect(() => {
     (async () => {
+      const dir = path.join('/projects', project);
       const href = path.join(pathname, 'project-page') + '?' + createQueryString('projectName', project);
-      const res = await fetch(`/projects/${project}.md`);
+      const res = await fetch(`${dir}/content.md`);
       if (res.ok) {
         const text = await res.text();
         const parsed = matter(text); // Parse without generics
         const content = parsed.content;
         const metadata = parsed.data as ProjectMetadata;
         setProjectData({ href, metadata, content });
+        setCoverImage((metadata.coverImage && path.join(dir, metadata.coverImage)) || placeHolderCoverPath);
       } else {
         console.error('Error fetching project metadata');
       }
@@ -49,6 +53,7 @@ const ProjectCard = ({
   }, [createQueryString, project, pathname]);
 
   if (!projectData) return <Skeleton count={3} />;
+
   return (
     <>
       <motion.article
@@ -59,7 +64,7 @@ const ProjectCard = ({
       >
         <div className="relative aspect-video mb-4 rounded-lg overflow-hidden">
           <Image
-            src={projectData.metadata.coverImage || placeHolderCoverPath}
+            src={coverImage || placeHolderCoverPath}
             alt={projectData.metadata.projectName}
             fill
             className="object-cover"

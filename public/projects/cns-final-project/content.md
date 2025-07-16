@@ -1,5 +1,6 @@
 ---
 projectName: 'Computer Network and Security Final Project'
+coverImage: 'cover.png'
 description: 'A survey of Quishing in restaurants'
 overview: [
   'Conducted a comprehensive security survey on “quishing" attacks.',

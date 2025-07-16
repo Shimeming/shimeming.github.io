@@ -1,5 +1,6 @@
 ---
 projectName: 'Hogwarts Tag - 2023 CSIE Camp Challenge Game'
+coverImage: 'cover.png'
 description: 'A 2D tag game with various items and abilities for educational purposes using Python.'
 overview: [
   'Contributed over 2,000 lines of Python code across 97 commits, focusing on implementing and optimizing game content display.Enhanced image preprocessing, doubling the FPS from 30 to over 60.',

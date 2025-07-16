@@ -1,5 +1,6 @@
 ---
 projectName: 'Phantom Arena - 2024 CSIE Camp Challenge Game'
+coverImage: 'cover.png'
 description: 'A 2D educational game involving multi-threading with over 10,000 lines of Python code contributed by a team of more than 20 people.'
 overview: [
   'Led a team of 20+ members, providing Python programming instruction and overseeing development of a 10,000+ line codebase with 1,430 commits.',
