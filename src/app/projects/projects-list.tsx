@@ -2,38 +2,21 @@
 import { motion } from 'framer-motion';
 import ProjectCard from '@/app/projects/project-card';
 import projectList from '@/data/projects';
+import { staggerContainer } from '@/lib/animations';
 
 const ProjectsList = () => {
-
   return (
     <>
-      <motion.ul
-        role='list'
-        className='grid grid-cols-1 gap-4'
-        variants={{
-          animate: {
-            transition: {
-              staggerChildren: 0.15,
-            },
-          },
-        }}
-        initial='initial'
-        animate='animate'
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
       >
         {projectList.map((name) => (
-          <motion.li key={name}
-            variants={{
-              initial: { opacity: 0, y: 50 },
-              animate: {
-                opacity: 1, y: 0,
-                transition: { duration: 1 },
-              },
-            }}
-          >
-            <ProjectCard project={name} />
-          </motion.li>
+          <ProjectCard key={name} project={name} />
         ))}
-      </motion.ul>
+      </motion.div>
     </>
   );
 };

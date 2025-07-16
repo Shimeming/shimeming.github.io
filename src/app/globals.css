@@ -10,6 +10,7 @@
   --color-secondary: #6b7280; /* gray-500 */
   --color-hovered: oklch(0.967 0.003 264.542); /* gray-100 */
   --color-decorative: oklch(0.554 0.046 257.417);; /* slate-500 */
+  --color-surface: oklch(96.8% 0.007 247.896); /* slate-200 */
 }
 
 [data-mode='dark'] {
@@ -19,6 +20,7 @@
   --color-secondary: #d1d5db; /* gray-300 */
   --color-hovered: oklch(0.279 0.041 260.031); /* slate-800 */
   --color-decorative: oklch(0.704 0.04 256.788); /* slate-400 */
+  --color-surface: oklch(20.8% 0.042 265.755); /* slate-900 */
 }
 
 body {

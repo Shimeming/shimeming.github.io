@@ -1,17 +1,16 @@
 'use client';
 import path from 'path';
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import matter from 'gray-matter';
-import { AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
-import { MdEditNote } from 'react-icons/md';
 import Skeleton from 'react-loading-skeleton';
-import { containsPrintable, iconNameToFaIcon } from '@/helpers/utils';
 import { ProjectMetadata } from '@/types/project';
+import { fadeInUp, staggerContainer, cardHoverSmall } from '@/lib/animations';
+import Image from 'next/image';
+import { containsPrintable, iconNameToFaIcon } from '@/lib/utils';
+import { MdEditNote } from 'react-icons/md';
 
 const ProjectCard = ({
   project,
@@ -27,10 +26,11 @@ const ProjectCard = ({
     return params.toString();
   }, [searchParams]);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<{
     href: string, metadata: ProjectMetadata, content: string,
   }>();
+
+  const placeHolderCoverPath = '/projects/placeholder/cover.avif';
 
   useEffect(() => {
     (async () => {
@@ -50,48 +50,68 @@ const ProjectCard = ({
 
   if (!projectData) return <Skeleton count={3} />;
   return (
-    <motion.div
-      layout
-      transition={{ duration: 0.5 }}
-      className={clsx(
-        `relative block border rounded-lg shadow-lg overflow-hidden
-      dark:bg-gray-800
-      border-gray-200 dark:border-gray-700`,
-      )}
-    >
-      <motion.button
-        layout='position'
-        onClick={() => setIsOpen(!isOpen)}
-        className={clsx(
-          'relative flex flex-col w-full px-6 py-3 text-left',
-          {
-            'hover:bg-gray-100 dark:hover:bg-gray-700': projectData.href,
-          })}
+    <>
+      <motion.article
+        key={projectData.metadata.projectName}
+        className="bg-surface dark:bg-dark/50 rounded-lg shadow-md p-6"
+        variants={fadeInUp}
+        {...cardHoverSmall}
       >
-        <div className='flex w-full justify-between items-center'>
-          <div className='flex gap-2 items-end'>
-            <h5 className="text-xl font-bold tracking-tight text-black dark:text-white">
-              {projectData.metadata.projectName}
-            </h5>
-            {containsPrintable(projectData.content) && (
-              <span>
-                <Link
-                  href={projectData.href}
-                  className='hover:opacity-80 active:scale-90 duration-300'
-                >
-                  <MdEditNote className='inline' />
-                  Note
-                </Link>
-              </span>
-            )}
-          </div>
+        <div className="relative aspect-video mb-4 rounded-lg overflow-hidden">
+          <Image
+            src={projectData.metadata.coverImage || placeHolderCoverPath}
+            alt={projectData.metadata.projectName}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+        <motion.h3
+          className="text-xl font-semibold mb-2"
+          whileHover={{ x: 5 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          {projectData.metadata.projectName}
+        </motion.h3>
+        <motion.p
+          className="text-gray-600 dark:text-gray-300 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          {projectData.metadata.description}
+        </motion.p>
+        <motion.div
+          className="flex flex-wrap gap-2 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          {/* {project.technologies.map((tech) => (
+            <motion.span
+              key={tech}
+              className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {tech}
+            </motion.span>
+          ))} */}
+        </motion.div>
+        <motion.div
+          className="flex gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
           <div className='lg:text-sm flex gap-3'>
             {projectData.metadata.links?.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
                 target={'_blank'}
-                className='hover:opacity-80 active:scale-90 duration-300'
+                // className='hover:opacity-80 active:scale-90 duration-300'
+                className="flex items-center gap-2 text-secondary hover:text-primary active:scale-90 duration-300"
               >
                 {/* {link.icon} */}
                 <p className=''>
@@ -103,64 +123,23 @@ const ProjectCard = ({
               </Link>
             ))}
           </div>
-        </div>
-        <p className="font-normal">
-          {projectData.metadata.description}
-        </p>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.5 }}
-          className='absolute right-6 bottom-2 transform -translate-y-1/2'
-        >
-          <FaChevronDown />
-        </motion.span>
-      </motion.button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <>
-            <motion.div
-              layout='position'
-              className='dark:bg-gray-900 bg-neutral-200 px-6 py-3'
-            >
-              <motion.div
-                initial="collapsed"
-                animate="open"
-                exit="collapsed"
-                variants={{
-                  open: { opacity: 1, y: 0 },
-                  collapsed: { opacity: 0, y: -20 },
-                }}
-                transition={{ duration: 0.5 }}
-                key={isOpen ? 'open' : 'closed'}
+          {containsPrintable(projectData.content) && (
+            <div className='flex justify-end'>
+              <Link
+                href={projectData.href}
+              // className='
+              //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
+              //       active:scale-90 duration-300
+              //     '
               >
-                <ul className='list-disc list-inside'>
-                  {projectData.metadata.overview.map((overview, index) => (
-                    <li key={index}>
-                      {overview}
-                    </li>
-                  ))}
-                </ul>
-                {/* <span className=''></span> */}
-              </motion.div>
-              {containsPrintable(projectData.content) && (
-                <div className='flex justify-end'>
-                  <Link
-                    href={projectData.href}
-                  // className='
-                  //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
-                  //       active:scale-90 duration-300
-                  //     '
-                  >
-                    <MdEditNote className='inline' />
-                    Note
-                  </Link>
-                </div>
-              )}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </motion.div >
+                <MdEditNote className='inline' />
+                Note
+              </Link>
+            </div>
+          )}
+        </motion.div>
+      </motion.article>
+    </>
   );
 };
 
