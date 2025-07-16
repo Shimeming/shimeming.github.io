@@ -1,5 +1,6 @@
 export interface ProjectMetadata {
   projectName: string;
+  coverImage?: string;
   description: string;
   overview: string[];
   links?: {

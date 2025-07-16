@@ -18,6 +18,7 @@ export default {
         background: 'var(--background)',
         hovered: 'var(--color-hovered)',
         decorative: 'var(--color-decorative)',
+        surface: 'var(--color-surface)',
       },
       fontFamily: {
         sans: ['var(--font-noto-sans)'],
