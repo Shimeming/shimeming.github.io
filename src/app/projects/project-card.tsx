@@ -2,15 +2,16 @@
 import path from 'path';
 import { motion } from 'framer-motion';
 import matter from 'gray-matter';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useState, useEffect, useCallback } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { ProjectMetadata } from '@/types/project';
-import { fadeInUp, staggerContainer, cardHoverSmall } from '@/lib/animations';
-import Image from 'next/image';
-import { containsPrintable, iconNameToFaIcon } from '@/lib/utils';
+import React, { useId, useState, useEffect, useCallback } from 'react';
 import { MdEditNote } from 'react-icons/md';
+import Skeleton from 'react-loading-skeleton';
+import { fadeInUp, cardHoverSmall } from '@/lib/animations';
+import { containsPrintable, iconNameToFaIcon } from '@/lib/utils';
+import { ProjectMetadata } from '@/types/project';
+import ProjectDetail from './project-detail';
 
 const ProjectCard = ({
   project,
@@ -31,8 +32,14 @@ const ProjectCard = ({
   const [projectData, setProjectData] = useState<{
     href: string, metadata: ProjectMetadata, content: string,
   }>();
+  
+  const id = useId();
 
   const [coverImage, setCoverImage] = useState<string>(placeHolderCoverPath);
+  const [openDetail, setOpenDetail] = useState<boolean>(false);
+  const layoutId = Object.fromEntries(
+    ['title', 'card', 'image', 'description'].map(key => [key, `${key}-${id}`]),
+  );
 
   useEffect(() => {
     (async () => {
@@ -56,13 +63,24 @@ const ProjectCard = ({
 
   return (
     <>
+      <ProjectDetail
+        projectId={project}
+        layoutId={layoutId}
+        projectData={projectData}
+        openState={[openDetail, setOpenDetail]}
+      />
       <motion.article
         key={projectData.metadata.projectName}
-        className="bg-surface dark:bg-dark/50 rounded-lg shadow-md p-6"
+        onClick={() => setOpenDetail(true)}
+        layoutId={layoutId.card}
+        className="bg-surface dark:bg-dark/50 rounded-lg shadow-md p-6 hover:cursor-pointer"
         variants={fadeInUp}
         {...cardHoverSmall}
       >
-        <div className="relative aspect-video mb-4 rounded-lg overflow-hidden">
+        <motion.div
+          className="relative aspect-video mb-4 rounded-lg overflow-hidden"
+          layoutId={layoutId.image}
+        >
           <Image
             src={coverImage || placeHolderCoverPath}
             alt={projectData.metadata.projectName}
@@ -70,7 +88,7 @@ const ProjectCard = ({
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </div>
+        </motion.div>
         <motion.h3
           className="text-xl font-semibold mb-2"
           whileHover={{ x: 5 }}
