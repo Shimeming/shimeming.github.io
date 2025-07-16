@@ -1,29 +1,25 @@
 'use client';
 
-import { AnimatePresence, motion } from 'motion/react';
-import { useOutsideClick } from '@/hooks/use-outside-click';
-import { ProjectMetadata } from '@/types/project';
-import { useRef } from 'react';
-import Image from 'next/image';
 import path from 'path';
-
-export type LayoutId = {
-  title?: string;
-  card?: string;
-  image?: string;
-  description?: string;
-}
+import { AnimatePresence, motion } from 'motion/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRef, useEffect } from 'react';
+import { MdEditNote } from 'react-icons/md';
+import LinkIcon from '@/components/link-icon';
+import { useOutsideClick } from '@/hooks/use-outside-click';
+import { fadeDown } from '@/lib/animations';
+import { containsPrintable } from '@/lib/utils';
+import { ProjectMetadata } from '@/types/project';
 
 const ProjectDetail = ({
   projectId,
   projectData,
   openState,
-  layoutId,
 }: {
   projectId: string
   projectData: { href: string, metadata: ProjectMetadata, content: string, }
   openState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  layoutId?: LayoutId
 }) => {
   const metadata = projectData.metadata;
   const dir = path.join('/projects', projectId);
@@ -33,77 +29,125 @@ const ProjectDetail = ({
   useOutsideClick(ref, () => setOpen(false));
 
   const coverImage = (metadata.coverImage && path.join(dir, metadata.coverImage)) || placeHolderCoverPath;
+  useEffect(() => {
+    function handleCloseKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    }
+    function handleClosePop(event: PopStateEvent) {
+      setOpen(false);
+      event.preventDefault();
+    }
+    window.addEventListener('keydown', handleCloseKey);
+    window.addEventListener('popstate', handleClosePop);
+    return () => {
+      window.removeEventListener('keydown', handleCloseKey);
+      window.removeEventListener('popstate', handleClosePop);
+    };
+  }, [open, setOpen]);
 
   return (
     <>
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 h-full w-full z-10"
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 grid place-items-center z-[100]">
+          <>
             <motion.div
-              layoutId={layoutId?.card}
-              ref={ref}
-              className="w-full max-w-2xl h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
-            >
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-black/20 h-full w-full z-10"
+            />
+            <div className="fixed inset-0 grid place-items-center z-[100]">
               <motion.div
-                layoutId={layoutId?.image}
-                className="relative aspect-video"
+                ref={ref}
+                {...fadeDown}
+                className="relative w-full md:max-w-7xl h-full md:min-h-3xl md:max-h-[90%] bg-surface md:rounded-lg overflow-x-scroll no-scrollbar grid"
               >
-                <Image
-                  src={coverImage || placeHolderCoverPath}
-                  alt={projectData.metadata.projectName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </motion.div>
-
-              <div>
-                <div className="flex justify-between items-start p-4">
-                  <div className="">
-                    <motion.h3
-                      layoutId={layoutId?.title}
-                      className="font-medium text-neutral-700 dark:text-neutral-200 text-base"
-                    >
-                      {metadata.projectName}
-                    </motion.h3>
-                    <motion.p
-                      layoutId={layoutId?.description}
-                      className="text-neutral-600 dark:text-neutral-400 text-base"
-                    >
-                      {metadata.description}
-                    </motion.p>
+                <div
+                  className='absolute inset-0 items-center justify-center overflow-hidden'
+                >
+                  <div
+                    className="relative h-full"
+                  >
+                    <Image
+                      src={coverImage || placeHolderCoverPath}
+                      alt={projectData.metadata.projectName}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </div>
                 </div>
-                <div className="pt-4 relative px-4">
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
-                  >
-                    <ul className='list-disc list-inside'>
-                      {projectData.metadata.overview.map((overview, index) => (
-                        <li key={index}>
-                          {overview}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
+
+                <div className="bg-white/80 dark:bg-black/80 z-10 py-8 px-12 flex mt-64">
+                  <div className="flex flex-col gap-4">
+                    <h2
+                      className="font-bold text-primary text-4xl"
+                    >
+                      {metadata.projectName}
+                    </h2>
+                    <div>
+                      <motion.div
+                        className="flex gap-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        <div className='lg:text-sm flex gap-3'>
+                          {projectData.metadata.links?.map((link, index) => (
+                            <Link
+                              key={index}
+                              href={link.href}
+                              target={'_blank'}
+                              // className='hover:opacity-80 active:scale-90 duration-300'
+                              className="flex items-center gap-2 text-secondary hover:text-primary active:scale-90 duration-300"
+                            >
+                              <p className=''>
+                                <LinkIcon iconName={link.icon} />
+                                <span className='hidden lg:inline-block pl-1'>
+                                  {link.description}
+                                </span>
+                              </p>
+                            </Link>
+                          ))}
+                        </div>
+                        {containsPrintable(projectData.content) && (
+                          <div className='flex justify-end'>
+                            <Link
+                              href={projectData.href}
+                              className="flex items-center gap-2 text-secondary hover:text-primary active:scale-90 duration-300"
+                            >
+                              <MdEditNote className='inline' />
+                              Note
+                            </Link>
+                          </div>
+                        )}
+                      </motion.div>
+                    </div>
+
+                    <p className='text-lg'>
+                      {metadata.description}
+                    </p>
+                    <div className="relative">
+                      <div
+                        className="flex flex-col items-start gap-4 overflow-auto"
+                      >
+                        <ul className='list-disc list-inside'>
+                          {projectData.metadata.overview.map((overview, index) => (
+                            <li key={index}>
+                              {overview}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              </motion.div>
+            </div>
+          </>
         )}
       </AnimatePresence>
     </>

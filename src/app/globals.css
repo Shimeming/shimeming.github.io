@@ -3,24 +3,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-primary: #1d4ed8; /* blue-700 */
-  --color-secondary: #6b7280; /* gray-500 */
-  --color-hovered: oklch(0.967 0.003 264.542); /* gray-100 */
-  --color-decorative: oklch(0.554 0.046 257.417);; /* slate-500 */
-  --color-surface: oklch(96.8% 0.007 247.896); /* slate-200 */
+  --color-primary: #1d4ed8;
+  /* blue-700 */
+  --color-secondary: #6b7280;
+  /* gray-500 */
+  --color-hovered: oklch(0.967 0.003 264.542);
+  /* gray-100 */
+  --color-decorative: oklch(0.554 0.046 257.417);
+  /* slate-500 */
+  --color-surface: oklch(96.8% 0.007 247.896);
+  /* slate-200 */
 }
 
 [data-mode='dark'] {
-  --background: #0a0a0a;
+  --background: oklch(14.1% 0.005 285.823);
+  /* zinc-950 */
   --foreground: #ededed;
-  --color-primary: #a78bfa; /* violet-400 */
-  --color-secondary: #d1d5db; /* gray-300 */
-  --color-hovered: oklch(0.279 0.041 260.031); /* slate-800 */
-  --color-decorative: oklch(0.704 0.04 256.788); /* slate-400 */
-  --color-surface: oklch(20.8% 0.042 265.755); /* slate-900 */
+  --color-primary: #a78bfa;
+  /* violet-400 */
+  --color-secondary: #d1d5db;
+  /* gray-300 */
+  --color-hovered: oklch(0.279 0.041 260.031);
+  /* slate-800 */
+  --color-decorative: oklch(0.704 0.04 256.788);
+  /* slate-400 */
+  --color-surface: oklch(20.8% 0.042 265.755);
+  /* slate-900 */
 }
 
 body {

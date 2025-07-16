@@ -16,6 +16,11 @@ export const fadeIn = {
   transition: { duration: 0.5 },
 };
 
+export const fadeDown = {
+  ...fadeInDown,
+  exit: { opacity: 0, y: -20 },
+};
+
 export const staggerContainer = {
   animate: {
     transition: {

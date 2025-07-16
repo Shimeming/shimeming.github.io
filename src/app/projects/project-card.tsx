@@ -5,11 +5,12 @@ import matter from 'gray-matter';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useId, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MdEditNote } from 'react-icons/md';
 import Skeleton from 'react-loading-skeleton';
+import LinkIcon from '@/components/link-icon';
 import { fadeInUp, cardHoverSmall } from '@/lib/animations';
-import { containsPrintable, iconNameToFaIcon } from '@/lib/utils';
+import { containsPrintable } from '@/lib/utils';
 import { ProjectMetadata } from '@/types/project';
 import ProjectDetail from './project-detail';
 
@@ -33,13 +34,11 @@ const ProjectCard = ({
     href: string, metadata: ProjectMetadata, content: string,
   }>();
   
-  const id = useId();
-
   const [coverImage, setCoverImage] = useState<string>(placeHolderCoverPath);
   const [openDetail, setOpenDetail] = useState<boolean>(false);
-  const layoutId = Object.fromEntries(
-    ['title', 'card', 'image', 'description'].map(key => [key, `${key}-${id}`]),
-  );
+  // const layoutId = Object.fromEntries(
+  //   ['title', 'card', 'image', 'description'].map(key => [key, `${key}-${id}`]),
+  // );
 
   useEffect(() => {
     (async () => {
@@ -65,21 +64,18 @@ const ProjectCard = ({
     <>
       <ProjectDetail
         projectId={project}
-        layoutId={layoutId}
         projectData={projectData}
         openState={[openDetail, setOpenDetail]}
       />
       <motion.article
         key={projectData.metadata.projectName}
         onClick={() => setOpenDetail(true)}
-        layoutId={layoutId.card}
         className="bg-surface dark:bg-dark/50 rounded-lg shadow-md p-6 hover:cursor-pointer"
         variants={fadeInUp}
         {...cardHoverSmall}
       >
         <motion.div
           className="relative aspect-video mb-4 rounded-lg overflow-hidden"
-          layoutId={layoutId.image}
         >
           <Image
             src={coverImage || placeHolderCoverPath}
@@ -163,25 +159,6 @@ const ProjectCard = ({
         </motion.div>
       </motion.article>
     </>
-  );
-};
-
-const LinkIcon = ({
-  iconName,
-}: {
-  iconName: string
-}) => {
-  const [IconComponent, setIconComponent] = useState<React.ComponentType>();
-  useEffect(() => {
-    (async () => {
-      const Icon = await iconNameToFaIcon(iconName);
-      setIconComponent(() => Icon);
-    })();
-  }, [iconName]);
-  return (
-    <span className='inline-block'>
-      {IconComponent ? <IconComponent /> : 'link'}
-    </span>
   );
 };
 
