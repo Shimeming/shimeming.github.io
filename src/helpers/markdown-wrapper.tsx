@@ -1,7 +1,7 @@
 import Markdown, { type Components } from 'react-markdown';
 // import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark';
 import rehypeRaw from 'rehype-raw';
 
 const MarkdownWrapper = ({
@@ -18,16 +18,17 @@ const MarkdownWrapper = ({
       const match = /language-(\w+)/.exec(className || '');
 
       return match ? (
-        <SyntaxHighlighter
-          style={syntaxTheme}
-          language={match[1]}
-          PreTag="div"
-          className="!m-0"
-          // children={String(children).replace(/\n$/, '')}
-          {...rest}
-        >
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
+        // <SyntaxHighlighter
+        //   style={syntaxTheme}
+        //   language={match[1]}
+        //   PreTag="div"
+        //   className="!m-0"
+        //   // children={String(children).replace(/\n$/, '')}
+        //   {...rest}
+        // >
+        //   {String(children).replace(/\n$/, '')}
+        // </SyntaxHighlighter>
+        String(children).replace(/\n$/, '')
       ) : (
         <code {...rest} className={className}>
           {children}
