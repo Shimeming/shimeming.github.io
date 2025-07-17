@@ -85,13 +85,11 @@ const ProjectCard = ({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
-        <motion.h3
+        <h3
           className="text-xl font-semibold mb-2"
-          whileHover={{ x: 5 }}
-          transition={{ type: 'spring', stiffness: 300 }}
         >
           {projectData.metadata.projectName}
-        </motion.h3>
+        </h3>
         <motion.p
           className="text-gray-600 dark:text-gray-300 mb-4"
           initial={{ opacity: 0 }}

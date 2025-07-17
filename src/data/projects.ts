@@ -1,5 +1,6 @@
 const projectList = [
   'hallucination',
+  'icg-water-shader',
   'personal-website',
   'cns-final-project',
   'phantom-arena',
