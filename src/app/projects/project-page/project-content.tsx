@@ -18,7 +18,7 @@ const ProjectContent = ({
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/projects/${projectName}.md`);
+      const res = await fetch(`/projects/${projectName}/content.md`);
       if (res.ok) {
         const text = await res.text();
         const { content, data } = matter(text);
