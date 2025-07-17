@@ -82,6 +82,20 @@ const ProjectDetail = ({
                 </div>
 
                 <div className="bg-white/80 dark:bg-black/80 z-10 py-8 px-12 flex mt-64">
+                  <div className="absolute right-12 bottom-8">
+                    {containsPrintable(projectData.content) && (
+                      <div className='flex justify-end'>
+                        <Link
+                          href={projectData.href}
+                          className="flex items-center gap-2 text-lg font-bold hover:text-primary active:scale-95 duration-100 border-2 border-primary px-2 py-1 rounded-lg"
+                        >
+                          <MdEditNote className='inline' />
+                          Note
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
                   <div className="flex flex-col gap-4">
                     <h2
                       className="font-bold text-primary text-4xl"
@@ -89,11 +103,8 @@ const ProjectDetail = ({
                       {metadata.projectName}
                     </h2>
                     <div>
-                      <motion.div
+                      <div
                         className="flex gap-4"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
                       >
                         <div className='lg:text-sm flex gap-3'>
                           {projectData.metadata.links?.map((link, index) => (
@@ -113,18 +124,7 @@ const ProjectDetail = ({
                             </Link>
                           ))}
                         </div>
-                        {containsPrintable(projectData.content) && (
-                          <div className='flex justify-end'>
-                            <Link
-                              href={projectData.href}
-                              className="flex items-center gap-2 text-secondary hover:text-primary active:scale-90 duration-300"
-                            >
-                              <MdEditNote className='inline' />
-                              Note
-                            </Link>
-                          </div>
-                        )}
-                      </motion.div>
+                      </div>
                     </div>
 
                     <p className='text-lg'>
