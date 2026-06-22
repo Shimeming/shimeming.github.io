@@ -9,7 +9,9 @@ fs.readdir(directoryPath, (err, files) => {
     return console.error('Unable to scan directory: ' + err);
   }
   let fileContent = 'const projects = [\n';
-  const fileNamesWithoutExtension = files.map(file => path.parse(file).name);
+  const fileNamesWithoutExtension = files
+    .filter(file => !file.startsWith('_')) // skip _placeholder and other helpers
+    .map(file => path.parse(file).name);
   fileContent += `  '${fileNamesWithoutExtension.join("',\n  '")}',\n`;
   // files.forEach(file => {
   //   fileContent += `  '${file}',\n`;

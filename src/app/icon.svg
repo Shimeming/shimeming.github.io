@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#7c3aed"/>
+  <text x="32" y="35" text-anchor="middle" dominant-baseline="central"
+        font-size="40" font-weight="700" fill="#ffffff"
+        font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei','Hiragino Sans',sans-serif">銘</text>
+</svg>
