@@ -6,7 +6,8 @@ import { FaChevronDown, FaLink, FaGithub } from 'react-icons/fa';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { IoSchool } from 'react-icons/io5';
 import { PiNotePencilBold } from 'react-icons/pi';
-import { Tag, Collapsible } from '@/components/capsules';
+import { Collapsible } from '@/components/ui/collapsible';
+import { Tag } from '@/components/ui/tag';
 import { CourseData, EducationData } from '@/types/about';
 
 

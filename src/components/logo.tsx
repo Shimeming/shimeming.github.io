@@ -17,22 +17,11 @@ const Logo = ({
         flex h-11 w-11 items-center justify-center rounded-full
         bg-background font-sanstc text-xl font-bold text-foreground
         outline outline-2 outline-foreground/70
-        transition-colors focus-visible:outline-primary
+        transition-colors hover:outline-primary focus-visible:outline-primary
         ${className}
       `}
-      whileHover={{
-        backgroundColor: [
-          '#ef4444', // red-500
-          '#facc15', // yellow-400
-          '#65a30d', // lime-600
-          '#06b6d4', // cyan-500
-          '#3b82f6', // blue-500
-          '#a855f7', // purple-500
-          '#ec4899', // pink-500
-        ],
-        transition: { duration: 3, repeat: Infinity },
-      }}
-      whileTap={{ scale: 0.92 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       銘
     </MotionLink>

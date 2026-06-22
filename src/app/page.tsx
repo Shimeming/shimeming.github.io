@@ -38,7 +38,7 @@ const Page = () => {
         <div className='w-44 shrink-0 sm:w-60 md:w-2/5'>
           <Image
             src={profilePic}
-            alt='Shimeming'
+            alt='A waterfall in a lush green forest'
             className='h-auto w-full'
             priority
             sizes='(max-width: 768px) 15rem, 40vw'

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import Container from '@/components/layout/container';
-import MarkdownWrapper from '@/helpers/markdown-wrapper';
+import MarkdownWrapper from '@/components/markdown';
 import { getAllArticles, getArticle } from '@/lib/articles';
 
 export function generateStaticParams() {

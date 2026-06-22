@@ -1,7 +1,7 @@
 import DarkModeToggle from '@/components/dark-mode-toggle';
 import NavBar from '@/components/nav-bar';
-import { poppinsSemiBold, notoSans, notoSansTC, geistMono, caveat } from '@/helpers/fonts';
-import ThemeProviderWrapper from '@/helpers/theme-provider-wrapper';
+import ThemeProviderWrapper from '@/components/providers/theme-provider';
+import { poppinsSemiBold, notoSans, notoSansTC, geistMono, caveat } from '@/lib/fonts';
 import type { Metadata } from 'next';
 
 import './globals.css';
@@ -9,8 +9,8 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://shimeming.github.io'),
   title: {
-    template: '%s | Shimeming\'s Blog',
-    default: 'Shimeming\'s Blog',
+    template: '%s | Shimeming',
+    default: 'Shimeming',
   },
   description: 'Personal site of Shimeming — projects, notes, and more.',
 };

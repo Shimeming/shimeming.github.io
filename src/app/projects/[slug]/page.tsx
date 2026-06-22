@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import Container from '@/components/layout/container';
 import LinkIcon from '@/components/link-icon';
-import MarkdownWrapper from '@/helpers/markdown-wrapper';
+import MarkdownWrapper from '@/components/markdown';
 import { getAllProjects, getProject } from '@/lib/projects';
 
 export function generateStaticParams() {
