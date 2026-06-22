@@ -1,23 +1,24 @@
-'use client';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/lib/animations';
+import { type Metadata } from 'next';
+import Container from '@/components/layout/container';
+import { getProjectSummaries } from '@/lib/projects';
 import ProjectsList from './projects-list';
 
+export const metadata: Metadata = {
+  title: 'Projects',
+};
+
 const Page = () => {
+  const projects = getProjectSummaries();
+
   return (
-    <>
-      <main className='mb-20 md:px-32'>
-        <div className="container max-w-7xl mx-auto px-4">
-          <motion.h1
-            className="text-3xl font-bold mb-12 text-center"
-            {...fadeInUp}
-          >
-            Projects
-          </motion.h1>
-          <ProjectsList />
-        </div>
-      </main>
-    </>
+    <main className='mb-20'>
+      <Container>
+        <h1 className='mb-12 text-center text-3xl font-bold'>
+          Projects
+        </h1>
+        <ProjectsList projects={projects} />
+      </Container>
+    </main>
   );
 };
 

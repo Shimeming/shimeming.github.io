@@ -1,27 +1,29 @@
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
+import Container from '@/components/layout/container';
+import { getAwards, getEducation } from '@/lib/about';
 import Awards from './awards';
 import Education from './education';
-
-// import AnimatedHeading from '@/components/animated-heading';
 
 export const metadata: Metadata = {
   title: 'About',
 };
 
 const Page = () => {
+  const education = getEducation();
+  const awards = getAwards();
 
   return (
-    <>
-      <main className='pb-20 md:px-32'>
-        <h2 className='mb-2 text-xl font-bold uppercase opacity-75'>
+    <main className='pb-20'>
+      <Container>
+        <h1 className='mb-6 text-xl font-bold uppercase opacity-75'>
           About me
-        </h2>
+        </h1>
         <div className='flex flex-col gap-8'>
-          <Education />
-          <Awards />
+          <Education education={education} />
+          <Awards awards={awards} />
         </div>
-      </main>
-    </>
+      </Container>
+    </main>
   );
 };
 

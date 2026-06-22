@@ -1,7 +1,7 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaChevronDown, FaLink, FaGithub } from 'react-icons/fa';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { IoSchool } from 'react-icons/io5';
@@ -10,29 +10,19 @@ import { Tag, Collapsible } from '@/components/capsules';
 import { CourseData, EducationData } from '@/types/about';
 
 
-const Education = () => {
-  const [educationData, setEducationData] = useState<EducationData[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/about/education.json');
-      if (!res.ok) {
-        console.error('Failed to fetch education data');
-        return;
-      }
-      const data: { education: EducationData[] } = await res.json();
-      setEducationData(data.education);
-    })();
-  }, []);
-
+const Education = ({
+  education,
+}: {
+  education: EducationData[]
+}) => {
   return (
     <section>
       <h2 className='mb-2 text-xl font-bold opacity-75'>
         Education
       </h2>
       <ul className='relative border-s-2 pt-2 pb-1 ml-6'>
-        {educationData.map((education, index) => (
-          <School education={education} key={index} />
+        {education.map((school, index) => (
+          <School education={school} key={index} />
         ))}
       </ul>
     </section>
@@ -53,7 +43,7 @@ const School = ({
         onClick={() => setIsOpen(!isOpen)}
         disabled={education.courses === undefined}
       >
-        <span className='w-6 h-6 rounded-full bg-foreground flex justify-center items-center -translate-x-[1px]'>
+        <span className='w-6 h-6 rounded-full bg-primary flex justify-center items-center -translate-x-[1px]'>
           <IoSchool className='text-background' />
         </span>
         <div className='flex flex-col items-start'>
@@ -92,12 +82,13 @@ const School = ({
 
 const Course = ({
   course: {
-    courseNumber,
+    // Pulled out only to exclude them from `additionalInformation`.
+    courseNumber: _courseNumber,
+    credits: _credits,
+    semester: _semester,
     chineseName,
     englishName,
-    credits,
     grade,
-    semester,
     skills,
     ...additionalInformation
   },
@@ -156,7 +147,12 @@ const Course = ({
         <Collapsible isOpen={isOpen} className='pl-10 pb-2 pt-1'>
           <div className='flex flex-col gap-2'>
             {additionalInformation.link && (
-              <Link href={additionalInformation.link}>
+              <Link
+                href={additionalInformation.link}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='transition-colors hover:text-primary'
+              >
                 <span className='flex gap-2 items-baseline'>
                   <FaLink />
                   {additionalInformation.link}
@@ -164,7 +160,12 @@ const Course = ({
               </Link>
             )}
             {additionalInformation.repoLink && (
-              <Link href={additionalInformation.repoLink}>
+              <Link
+                href={additionalInformation.repoLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='transition-colors hover:text-primary'
+              >
                 <span className='flex gap-2 items-baseline'>
                   <FaGithub />
                   {additionalInformation.repoLink}

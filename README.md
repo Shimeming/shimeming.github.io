@@ -3,7 +3,7 @@
 This is my personal website.
 Currently under construction.
 
-The process of writing this webpage is documented at [here](https://shimeming.github.io/projects/project-page?projectName=personal-website).
+The process of writing this webpage is documented at [here](https://shimeming.github.io/projects/personal-website).
 
 ## Run code
 
@@ -29,8 +29,3 @@ The process of writing this webpage is documented at [here](https://shimeming.gi
 ## 📖 References
 
 - [YouTube Tutorial](https://www.youtube.com/watch?v=Yw7yWHigGKI)
-
-## 📝 Todo
-- Add code block highlight for markdown.
-  - useful links:
-    - [Syntax Highlight Code in Markdown](https://amirardalan.com/blog/syntax-highlight-code-in-markdown)

@@ -1,23 +1,25 @@
 'use client';
-import { motion } from 'framer-motion';
-import ProjectCard from '@/app/projects/project-card';
-import projectList from '@/data/projects';
+import { motion } from 'motion/react';
 import { staggerContainer } from '@/lib/animations';
+import type { ProjectSummary } from '@/lib/projects';
+import ProjectCard from './project-card';
 
-const ProjectsList = () => {
+const ProjectsList = ({
+  projects,
+}: {
+  projects: ProjectSummary[]
+}) => {
   return (
-    <>
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-      >
-        {projectList.map((name) => (
-          <ProjectCard key={name} project={name} />
-        ))}
-      </motion.div>
-    </>
+    <motion.div
+      className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'
+      variants={staggerContainer}
+      initial='initial'
+      animate='animate'
+    >
+      {projects.map((project) => (
+        <ProjectCard key={project.slug} project={project} />
+      ))}
+    </motion.div>
   );
 };
 

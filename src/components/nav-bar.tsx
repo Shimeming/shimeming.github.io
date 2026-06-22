@@ -1,73 +1,63 @@
 'use client';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-// import Logo from '@/components/logo';
 import { usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
+import Container from '@/components/layout/container';
+import Logo from '@/components/logo';
+
+const pages = [
+  { href: '/about', title: 'About' },
+  { href: '/projects', title: 'Projects' },
+  { href: '/articles', title: 'Articles' },
+  { href: '/celeste', title: 'Celeste' },
+];
 
 const NavBar = (): React.JSX.Element => {
-
   const pathName = usePathname();
 
-  const pages = [
-    { href: '/', title: 'Home' },
-    { href: '/about', title: 'About' },
-    { href: '/projects', title: 'Projects' },
-    // { href: '/articles', title: 'Articles' },
-    { href: '/celeste', title: 'Celeste' },
-  ];
-
-  const links = [
-    { href: 'https://github.com/Shimeming', icon: <FaGithub /> },
-  ];
-
   return (
-    <header
-      className={`
-        w-full md:px-32 py-8 font-medium
-        flex items-center justify-between
-      `}
-    >
-      <nav className='space-x-4'>
-        {pages.map((page, index) => (
-          <Link
-            key={index}
-            href={page.href}
-            className='relative group text-xl'
-          >
-            {page.title}
-            <span
-              className={`
-                h-0.5 inline-block bg-foreground absolute left-0 -bottom-0.5
-                group-hover:w-full
-                ${pathName === page.href ? 'w-full' : 'w-0'}
-              `}
-              style={{
-                transition: `
-                  width 300ms ease-in-out,
-                  background-color 1000ms linear
-                `,
-              }}
-            />
-          </Link>
-        ))}
-      </nav>
-      <nav className='space-x-4'>
-        {links.map((link, index) => (
-          <motion.a
-            key={index} href={link.href} target={'_blank'}
-            className="text-3xl block"
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {link.icon}
-          </motion.a>
-        ))}
-      </nav>
-
-      {/* <div className='absolute left-1/2 -translate-x-1/2'>
+    <header className='sticky top-0 z-40 border-b border-decorative/15 bg-background/80 backdrop-blur'>
+      <Container className='flex items-center justify-between gap-4 py-4'>
         <Logo />
-      </div> */}
+
+        <nav
+          aria-label='Primary'
+          className='no-scrollbar flex items-center gap-4 overflow-x-auto sm:gap-6'
+        >
+          {pages.map((page) => {
+            const active =
+              pathName === page.href || pathName.startsWith(page.href + '/');
+            return (
+              <Link
+                key={page.href}
+                href={page.href}
+                aria-current={active ? 'page' : undefined}
+                className='group relative shrink-0 text-base font-medium transition-colors hover:text-primary sm:text-lg'
+              >
+                {page.title}
+                <span
+                  className={`
+                    absolute -bottom-0.5 left-0 h-0.5 bg-primary
+                    transition-[width] duration-300 ease-in-out
+                    group-hover:w-full
+                    ${active ? 'w-full' : 'w-0'}
+                  `}
+                />
+              </Link>
+            );
+          })}
+
+          <Link
+            href='https://github.com/Shimeming'
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label='GitHub profile'
+            className='shrink-0 text-2xl transition-colors hover:text-primary'
+          >
+            <FaGithub />
+          </Link>
+        </nav>
+      </Container>
     </header>
   );
 };

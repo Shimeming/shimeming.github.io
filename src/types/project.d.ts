@@ -3,6 +3,7 @@ export interface ProjectMetadata {
   coverImage?: string;
   description: string;
   overview: string[];
+  tags?: string[];
   links?: {
     href: string;
     icon: string;

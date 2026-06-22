@@ -1,4 +1,5 @@
 'use client';
+import { MotionConfig } from 'motion/react';
 import { ThemeProvider } from 'next-themes';
 
 const ThemeProviderWrapper = ({
@@ -8,7 +9,9 @@ const ThemeProviderWrapper = ({
 }>): React.JSX.Element => {
   return (
     <ThemeProvider attribute='data-mode' enableSystem={true}>
-      {children}
+      <MotionConfig reducedMotion='user'>
+        {children}
+      </MotionConfig>
     </ThemeProvider>
   );
 };

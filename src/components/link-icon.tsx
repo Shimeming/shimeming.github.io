@@ -1,22 +1,23 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { iconNameToFaIcon } from '@/lib/utils';
+import { type IconType } from 'react-icons';
+import { FaFilePdf, FaGamepad, FaGithub, FaUserCircle, FaLink } from 'react-icons/fa';
+
+const iconMap: Record<string, IconType> = {
+  FaFilePdf,
+  FaGamepad,
+  FaGithub,
+  FaUserCircle,
+  FaLink,
+};
 
 const LinkIcon = ({
   iconName,
 }: {
   iconName: string
 }) => {
-  const [IconComponent, setIconComponent] = useState<React.ComponentType>();
-  useEffect(() => {
-    (async () => {
-      const Icon = await iconNameToFaIcon(iconName);
-      setIconComponent(() => Icon);
-    })();
-  }, [iconName]);
+  const Icon = iconMap[iconName] ?? FaLink;
   return (
     <span className='inline-block'>
-      {IconComponent ? <IconComponent /> : 'link'}
+      <Icon />
     </span>
   );
 };

@@ -7,11 +7,12 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shimeming.github.io'),
   title: {
     template: '%s | Shimeming\'s Blog',
     default: 'Shimeming\'s Blog',
   },
-  description: 'Shimeming\'s Blog',
+  description: 'Personal site of Shimeming — projects, notes, and more.',
 };
 
 export default function RootLayout({
@@ -26,20 +27,16 @@ export default function RootLayout({
           ${notoSans.variable} ${notoSansTC.variable} ${geistMono.variable} ${caveat.variable}
           ${poppinsSemiBold.variable}
           font-sans antialiased
-          text-dark
-          w-full min-h-screen
+          flex min-h-screen flex-col
         `}
       >
         <ThemeProviderWrapper>
           <NavBar />
-          {/* <div className="flex-grow flex justify-center items-center"> */}
-          <div className='
-            w-full h-full z-0
-          '>
+          <div className='flex flex-1 flex-col'>
             {children}
-            <div className='fixed bottom-4 right-8 z-30 p-4'>
-              <DarkModeToggle />
-            </div>
+          </div>
+          <div className='fixed bottom-4 right-8 z-30'>
+            <DarkModeToggle />
           </div>
         </ThemeProviderWrapper>
       </body>

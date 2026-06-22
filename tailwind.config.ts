@@ -13,6 +13,7 @@ export default {
     extend: {
       colors: {
         primary: 'var(--color-primary)',
+        accent: 'var(--color-accent)',
         secondary: 'var(--color-secondary)',
         foreground: 'var(--foreground)',
         background: 'var(--background)',
@@ -30,16 +31,7 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '64rem',
-            pre: {
-              // backgroundColor: 'var(--foreground)',
-              'border-width': '2px',
-              'border-color': '#ededed',
-              'padding': '0',
-            },
-            'pre code': {
-              'line-height': '1.2',
-            },
+            maxWidth: 'none',
           },
         },
       },

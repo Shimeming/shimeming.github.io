@@ -14,7 +14,7 @@
           "grade": "A+",
           "semester": "1st Semester 2022/2023",
           "repoLink": "https://github.com/tuanrongshan/IntroCS-Final-Project",
-          "projectPageLinkEmpty": "/projects/project-page?projectName=introcs-final-project",
+          "projectPageLinkEmpty": "/projects/introcs-final-project",
           "skills": [
             "Jack",
             "computer architecture"
@@ -205,7 +205,7 @@
           "grade": "A+",
           "semester": "2nd Semester 2023/2024",
           "link": "https://drive.google.com/file/d/1VZ44v_03IkEJoGKOrXUWPe0IJMVk5EDl/view?usp=sharing",
-          "projectPageLinkEmpty": "/projects/project-page?projectName=cns-final-project",
+          "projectPageLinkEmpty": "/projects/cns-final-project",
           "skills": [
             "Cryptography",
             "Network",
@@ -256,7 +256,7 @@
           "grade": "A+",
           "semester": "1st Semester 2023/2024",
           "repoLink": "https://github.com/seantsao00/Hallucination",
-          "projectPageLink": "/projects/project-page?projectName=hallucination",
+          "projectPageLink": "/projects/hallucination",
           "skills": [
             "Unity",
             "C#",

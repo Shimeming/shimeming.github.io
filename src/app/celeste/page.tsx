@@ -73,7 +73,7 @@ const progressData: CelesteProgressData = {
 
 const Page = () => {
   return (
-    <>
+    <div className='relative flex flex-1 items-center overflow-hidden'>
       <Image
         alt="Celeste background"
         src={celesteBackgroundImage}
@@ -81,18 +81,18 @@ const Page = () => {
         quality={100}
         fill
         sizes="100vw"
-        style={{
-          objectFit: 'cover',
-        }}
-        className='-z-40'
+        style={{ objectFit: 'cover' }}
+        className='-z-10'
       />
-      <div className='relative flex-1 overflow-hidden'>
-        <CelesteProgressJournal
-          celesteProgress={progressData}
-          className='-rotate-2 -translate-x-32 translate-y-16'
-        />
+      <div className='no-scrollbar w-full overflow-x-auto'>
+        <div className='flex min-w-fit justify-center px-4 py-10'>
+          <CelesteProgressJournal
+            celesteProgress={progressData}
+            className='-rotate-1'
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

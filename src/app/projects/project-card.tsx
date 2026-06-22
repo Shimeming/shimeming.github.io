@@ -1,162 +1,81 @@
 'use client';
-import path from 'path';
-import { motion } from 'framer-motion';
-import matter from 'gray-matter';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useState, useEffect, useCallback } from 'react';
-import { MdEditNote } from 'react-icons/md';
-import Skeleton from 'react-loading-skeleton';
 import LinkIcon from '@/components/link-icon';
 import { fadeInUp, cardHoverSmall } from '@/lib/animations';
-import { containsPrintable } from '@/lib/utils';
-import { ProjectMetadata } from '@/types/project';
-import ProjectDetail from './project-detail';
+import type { ProjectSummary } from '@/lib/projects';
 
 const ProjectCard = ({
   project,
 }: {
-  project: string
+  project: ProjectSummary
 }) => {
-  const placeHolderCoverPath = '/projects/_placeholder/cover.avif';
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const createQueryString = useCallback((name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(name, value);
-    return params.toString();
-  }, [searchParams]);
-
-  const [projectData, setProjectData] = useState<{
-    href: string, metadata: ProjectMetadata, content: string,
-  }>();
-  
-  const [coverImage, setCoverImage] = useState<string>(placeHolderCoverPath);
-  const [openDetail, setOpenDetail] = useState<boolean>(false);
-  // const layoutId = Object.fromEntries(
-  //   ['title', 'card', 'image', 'description'].map(key => [key, `${key}-${id}`]),
-  // );
-
-  useEffect(() => {
-    (async () => {
-      const dir = path.join('/projects', project);
-      const href = path.join(pathname, 'project-page') + '?' + createQueryString('projectName', project);
-      const res = await fetch(`${dir}/content.md`);
-      if (res.ok) {
-        const text = await res.text();
-        const parsed = matter(text); // Parse without generics
-        const content = parsed.content;
-        const metadata = parsed.data as ProjectMetadata;
-        setProjectData({ href, metadata, content });
-        setCoverImage((metadata.coverImage && path.join(dir, metadata.coverImage)) || placeHolderCoverPath);
-      } else {
-        console.error('Error fetching project metadata');
-      }
-    })();
-  }, [createQueryString, project, pathname]);
-
-  if (!projectData) return <Skeleton count={3} />;
+  const { slug, metadata, coverImage } = project;
 
   return (
-    <>
-      <ProjectDetail
-        projectId={project}
-        projectData={projectData}
-        openState={[openDetail, setOpenDetail]}
-      />
-      <motion.article
-        key={projectData.metadata.projectName}
-        onClick={() => setOpenDetail(true)}
-        className="bg-surface dark:bg-dark/50 rounded-lg shadow-md p-6 hover:cursor-pointer"
-        variants={fadeInUp}
-        {...cardHoverSmall}
-      >
-        <motion.div
-          className="relative aspect-video mb-4 rounded-lg overflow-hidden"
-        >
-          <Image
-            src={coverImage || placeHolderCoverPath}
-            alt={projectData.metadata.projectName}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </motion.div>
-        <h3
-          className="text-xl font-semibold mb-2"
-        >
-          {projectData.metadata.projectName}
+    <motion.article
+      variants={fadeInUp}
+      {...cardHoverSmall}
+      className='group relative flex flex-col overflow-hidden rounded-2xl bg-surface shadow-md transition-shadow hover:shadow-xl'
+    >
+      <div className='relative aspect-video overflow-hidden'>
+        <Image
+          src={coverImage}
+          alt={metadata.projectName}
+          fill
+          className='object-cover transition-transform duration-300 group-hover:scale-105'
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+        />
+      </div>
+
+      <div className='flex flex-1 flex-col p-6'>
+        <h3 className='text-xl font-semibold'>
+          {metadata.projectName}
         </h3>
-        <motion.p
-          className="text-gray-600 dark:text-gray-300 mb-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          {projectData.metadata.description}
-        </motion.p>
-        <motion.div
-          className="flex flex-wrap gap-2 mb-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          {/* {project.technologies.map((tech) => (
-            <motion.span
-              key={tech}
-              className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {tech}
-            </motion.span>
-          ))} */}
-        </motion.div>
-        <motion.div
-          className="flex gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div className='lg:text-sm flex gap-3'>
-            {projectData.metadata.links?.map((link, index) => (
+        <p className='mt-2 text-decorative'>
+          {metadata.description}
+        </p>
+
+        {metadata.tags && metadata.tags.length > 0 && (
+          <div className='mt-3 flex flex-wrap gap-2'>
+            {metadata.tags.map((tag) => (
+              <span
+                key={tag}
+                className='rounded-full bg-primary/10 px-3 py-1 text-sm text-primary'
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* External links sit above the full-card overlay link (z-10). */}
+        {metadata.links && metadata.links.length > 0 && (
+          <div className='relative z-10 mt-4 flex flex-wrap gap-3 text-sm'>
+            {metadata.links.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
-                target={'_blank'}
-                // className='hover:opacity-80 active:scale-90 duration-300'
-                className="flex items-center gap-2 text-secondary hover:text-primary active:scale-90 duration-300"
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center gap-1.5 text-secondary transition-colors hover:text-primary active:scale-95'
               >
-                {/* {link.icon} */}
-                <p className=''>
-                  <LinkIcon iconName={link.icon} />
-                  <span className='hidden lg:inline-block pl-1'>
-                    {link.description}
-                  </span>
-                </p>
+                <LinkIcon iconName={link.icon} />
+                <span className='hidden sm:inline'>{link.description}</span>
               </Link>
             ))}
           </div>
-          {containsPrintable(projectData.content) && (
-            <div className='flex justify-end'>
-              <Link
-                href={projectData.href}
-              // className='
-              //       block bg-foreground text-background px-1 py-0.5 rounded-md hover:opacity-80
-              //       active:scale-90 duration-300
-              //     '
-              >
-                <MdEditNote className='inline' />
-                Note
-              </Link>
-            </div>
-          )}
-        </motion.div>
-      </motion.article>
-    </>
+        )}
+      </div>
+
+      {/* Full-card click target → detail page; keyboard-focusable. */}
+      <Link
+        href={`/projects/${slug}`}
+        aria-label={`View ${metadata.projectName}`}
+        className='absolute inset-0 z-0 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      />
+    </motion.article>
   );
 };
 

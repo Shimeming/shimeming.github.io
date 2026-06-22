@@ -54,7 +54,7 @@ const CelesteProgressJournal = ({
   };
 
   const totalStrawberries = celesteProgress.chapterData.reduce((total, chapter) => {
-    const [collected, _] = chapter.strawberries.split('/').map(Number);
+    const [collected] = chapter.strawberries.split('/').map(Number);
     return total + (isNaN(collected) ? 0 : collected);
   }, 0);
   const totalDeaths = celesteProgress.chapterData.reduce((total, chapter) => {

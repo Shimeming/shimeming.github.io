@@ -1,44 +1,51 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaArrowRightLong } from 'react-icons/fa6';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import AnimatedHeading from '@/components/animated-heading';
+import Container from '@/components/layout/container';
 import profilePic from '@public/pictures/home-page-pic_softEdge.png';
-
 
 const Page = () => {
   return (
-    <>
-      <main className='flex items-center w-full md:px-32'>
-        <div className="flex items-center justify-between w-full">
-          <div className='md:pl-12 w-2/5 hidden md:block'>
-            <Image
-              src={profilePic}
-              alt="Profile Picture"
-              className='w-full h-auto'
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-          <div className='md:w-1/2'>
-            <AnimatedHeading
-              // text="I think there should be some really awesome text here, but I can't come up with anything."
-              // text="Imagine some really awesome text here!"
-              text="Here's Shimeming"
-              wordAppearInterval={0.3}
-            />
-            <p className='my-4 text-xl font-medium font-caveat'>
-              If a thing is worth doing, it is worth doing badly.
-            </p>
-            <div className='flex items-center mt-2'>
-              <Link href='mailto:b11902140@csie.ntu.edu.tw' target={'_blank'}>
-                <MdOutlineAlternateEmail className='inline mr-1' />
-                b11902140@csie.ntu.edu.tw
-              </Link>
-            </div>
+    <main className='flex flex-1 items-center'>
+      <Container className='flex flex-col-reverse items-center gap-8 py-12 md:flex-row md:justify-between md:gap-12'>
+        <div className='w-full md:w-1/2'>
+          <AnimatedHeading
+            text="Here's Shimeming"
+            wordAppearInterval={0.3}
+          />
+          <p className='mt-3 font-caveat text-2xl text-primary'>
+            If a thing is worth doing, it is worth doing badly.
+          </p>
+          <div className='mt-6 flex flex-wrap items-center gap-4'>
+            <Link
+              href='/projects'
+              className='inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-medium text-background transition hover:opacity-90 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+            >
+              View projects <FaArrowRightLong />
+            </Link>
+            <Link
+              href='mailto:b11902140@csie.ntu.edu.tw'
+              className='inline-flex items-center gap-2 text-secondary transition-colors hover:text-primary'
+            >
+              <MdOutlineAlternateEmail />
+              b11902140@csie.ntu.edu.tw
+            </Link>
           </div>
         </div>
-      </main>
-    </>
+
+        <div className='w-44 shrink-0 sm:w-60 md:w-2/5'>
+          <Image
+            src={profilePic}
+            alt='Shimeming'
+            className='h-auto w-full'
+            priority
+            sizes='(max-width: 768px) 15rem, 40vw'
+          />
+        </div>
+      </Container>
+    </main>
   );
 };
 

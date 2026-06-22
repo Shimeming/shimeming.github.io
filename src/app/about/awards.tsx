@@ -1,24 +1,12 @@
-'use client';
-import { useEffect, useState } from 'react';
 import { FaAward } from 'react-icons/fa';
 import { AwardData } from '@/types/about';
 
 
-const Awards = () => {
-  const [awards, setAwards] = useState<AwardData[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/about/awards.json');
-      if (!res.ok) {
-        console.error('Failed to fetch awards data');
-        return;
-      }
-      const data: { awards: AwardData[] } = await res.json();
-      setAwards(data.awards);
-    })();
-  }, []);
-
+const Awards = ({
+  awards,
+}: {
+  awards: AwardData[]
+}) => {
   return (
     <section>
       <h2 className='mb-2 text-xl font-bold opacity-75'>
@@ -43,7 +31,7 @@ const Award = ({
       <div
         className='relative flex gap-4 group-hover:bg-hovered hover:bg-hovered px-3 py-1 rounded-lg items-baseline'
       >
-        <span className='w-6 h-6 rounded-full bg-foreground flex justify-center items-center -translate-x-[1px]'>
+        <span className='w-6 h-6 rounded-full bg-primary flex justify-center items-center -translate-x-[1px]'>
           <FaAward className='text-background' />
         </span>
         <div className='flex flex-col items-start'>

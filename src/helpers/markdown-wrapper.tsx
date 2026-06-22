@@ -1,7 +1,6 @@
-import Markdown, { type Components } from 'react-markdown';
-// import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark';
+import 'highlight.js/styles/atom-one-dark.css';
+import Markdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 
 const MarkdownWrapper = ({
@@ -11,40 +10,14 @@ const MarkdownWrapper = ({
   content: string
   className?: string
 }) => {
-  const syntaxTheme = oneDark;
-
-  const MarkdownComponents: Components = {
-    code({ children, className, ...rest }) {
-      const match = /language-(\w+)/.exec(className || '');
-
-      return match ? (
-        // <SyntaxHighlighter
-        //   style={syntaxTheme}
-        //   language={match[1]}
-        //   PreTag="div"
-        //   className="!m-0"
-        //   // children={String(children).replace(/\n$/, '')}
-        //   {...rest}
-        // >
-        //   {String(children).replace(/\n$/, '')}
-        // </SyntaxHighlighter>
-        String(children).replace(/\n$/, '')
-      ) : (
-        <code {...rest} className={className}>
-          {children}
-        </code>
-      );
-    },
-  };
-
   return (
-    <Markdown
-      className={`prose dark:prose-invert mx-auto ${className}`} // font-sanstc
-      rehypePlugins={[rehypeRaw]} // , rehypeHighlight
-      components={MarkdownComponents}
-    >
-      {content}
-    </Markdown>
+    <div className={`prose dark:prose-invert max-w-none ${className}`}>
+      <Markdown
+        rehypePlugins={[rehypeRaw, [rehypeHighlight, { ignoreMissing: true }]]}
+      >
+        {content}
+      </Markdown>
+    </div>
   );
 };
 
