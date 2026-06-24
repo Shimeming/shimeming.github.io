@@ -10,20 +10,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        accent: 'var(--color-accent)',
-        secondary: 'var(--color-secondary)',
-        foreground: 'var(--foreground)',
-        background: 'var(--background)',
-        hovered: 'var(--color-hovered)',
-        decorative: 'var(--color-decorative)',
-        surface: 'var(--color-surface)',
+        /* blueprint tokens */
+        background:  'var(--background)',
+        surface:     'var(--surface)',
+        surfaceFlat: 'var(--surface-flat)',
+        foreground:  'var(--foreground)',
+        body:        'var(--body)',
+        muted:       'var(--muted)',
+        primary:     'var(--primary)',
+        accent:      'var(--accent)',
+        grade:       'var(--grade)',
+        hand:        'var(--hand)',
+        /* backward-compat aliases for not-yet-rewritten components */
+        secondary:   'var(--muted)',
+        decorative:  'var(--muted)',
+        hovered:     'var(--surface)',
       },
       fontFamily: {
-        sans: ['var(--font-noto-sans)'],
-        sanstc: ['var(--font-noto-sans-tc)'],
-        mono: ['var(--font-geist-mono)'],
-        caveat: ['var(--font-caveat)', 'cursive'],
+        display: ['var(--font-space-grotesk)'],
+        mono:    ['var(--font-space-mono)'],
+        sans:    ['var(--font-noto-sans)'],
+        sanstc:  ['var(--font-noto-sans-tc)'],
+        caveat:  ['var(--font-caveat)', 'cursive'],
         poppins: ['var(--font-poppins-semi-bold)'],
       },
       typography: {

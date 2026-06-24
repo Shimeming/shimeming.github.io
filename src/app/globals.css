@@ -12,28 +12,57 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Blueprint grid background utility */
+  .bp-grid {
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
 }
 
 :root {
-  --background: #fffdfa; /* warm white */
-  --foreground: #1e2233; /* slate-ink */
-  --color-primary: #7c3aed; /* violet-600 */
-  --color-accent: #ec4899; /* pink-500 */
-  --color-secondary: #6b7280; /* gray-500 */
-  --color-decorative: #64748b; /* slate-500 */
-  --color-surface: #f5f1ea; /* warm surface */
-  --color-hovered: #ece6dd; /* warm hover */
+  /* blueprint light tokens */
+  --background:    #F5F8F6;
+  --surface:       #FFFFFF;
+  --surface-flat:  #F4F7F5;
+  --foreground:    #16202A;
+  --body:          #33414F;
+  --muted:         #41576A;
+  --primary:       #1E5FCC;
+  --accent:        #C8402F;
+  --grade:         #1E8A4C;
+  --hand:          #C8402F; /* same as accent in light */
+  --grid-line:     rgba(30,95,204,.07);
+  /* backward-compat aliases (used by not-yet-rewritten components) */
+  --color-primary:    var(--primary);
+  --color-accent:     var(--accent);
+  --color-secondary:  var(--muted);
+  --color-decorative: var(--muted);
+  --color-surface:    var(--surface);
+  --color-hovered:    var(--surface);
 }
 
 [data-mode='dark'] {
-  --background: #15131c; /* violet-tinted near-black */
-  --foreground: #ece8f0;
-  --color-primary: #a78bfa; /* violet-400 */
-  --color-accent: #f472b6; /* pink-400 */
-  --color-secondary: #cbd5e1; /* slate-300 */
-  --color-decorative: #94a3b8; /* slate-400 */
-  --color-surface: #211d2e; /* violet-tinted surface */
-  --color-hovered: #2c2740;
+  /* blueprint dark tokens */
+  --background:    #0E1A24;
+  --surface:       #13242F;
+  --surface-flat:  #10202A;
+  --foreground:    #E6EEF3;
+  --body:          #9FB6C4;
+  --muted:         #8FA6B5;
+  --primary:       #5BA8FF;
+  --accent:        #FF6B5A;
+  --grade:         #1E8A4C; /* kept same; no dark override in brief */
+  --hand:          #FF9A6B;
+  --grid-line:     rgba(56,189,248,.07);
+  /* backward-compat aliases */
+  --color-primary:    var(--primary);
+  --color-accent:     var(--accent);
+  --color-secondary:  var(--muted);
+  --color-decorative: var(--muted);
+  --color-surface:    var(--surface);
+  --color-hovered:    var(--surface);
 }
 
 body {
