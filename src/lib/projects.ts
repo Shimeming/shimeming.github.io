@@ -18,10 +18,21 @@ export interface Project {
 
 export type ProjectSummary = Omit<Project, 'content'>;
 
+export function assertProjectMetadata(data: unknown, slug: string): ProjectMetadata {
+  const d = data as Record<string, unknown>;
+  if (!d || typeof d.projectName !== 'string' || !d.projectName) {
+    throw new Error(`Project "${slug}": missing required frontmatter "projectName"`);
+  }
+  if (!d || typeof d.description !== 'string' || !d.description) {
+    throw new Error(`Project "${slug}": missing required frontmatter "description"`);
+  }
+  return data as ProjectMetadata;
+}
+
 function readProject(slug: string): Project {
   const file = fs.readFileSync(path.join(PROJECTS_DIR, slug, 'content.md'), 'utf8');
   const { data, content } = matter(file);
-  const metadata = data as ProjectMetadata;
+  const metadata = assertProjectMetadata(data, slug);
   const coverImage = metadata.coverImage
     ? path.posix.join('/projects', slug, metadata.coverImage)
     : PLACEHOLDER_COVER;

@@ -9,6 +9,12 @@ export interface ProjectMetadata {
     icon: string;
     description?: string;
   }[];
+  year?: number;
+  role?: string;
+  category?: 'Game' | 'Graphics' | 'Web' | 'Systems' | 'School';
+  stack?: string[];
+  preview?: string;
+  featured?: boolean;
 }
 
 export interface GithubProjectMetadata extends ProjectMetadata {
