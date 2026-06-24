@@ -1,4 +1,4 @@
-const articleList = [
+const articles = [
   'courage-to-start',
 ];
-export default articleList;
+export default articles;

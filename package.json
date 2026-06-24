@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "update-content": "node scripts/update-content.js",
+    "update-content": "node scripts/update-content.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

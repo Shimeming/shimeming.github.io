@@ -1,4 +1,4 @@
-const projectList = [
+const projects = [
   'hallucination',
   'icg-water-shader',
   'personal-website',
@@ -8,4 +8,4 @@ const projectList = [
   'introcs-final-project',
   'codefest2024',
 ];
-export default projectList;
+export default projects;
