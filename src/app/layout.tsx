@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import NavBar from '@/components/nav-bar';
 import ThemeProviderWrapper from '@/components/providers/theme-provider';
 import { poppinsSemiBold, notoSans, notoSansTC, spaceGrotesk, spaceMono, caveat } from '@/lib/fonts';
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className='flex flex-1 flex-col'>
             {children}
           </div>
+          <Footer />
         </ThemeProviderWrapper>
       </body>
     </html>
