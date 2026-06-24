@@ -1,50 +1,55 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { MdOutlineAlternateEmail } from 'react-icons/md';
 import AnimatedHeading from '@/components/animated-heading';
-import Container from '@/components/layout/container';
-import profilePic from '@public/pictures/home-page-pic_softEdge.png';
+import site from '@/data/site';
 
 const Page = () => {
   return (
     <main className='flex flex-1 items-center'>
-      <Container className='flex flex-col-reverse items-center gap-8 py-12 md:flex-row md:justify-between md:gap-12'>
-        <div className='w-full md:w-1/2'>
+      <section className='bp-grid w-full px-6 py-12 sm:px-10'>
+        {/* Mono eyebrow */}
+        <p className='font-mono text-xs uppercase tracking-[0.14em] text-primary'>
+          Personal site · 個人網站
+        </p>
+
+        {/* Heading + Caveat note */}
+        <div className='flex flex-wrap items-baseline gap-x-3'>
           <AnimatedHeading
-            text="Here's Shimeming"
-            wordAppearInterval={0.3}
+            text="Hi, I'm Shimeming"
+            wordAppearInterval={0.12}
           />
-          <p className='mt-3 font-caveat text-2xl text-primary'>
-            If a thing is worth doing, it is worth doing badly.
-          </p>
-          <div className='mt-6 flex flex-wrap items-center gap-4'>
-            <Link
-              href='/projects'
-              className='inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-medium text-background transition hover:opacity-90 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
-            >
-              View projects <FaArrowRightLong />
-            </Link>
-            <Link
-              href='mailto:b11902140@csie.ntu.edu.tw'
-              className='inline-flex items-center gap-2 text-secondary transition-colors hover:text-primary'
-            >
-              <MdOutlineAlternateEmail />
-              b11902140@csie.ntu.edu.tw
-            </Link>
-          </div>
+          <span className='-rotate-3 inline-block font-caveat text-xl text-accent'>
+            銘 = to inscribe ↗
+          </span>
         </div>
 
-        <div className='w-44 shrink-0 sm:w-60 md:w-2/5'>
-          <Image
-            src={profilePic}
-            alt='A waterfall in a lush green forest'
-            className='h-auto w-full'
-            priority
-            sizes='(max-width: 768px) 15rem, 40vw'
-          />
+        {/* Subtitle */}
+        <p className='mt-3 max-w-[42ch] text-body'>
+          A CS student at NTU who builds games &amp; graphics — and writes down everything he figures out on the way up.
+        </p>
+
+        {/* Button row */}
+        <div className='mt-5 flex flex-wrap items-center gap-4'>
+          <Link
+            href='/projects'
+            className='inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wide text-background transition hover:opacity-90 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+          >
+            View projects →
+          </Link>
+          <Link
+            href={`mailto:${site.email}`}
+            className='font-mono text-sm text-muted transition-colors hover:text-primary'
+          >
+            ↳ {site.email}
+          </Link>
         </div>
-      </Container>
+
+        {/* Thin dimension rule */}
+        <div className='relative mt-5 h-px bg-primary/20'>
+          <span className='absolute -top-5 right-0 font-mono text-[9px] tracking-[0.1em] text-primary/60'>
+            ↤ 1440px ↦
+          </span>
+        </div>
+      </section>
     </main>
   );
 };

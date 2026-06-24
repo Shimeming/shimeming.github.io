@@ -31,10 +31,10 @@ const AnimatedHeading = ({
   };
 
   return (
-    <div className='w-full mx-auto py-2 flex items-center justify-center'>
+    <div className='py-2'>
       <motion.h1
         className={`
-          inline-block w-full font-bold capitalize text-2xl md:text-6xl leading-tight
+          inline-block w-full font-display font-semibold text-3xl sm:text-5xl lg:text-6xl leading-tight tracking-tight
           ${className}
         `}
         variants={container}
