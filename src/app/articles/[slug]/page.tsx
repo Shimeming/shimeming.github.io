@@ -1,10 +1,15 @@
 import { type Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import Container from '@/components/layout/container';
 import MarkdownWrapper from '@/components/markdown';
 import { getAllArticles, getArticle } from '@/lib/articles';
+
+function formatIsoDate(dateStr: string): string | undefined {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return undefined;
+  return d.toISOString().split('T')[0];
+}
 
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({ slug: article.slug }));
@@ -32,21 +37,37 @@ const ArticlePage = async ({
   if (!article) notFound();
 
   const { metadata, content } = article;
+  const isoDate = metadata.date ? formatIsoDate(metadata.date) : undefined;
 
   return (
     <main className='pb-20'>
       <Container className='pt-8'>
+        {/* Back link */}
         <Link
           href='/articles'
-          className='mb-6 inline-flex items-center gap-2 text-secondary transition-colors hover:text-primary'
+          className='mb-6 inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-primary transition-colors hover:text-primary/70'
         >
-          <FaArrowLeftLong /> All articles
+          ← All articles
         </Link>
 
-        <header className='mb-8'>
-          <h1 className='text-3xl font-bold sm:text-4xl'>{metadata.title}</h1>
+        {/* Blueprint header */}
+        <header className='mb-8 border-b border-primary/25 pb-4'>
+          <h1 className='font-display text-[28px] font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px]'>
+            {metadata.title}
+          </h1>
           {metadata.date && (
-            <p className='mt-2 text-sm text-decorative'>{metadata.date}</p>
+            isoDate ? (
+              <time
+                dateTime={isoDate}
+                className='mt-2 block font-mono text-[11px] text-muted'
+              >
+                {metadata.date}
+              </time>
+            ) : (
+              <p className='mt-2 font-mono text-[11px] text-muted'>
+                {metadata.date}
+              </p>
+            )
           )}
         </header>
 

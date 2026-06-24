@@ -1,28 +1,79 @@
 import Link from 'next/link';
 import type { ArticleSummary } from '@/lib/articles';
 
+function formatIsoDate(dateStr: string): string | undefined {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return undefined;
+  return d.toISOString().split('T')[0];
+}
+
 const ArticleCard = ({
   article,
 }: {
   article: ArticleSummary
 }) => {
-  const { slug, metadata } = article;
+  const { slug, metadata, excerpt, readingMinutes } = article;
+  const isoDate = metadata.date ? formatIsoDate(metadata.date) : undefined;
 
   return (
     <Link
       href={`/articles/${slug}`}
-      className='relative block rounded-2xl border border-decorative/30 bg-surface px-6 py-4 shadow-sm transition-colors hover:bg-hovered focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      className='group flex gap-[18px] border-b border-foreground/10 px-1.5 py-4 transition-colors hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
     >
-      <div className='flex w-full items-end justify-between gap-4'>
-        <h2 className='text-xl font-bold tracking-tight'>
-          {metadata.title}
-        </h2>
-        {metadata.date && (
-          <span className='shrink-0 text-sm text-decorative'>
-            {metadata.date}
+      {/* Left date rail */}
+      <div className='w-[92px] shrink-0 pt-[3px]'>
+        {metadata.date ? (
+          isoDate ? (
+            <time
+              dateTime={isoDate}
+              className='font-mono text-[11px] font-bold leading-none text-primary'
+            >
+              {metadata.date}
+            </time>
+          ) : (
+            <span className='font-mono text-[11px] font-bold leading-none text-primary'>
+              {metadata.date}
+            </span>
+          )
+        ) : (
+          <span className='font-mono text-[11px] font-bold leading-none text-muted'>
+            DRAFT
           </span>
         )}
+        <span className='mt-1 block font-mono text-[11px] text-muted'>
+          {readingMinutes > 0 ? `${readingMinutes} min` : '—'}
+        </span>
       </div>
+
+      {/* Body */}
+      <div className='min-w-0 flex-1'>
+        <div>
+          <span className='font-display text-[20px] font-semibold leading-tight tracking-[-0.01em] text-foreground'>
+            {metadata.title}
+          </span>
+        </div>
+
+        {/* Full-width excerpt — NO max-width */}
+        {excerpt && (
+          <p className='mt-1.5 font-sans text-[13px] leading-[1.55] text-muted'>
+            {excerpt}
+          </p>
+        )}
+
+        {/* Meta chips */}
+        <div className='mt-2.5 flex flex-wrap gap-2'>
+          {metadata.lang && (
+            <span className='rounded bg-surface px-1.5 py-[3px] font-mono text-[9px] font-bold uppercase tracking-wide text-body'>
+              {metadata.lang}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Arrow */}
+      <span className='ml-auto self-center font-mono text-[13px] font-bold text-foreground/25 transition-colors group-hover:text-primary'>
+        →
+      </span>
     </Link>
   );
 };
