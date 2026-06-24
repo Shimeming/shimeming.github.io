@@ -1,4 +1,4 @@
-import { Geist_Mono, Noto_Sans, Noto_Sans_TC, Caveat, Poppins } from 'next/font/google';
+import { Noto_Sans, Noto_Sans_TC, Caveat, Poppins, Space_Grotesk, Space_Mono } from 'next/font/google';
 
 export const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
@@ -10,10 +10,9 @@ export const notoSansTC = Noto_Sans_TC({
   preload: false,
 });
 
-export const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+export const spaceGrotesk = Space_Grotesk({ variable: '--font-space-grotesk', subsets: ['latin'], weight: ['400','500','600','700'] });
+
+export const spaceMono = Space_Mono({ variable: '--font-space-mono', subsets: ['latin'], weight: ['400','700'] });
 
 export const caveat = Caveat({
   variable: '--font-caveat',

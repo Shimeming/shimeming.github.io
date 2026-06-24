@@ -1,7 +1,7 @@
 import DarkModeToggle from '@/components/dark-mode-toggle';
 import NavBar from '@/components/nav-bar';
 import ThemeProviderWrapper from '@/components/providers/theme-provider';
-import { poppinsSemiBold, notoSans, notoSansTC, geistMono, caveat } from '@/lib/fonts';
+import { poppinsSemiBold, notoSans, notoSansTC, spaceGrotesk, spaceMono, caveat } from '@/lib/fonts';
 import type { Metadata } from 'next';
 
 import './globals.css';
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`
-          ${notoSans.variable} ${notoSansTC.variable} ${geistMono.variable} ${caveat.variable}
+          ${notoSans.variable} ${notoSansTC.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${caveat.variable}
           ${poppinsSemiBold.variable}
           font-sans antialiased
           flex min-h-screen flex-col
