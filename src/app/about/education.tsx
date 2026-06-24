@@ -18,7 +18,7 @@ const SectionLabel = ({ en, zh }: { en: string; zh: string }) => (
 );
 
 /* ── course chip ──────────────────────────────────────────────────── */
-const CourseChip = ({ course }: { course: CourseData }) => {
+const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSkills?: boolean }) => {
   const hasLinks =
     course.link || course.repoLink || course.projectPageLink;
 
@@ -64,7 +64,7 @@ const CourseChip = ({ course }: { course: CourseData }) => {
           )}
         </div>
       )}
-      {course.skills && course.skills.length > 0 && (
+      {showSkills && course.skills && course.skills.length > 0 && (
         <div className='flex flex-wrap gap-1 pl-1'>
           {course.skills.map((skill) => (
             <span
@@ -128,7 +128,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
               <Collapsible isOpen={expanded} className='mt-1.5'>
                 <div className='flex flex-wrap gap-1.5'>
                   {hidden.map((c) => (
-                    <CourseChip key={c.courseNumber} course={c} />
+                    <CourseChip key={c.courseNumber} course={c} showSkills={true} />
                   ))}
                 </div>
               </Collapsible>
