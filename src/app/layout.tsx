@@ -6,13 +6,28 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 
+const description = 'Personal site of Shimeming — projects, notes, and more.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://shimeming.github.io'),
   title: {
     template: '%s | Shimeming',
     default: 'Shimeming',
   },
-  description: 'Personal site of Shimeming — projects, notes, and more.',
+  description,
+  openGraph: {
+    title: 'Shimeming',
+    description,
+    url: 'https://shimeming.github.io',
+    siteName: 'Shimeming',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shimeming',
+    description,
+  },
 };
 
 export default function RootLayout({
