@@ -22,7 +22,7 @@ const properties = {
   },
 };
 
-const DarkModeToggle = ({
+const ThemeToggleButton = ({
   className = '',
 }: {
   className?: string;
@@ -48,7 +48,8 @@ const DarkModeToggle = ({
       onClick={toggleDarkMode}
       aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       className={`
-        rounded-full p-1 cursor-pointer
+        rounded-md p-1 cursor-pointer text-body
+        hover:text-primary transition-colors
         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
         ${className}
       `}
@@ -61,11 +62,11 @@ const DarkModeToggle = ({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-8 h-8"
+        className="w-5 h-5"
         animate={{ transform }}
         transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
       >
-        <mask id="moon-mask">
+        <mask id="moon-mask-toggle">
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
           <motion.circle
             stroke="none"
@@ -79,7 +80,7 @@ const DarkModeToggle = ({
           cy="12"
           r={r}
           fill="currentColor"
-          mask="url(#moon-mask)"
+          mask="url(#moon-mask-toggle)"
           initial={false}
           animate={{ r }}
           transition={{ duration: 0.5, type: 'spring' }}
@@ -99,4 +100,4 @@ const DarkModeToggle = ({
   );
 };
 
-export default DarkModeToggle;
+export default ThemeToggleButton;

@@ -1,4 +1,3 @@
-import DarkModeToggle from '@/components/dark-mode-toggle';
 import NavBar from '@/components/nav-bar';
 import ThemeProviderWrapper from '@/components/providers/theme-provider';
 import { poppinsSemiBold, notoSans, notoSansTC, spaceGrotesk, spaceMono, caveat } from '@/lib/fonts';
@@ -34,9 +33,6 @@ export default function RootLayout({
           <NavBar />
           <div className='flex flex-1 flex-col'>
             {children}
-          </div>
-          <div className='fixed bottom-4 right-8 z-30'>
-            <DarkModeToggle />
           </div>
         </ThemeProviderWrapper>
       </body>
