@@ -23,7 +23,7 @@ export function assertProjectMetadata(data: unknown, slug: string): ProjectMetad
   if (!d || typeof d.projectName !== 'string' || !d.projectName) {
     throw new Error(`Project "${slug}": missing required frontmatter "projectName"`);
   }
-  if (!d || typeof d.description !== 'string' || !d.description) {
+  if (typeof d.description !== 'string' || !d.description) {
     throw new Error(`Project "${slug}": missing required frontmatter "description"`);
   }
   return data as ProjectMetadata;

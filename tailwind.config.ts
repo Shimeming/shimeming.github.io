@@ -21,10 +21,6 @@ export default {
         accent:      'var(--accent)',
         grade:       'var(--grade)',
         hand:        'var(--hand)',
-        /* backward-compat aliases for not-yet-rewritten components */
-        secondary:   'var(--muted)',
-        decorative:  'var(--muted)',
-        hovered:     'var(--surface)',
       },
       fontFamily: {
         display: ['var(--font-space-grotesk)'],

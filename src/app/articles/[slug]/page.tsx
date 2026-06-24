@@ -4,12 +4,7 @@ import { notFound } from 'next/navigation';
 import Container from '@/components/layout/container';
 import MarkdownWrapper from '@/components/markdown';
 import { getAllArticles, getArticle } from '@/lib/articles';
-
-function formatIsoDate(dateStr: string): string | undefined {
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return undefined;
-  return d.toISOString().split('T')[0];
-}
+import { formatIsoDate } from '@/lib/format';
 
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({ slug: article.slug }));

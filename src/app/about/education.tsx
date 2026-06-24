@@ -3,19 +3,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FaGithub, FaLink } from 'react-icons/fa';
 import { Collapsible } from '@/components/ui/collapsible';
+import SectionLabel from '@/components/ui/section-label';
 import { CourseData, EducationData } from '@/types/about';
 
 const VISIBLE_COURSES = 6;
-
-/* ── section label ────────────────────────────────────────────────── */
-const SectionLabel = ({ en, zh }: { en: string; zh: string }) => (
-  <div className='mb-4 flex items-center gap-2.5'>
-    <span className='whitespace-nowrap font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-primary'>
-      {en} <span className='font-normal text-muted'>{zh}</span>
-    </span>
-    <span className='h-px flex-1 bg-primary/15' />
-  </div>
-);
 
 /* ── course chip ──────────────────────────────────────────────────── */
 const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSkills?: boolean }) => {

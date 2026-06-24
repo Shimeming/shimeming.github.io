@@ -25,10 +25,12 @@ const FigurePlate = ({ src, alt, fig, caption }: FigurePlateProps) => {
         {/* Overlay gradient for legibility of caption */}
         <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
 
-        {/* Four corner ticks */}
+        {/* Four corner ticks — bottom-left suppressed when a caption is present to avoid overlap */}
         <i className='pointer-events-none absolute left-2 top-2 h-3.5 w-3.5 border-l-2 border-t-2 border-white/60 not-italic' />
         <i className='pointer-events-none absolute right-2 top-2 h-3.5 w-3.5 border-r-2 border-t-2 border-white/60 not-italic' />
-        <i className='pointer-events-none absolute bottom-2 left-2 h-3.5 w-3.5 border-b-2 border-l-2 border-white/60 not-italic' />
+        {!label && (
+          <i className='pointer-events-none absolute bottom-2 left-2 h-3.5 w-3.5 border-b-2 border-l-2 border-white/60 not-italic' />
+        )}
         <i className='pointer-events-none absolute bottom-2 right-2 h-3.5 w-3.5 border-b-2 border-r-2 border-white/60 not-italic' />
 
         {/* Caption label */}

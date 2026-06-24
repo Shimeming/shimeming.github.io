@@ -146,7 +146,7 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
                 href={`/projects/${slug}`}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                aria-current={isActive ? 'true' : undefined}
+                aria-current={isActive ? 'location' : undefined}
                 className={`group flex items-center gap-3 rounded-lg p-2.5 transition-[background-color,box-shadow] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                   isActive
                     ? 'bg-surface shadow-[0_0_0_1.5px_var(--primary)]'
@@ -198,6 +198,7 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
       {/* RIGHT — flat preview surface (wide-screen enhancement) */}
       <div
         aria-live='polite'
+        aria-label='Project preview'
         className='hidden rounded-xl bg-surfaceFlat p-5 md:flex'
       >
         {/* keyed so the subtle fade replays on swap (respects reduced-motion via globals.css) */}

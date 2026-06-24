@@ -1,11 +1,6 @@
 import Link from 'next/link';
 import type { ArticleSummary } from '@/lib/articles';
-
-function formatIsoDate(dateStr: string): string | undefined {
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return undefined;
-  return d.toISOString().split('T')[0];
-}
+import { formatIsoDate } from '@/lib/format';
 
 const ArticleCard = ({
   article,
@@ -60,14 +55,14 @@ const ArticleCard = ({
           </p>
         )}
 
-        {/* Meta chips */}
-        <div className='mt-2.5 flex flex-wrap gap-2'>
-          {metadata.lang && (
+        {/* Meta chips — only rendered when at least one chip is present */}
+        {metadata.lang && (
+          <div className='mt-2.5 flex flex-wrap gap-2'>
             <span className='rounded bg-surface px-1.5 py-[3px] font-mono text-[9px] font-bold uppercase tracking-wide text-body'>
               {metadata.lang}
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Arrow */}
