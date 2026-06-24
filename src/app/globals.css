@@ -19,6 +19,16 @@
       linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 26px 26px;
   }
+
+  /* Subtle fade for the projects split-pane preview swap. */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 :root {
