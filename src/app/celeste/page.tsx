@@ -92,6 +92,9 @@ const Page = () => {
           />
         </div>
       </div>
+      <div className='absolute bottom-4 right-4 font-mono text-xs text-white/70 bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full'>
+        Last sync · {progressData.lastUpdate}
+      </div>
     </div>
   );
 };
