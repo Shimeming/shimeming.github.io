@@ -29,15 +29,21 @@ export function assertProjectMetadata(data: unknown, slug: string): ProjectMetad
   return data as ProjectMetadata;
 }
 
-function readProject(slug: string): Project {
+function readProjectMeta(slug: string): ProjectSummary {
   const file = fs.readFileSync(path.join(PROJECTS_DIR, slug, 'content.md'), 'utf8');
   const { data, content } = matter(file);
   const metadata = assertProjectMetadata(data, slug);
   const coverImage = metadata.coverImage
     ? path.posix.join('/projects', slug, metadata.coverImage)
     : PLACEHOLDER_COVER;
+  return { slug, metadata, coverImage, hasNote: containsPrintable(content) };
+}
 
-  return { slug, metadata, content, coverImage, hasNote: containsPrintable(content) };
+function readProject(slug: string): Project {
+  const summary = readProjectMeta(slug);
+  const file = fs.readFileSync(path.join(PROJECTS_DIR, slug, 'content.md'), 'utf8');
+  const { content } = matter(file);
+  return { ...summary, content };
 }
 
 export function getProjectSlugs(): string[] {
@@ -51,7 +57,7 @@ export function getAllProjects(): Project[] {
 // Card data without the (potentially large) markdown body, to keep the client
 // payload small.
 export function getProjectSummaries(): ProjectSummary[] {
-  return getAllProjects().map(({ content: _content, ...rest }) => rest);
+  return projectOrder.map(readProjectMeta);
 }
 
 export function getProject(slug: string): Project | null {
