@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 
 function readCuratedSlugs(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const matches = [...content.matchAll(/'([^']+)'/g)];
+  const matches = [...content.matchAll(/^\s*'([^']+)'\s*,?\s*$/gm)];
   return matches.map((m) => m[1]);
 }
 
