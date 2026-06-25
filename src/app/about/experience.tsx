@@ -1,14 +1,9 @@
 import SectionLabel from '@/components/ui/section-label';
 import { RoleData } from '@/types/about';
+import { Timeline, TimelineNode } from './timeline';
 
 const RoleNode = ({ role }: { role: RoleData }) => (
-  <div className='relative mb-6 pl-6'>
-    {/* Timeline node dot */}
-    <span
-      className='absolute -left-[17px] top-[5px] h-3 w-3 rounded-full bg-primary ring-4 ring-background'
-      aria-hidden='true'
-    />
-
+  <TimelineNode>
     <p className='font-mono text-[11px] font-bold text-primary'>{role.period}</p>
 
     <h3 className='mt-0.5 font-display text-[17px] font-semibold leading-snug tracking-[-0.01em] text-foreground'>
@@ -32,7 +27,7 @@ const RoleNode = ({ role }: { role: RoleData }) => (
         ))}
       </ul>
     )}
-  </div>
+  </TimelineNode>
 );
 
 const RoleTimeline = ({
@@ -46,11 +41,11 @@ const RoleTimeline = ({
 }) => (
   <section>
     <SectionLabel en={en} zh={zh} />
-    <div className='relative border-l-2 border-primary/20 pl-0'>
+    <Timeline>
       {roles.map((role, i) => (
         <RoleNode key={i} role={role} />
       ))}
-    </div>
+    </Timeline>
   </section>
 );
 

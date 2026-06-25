@@ -5,6 +5,7 @@ import { FaGithub, FaLink } from 'react-icons/fa';
 import { Collapsible } from '@/components/ui/collapsible';
 import SectionLabel from '@/components/ui/section-label';
 import { CourseData, EducationData } from '@/types/about';
+import { Timeline, TimelineNode } from './timeline';
 
 const VISIBLE_COURSES = 6;
 
@@ -80,13 +81,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
   const hidden  = courses.slice(VISIBLE_COURSES);
 
   return (
-    <div className='node relative mb-6 pl-6'>
-      {/* Timeline node dot */}
-      <span
-        className='absolute -left-[17px] top-[5px] h-3 w-3 rounded-full bg-primary ring-4 ring-background'
-        aria-hidden='true'
-      />
-
+    <TimelineNode>
       {/* Years */}
       <p className='font-mono text-[11px] font-bold text-primary'>
         {school.years}
@@ -135,7 +130,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
           )}
         </div>
       )}
-    </div>
+    </TimelineNode>
   );
 };
 
@@ -144,12 +139,11 @@ const Education = ({ education }: { education: EducationData[] }) => {
   return (
     <section>
       <SectionLabel en='Education' zh='學歷' />
-      {/* Ruler: left border is the vertical rule */}
-      <div className='relative border-l-2 border-primary/20 pl-0'>
+      <Timeline>
         {education.map((school, i) => (
           <SchoolNode key={i} school={school} />
         ))}
-      </div>
+      </Timeline>
     </section>
   );
 };
