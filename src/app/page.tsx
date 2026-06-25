@@ -25,7 +25,7 @@ const Page = () => {
 
         {/* Subtitle */}
         <p className='mt-3 max-w-[42ch] text-body'>
-          A CS student at NTU who builds games &amp; graphics — and writes down everything he figures out on the way up.
+          A CS student at NTU who researches NLP &amp; LLMs and builds games &amp; graphics — writing down everything he figures out on the way up.
         </p>
 
         {/* Button row */}

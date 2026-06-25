@@ -6,7 +6,7 @@ const site = {
   profile: {
     role:  'CS student · builder',
     based: 'Taipei, Taiwan',
-    focus: 'Games · GFX · Sys',
+    focus: 'LLMs · Games · GFX',
     gpa:   '4.16 / 4.3',
     lang:  'EN · 中文',
   },
