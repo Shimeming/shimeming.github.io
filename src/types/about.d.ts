@@ -26,3 +26,16 @@ export interface AwardData {
   chineseTitle?: string;
   description?: string;
 }
+
+export interface RoleData {
+  role: string;
+  org: string;
+  period: string;
+  location?: string;
+  bullets?: string[];
+}
+
+export interface SkillGroup {
+  category: string;
+  items: string[];
+}
