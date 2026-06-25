@@ -89,11 +89,11 @@ const CelesteProgressJournal = ({
             </tr>
           </thead>
           <tbody
-            className="from-blue-300/50 bg-gradient-to-br to-rose-300/35 [&_td]:p-1.5 [&_td]:text-center"
+            className="from-blue-300/50 bg-linear-to-br to-rose-300/35 [&_td]:p-1.5 [&_td]:text-center"
           >
             {celesteProgress.chapterData.map((chapter, index) => (
               <tr key={index} className="odd:bg-white">
-                <td className="font-semibold !text-right">{chapter.name}</td>
+                <td className="font-semibold text-right!">{chapter.name}</td>
                 <td className="flex gap-3 mx-8 justify-center items-center">
                   {chapter.flag && (
                     <Image
@@ -145,7 +145,7 @@ const CelesteProgressJournal = ({
                 after:content-[''] after:absolute after:top-1/2 after:left-0 after:w-full after:-translate-y-1/2 after:h-[52px] after:border-white after:border-y-[6px]
               "
             >
-              <td className="!text-right uppercase text-2xl">Totals</td>
+              <td className="text-right! uppercase text-2xl">Totals</td>
               <td className=""></td>
               <td className="">{totalStrawberries}</td>
               <td className=""></td>

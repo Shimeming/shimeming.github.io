@@ -13,7 +13,7 @@ const FigurePlate = ({ src, alt, fig, caption }: FigurePlateProps) => {
   return (
     <div className='overflow-hidden rounded-xl border border-primary/20 bg-surface'>
       {/* Aspect-ratio cover box */}
-      <div className='relative aspect-[21/7] w-full'>
+      <div className='relative aspect-21/7 w-full'>
         <Image
           src={src}
           alt={alt}
@@ -23,7 +23,7 @@ const FigurePlate = ({ src, alt, fig, caption }: FigurePlateProps) => {
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 72rem'
         />
         {/* Overlay gradient for legibility of caption */}
-        <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent' />
+        <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent' />
 
         {/* Four corner ticks — bottom-left suppressed when a caption is present to avoid overlap */}
         <i className='pointer-events-none absolute left-2 top-2 h-3.5 w-3.5 border-l-2 border-t-2 border-white/60 not-italic' />

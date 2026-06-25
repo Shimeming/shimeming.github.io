@@ -53,7 +53,7 @@ const ThemeToggleButton = ({
       className={`
         rounded-md p-1 cursor-pointer text-body
         hover:text-primary transition-colors
-        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+        focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
         ${className}
       `}
     >

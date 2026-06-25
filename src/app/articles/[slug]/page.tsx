@@ -40,7 +40,7 @@ const ArticlePage = async ({
         {/* Back link */}
         <Link
           href='/articles'
-          className='mb-6 inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-primary transition-colors hover:text-primary/70'
+          className='mb-6 inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary/70'
         >
           ← All articles
         </Link>

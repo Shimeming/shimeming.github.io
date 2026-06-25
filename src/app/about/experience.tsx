@@ -20,7 +20,7 @@ const RoleNode = ({ role }: { role: RoleData }) => (
         {role.bullets.map((bullet, i) => (
           <li
             key={i}
-            className='relative pl-4 font-sans text-[13px] leading-[1.5] text-body before:absolute before:left-0 before:text-primary before:content-["▹"]'
+            className='relative pl-4 font-sans text-[13px] leading-normal text-body before:absolute before:left-0 before:text-primary before:content-["▹"]'
           >
             {bullet}
           </li>

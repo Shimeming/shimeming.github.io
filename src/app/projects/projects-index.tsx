@@ -21,7 +21,7 @@ const rowMeta = (metadata: ProjectSummary['metadata']): string => {
 };
 
 const chipClass =
-  'rounded border border-primary/25 bg-primary/10 px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-primary';
+  'rounded-sm border border-primary/25 bg-primary/10 px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-primary';
 
 const Preview = ({ project }: { project: ProjectSummary }) => {
   const { slug, metadata } = project;
@@ -35,7 +35,7 @@ const Preview = ({ project }: { project: ProjectSummary }) => {
   return (
     <div className='flex h-full flex-col'>
       {/* Preview image */}
-      <div className='relative aspect-[16/8] flex-shrink-0 overflow-hidden rounded-lg bg-surface'>
+      <div className='relative aspect-16/8 shrink-0 overflow-hidden rounded-lg bg-surface'>
         <Image
           src={projectImage(project)}
           alt={metadata.projectName}
@@ -44,7 +44,7 @@ const Preview = ({ project }: { project: ProjectSummary }) => {
           sizes='(max-width: 1024px) 55vw, 640px'
         />
         {metadata.featured && (
-          <span className='-rotate-3 absolute right-2.5 top-2.5 rounded bg-accent px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wide text-white shadow-[0_2px_0_rgba(0,0,0,0.25)]'>
+          <span className='-rotate-3 absolute right-2.5 top-2.5 rounded-sm bg-accent px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wide text-white shadow-[0_2px_0_rgba(0,0,0,0.25)]'>
             ★ Featured
           </span>
         )}
@@ -105,7 +105,7 @@ const Preview = ({ project }: { project: ProjectSummary }) => {
             href={link.href}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-1.5 font-mono text-xs text-muted transition-colors hover:text-primary active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+            className='inline-flex items-center gap-1.5 font-mono text-xs text-muted transition-colors hover:text-primary active:scale-95 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
           >
             <LinkIcon iconName={link.icon} />
             {link.description && <span>{link.description}</span>}
@@ -113,7 +113,7 @@ const Preview = ({ project }: { project: ProjectSummary }) => {
         ))}
         <Link
           href={`/projects/${slug}`}
-          className='ml-auto inline-flex items-center font-mono text-xs font-bold uppercase tracking-wide text-primary transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+          className='ml-auto inline-flex items-center font-mono text-xs font-bold uppercase tracking-wide text-primary transition-opacity hover:opacity-80 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
         >
           Read more →
         </Link>
@@ -147,14 +147,14 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 aria-current={isActive ? 'location' : undefined}
-                className={`group flex items-center gap-3 rounded-lg p-2.5 transition-[background-color,box-shadow] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                className={`group flex items-center gap-3 rounded-lg p-2.5 transition-[background-color,box-shadow] focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                   isActive
                     ? 'bg-surface shadow-[0_0_0_1.5px_var(--primary)]'
                     : 'hover:bg-surface'
                 }`}
               >
                 {/* Thumbnail */}
-                <div className='relative aspect-[74/46] w-[74px] flex-shrink-0 overflow-hidden rounded-md bg-surfaceFlat'>
+                <div className='relative aspect-74/46 w-[74px] shrink-0 overflow-hidden rounded-md bg-surfaceFlat'>
                   <Image
                     src={projectImage(project)}
                     alt=''
@@ -163,7 +163,7 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
                     sizes='74px'
                   />
                   {metadata.category && (
-                    <span className='absolute left-1 top-1 rounded-sm bg-foreground/70 px-1 py-px font-mono text-[7px] font-bold uppercase text-white'>
+                    <span className='absolute left-1 top-1 rounded-xs bg-foreground/70 px-1 py-px font-mono text-[7px] font-bold uppercase text-white'>
                       {metadata.category}
                     </span>
                   )}
