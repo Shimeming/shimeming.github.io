@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import AnimatedHeading from '@/components/animated-heading';
+import Container from '@/components/layout/container';
 import site from '@/data/site';
 
 const Page = () => {
   return (
-    <main className='flex flex-1 items-center'>
-      <section className='bp-grid w-full px-6 py-12 sm:px-10'>
+    <main className='bp-grid flex flex-1 items-center'>
+      <Container as='section' className='w-full py-12'>
         {/* Mono eyebrow */}
         <p className='font-mono text-xs uppercase tracking-[0.14em] text-primary'>
           Personal site · 個人網站
@@ -49,7 +50,7 @@ const Page = () => {
             ↤ 1440px ↦
           </span>
         </div>
-      </section>
+      </Container>
     </main>
   );
 };

@@ -31,6 +31,10 @@
   }
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   /* blueprint light tokens */
   --background:    #F5F8F6;
