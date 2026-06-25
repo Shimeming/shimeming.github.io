@@ -1,14 +1,8 @@
 import Link from 'next/link';
 import Container from '@/components/layout/container';
 import Seal from '@/components/ui/seal';
+import { navPages } from '@/data/nav';
 import site from '@/data/site';
-
-const pages = [
-  { href: '/about', title: 'About' },
-  { href: '/projects', title: 'Projects' },
-  { href: '/articles', title: 'Articles' },
-  { href: '/celeste', title: 'Celeste' },
-];
 
 const Footer = (): React.JSX.Element => {
   const now = new Date();
@@ -38,7 +32,7 @@ const Footer = (): React.JSX.Element => {
             <h5 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
               Pages
             </h5>
-            {pages.map((page) => (
+            {navPages.map((page) => (
               <Link
                 key={page.href}
                 href={page.href}

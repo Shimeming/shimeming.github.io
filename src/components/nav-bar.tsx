@@ -5,13 +5,7 @@ import { FaGithub } from 'react-icons/fa';
 import Container from '@/components/layout/container';
 import ThemeToggleButton from '@/components/theme-toggle-button';
 import Seal from '@/components/ui/seal';
-
-const pages = [
-  { href: '/about', title: 'About' },
-  { href: '/projects', title: 'Projects' },
-  { href: '/articles', title: 'Articles' },
-  { href: '/celeste', title: 'Celeste' },
-];
+import { navPages } from '@/data/nav';
 
 const NavBar = (): React.JSX.Element => {
   const pathName = usePathname();
@@ -32,7 +26,7 @@ const NavBar = (): React.JSX.Element => {
           aria-label='Primary'
           className='no-scrollbar flex items-center gap-4 overflow-x-auto sm:gap-5'
         >
-          {pages.map((page) => {
+          {navPages.map((page) => {
             const active =
               pathName === page.href || pathName.startsWith(page.href + '/');
             return (
