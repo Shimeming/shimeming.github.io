@@ -19,7 +19,11 @@ const eslintConfig = [
     rules: {
       'semi': ['warn', 'always'],
       'quotes': ['warn', 'single', { 'avoidEscape': true }],
-      '@typescript-eslint/no-unused-vars': ['warn'],
+      '@typescript-eslint/no-unused-vars': ['warn', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      }],
       'indent': ['warn', 2],
       'comma-dangle': ['warn', 'always-multiline'],
       'import/order': [

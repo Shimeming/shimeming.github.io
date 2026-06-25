@@ -1,17 +1,33 @@
-import DarkModeToggle from '@/components/dark-mode-toggle';
+import Footer from '@/components/footer';
 import NavBar from '@/components/nav-bar';
-import { poppinsSemiBold, notoSans, notoSansTC, geistMono, caveat } from '@/helpers/fonts';
-import ThemeProviderWrapper from '@/helpers/theme-provider-wrapper';
+import ThemeProviderWrapper from '@/components/providers/theme-provider';
+import { poppinsSemiBold, notoSans, notoSansTC, spaceGrotesk, spaceMono, caveat, handTC } from '@/lib/fonts';
 import type { Metadata } from 'next';
 
 import './globals.css';
 
+const description = 'Personal site of Shimeming — projects, notes, and more.';
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shimeming.github.io'),
   title: {
-    template: '%s | Shimeming\'s Blog',
-    default: 'Shimeming\'s Blog',
+    template: '%s | Shimeming',
+    default: 'Shimeming',
   },
-  description: 'Shimeming\'s Blog',
+  description,
+  openGraph: {
+    title: 'Shimeming',
+    description,
+    url: 'https://shimeming.github.io',
+    siteName: 'Shimeming',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shimeming',
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -23,24 +39,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`
-          ${notoSans.variable} ${notoSansTC.variable} ${geistMono.variable} ${caveat.variable}
+          ${notoSans.variable} ${notoSansTC.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${caveat.variable} ${handTC.variable}
           ${poppinsSemiBold.variable}
           font-sans antialiased
-          text-dark
-          w-full min-h-screen
+          flex min-h-screen flex-col
         `}
       >
         <ThemeProviderWrapper>
           <NavBar />
-          {/* <div className="flex-grow flex justify-center items-center"> */}
-          <div className='
-            w-full h-full z-0
-          '>
+          <div className='flex flex-1 flex-col'>
             {children}
-            <div className='fixed bottom-4 right-8 z-30 p-4'>
-              <DarkModeToggle />
-            </div>
           </div>
+          <Footer />
         </ThemeProviderWrapper>
       </body>
     </html>

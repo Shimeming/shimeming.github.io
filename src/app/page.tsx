@@ -1,44 +1,57 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { MdOutlineAlternateEmail } from 'react-icons/md';
 import AnimatedHeading from '@/components/animated-heading';
-import profilePic from '@public/pictures/home-page-pic_softEdge.png';
-
+import Container from '@/components/layout/container';
+import site from '@/data/site';
 
 const Page = () => {
   return (
-    <>
-      <main className='flex items-center w-full md:px-32'>
-        <div className="flex items-center justify-between w-full">
-          <div className='md:pl-12 w-2/5 hidden md:block'>
-            <Image
-              src={profilePic}
-              alt="Profile Picture"
-              className='w-full h-auto'
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-          <div className='md:w-1/2'>
-            <AnimatedHeading
-              // text="I think there should be some really awesome text here, but I can't come up with anything."
-              // text="Imagine some really awesome text here!"
-              text="Here's Shimeming"
-              wordAppearInterval={0.3}
-            />
-            <p className='my-4 text-xl font-medium font-caveat'>
-              If a thing is worth doing, it is worth doing badly.
-            </p>
-            <div className='flex items-center mt-2'>
-              <Link href='mailto:b11902140@csie.ntu.edu.tw' target={'_blank'}>
-                <MdOutlineAlternateEmail className='inline mr-1' />
-                b11902140@csie.ntu.edu.tw
-              </Link>
-            </div>
-          </div>
+    <main className='bp-grid flex flex-1 items-center'>
+      <Container as='section' className='w-full py-12'>
+        {/* Mono eyebrow */}
+        <p className='font-mono text-xs uppercase tracking-[0.14em] text-primary'>
+          Personal site · 個人網站
+        </p>
+
+        {/* Heading + Caveat note */}
+        <div className='flex flex-wrap items-baseline gap-x-3'>
+          <AnimatedHeading
+            text="Hi, I'm Shimeming"
+            wordAppearInterval={0.12}
+          />
+          <span className='-rotate-3 inline-block font-caveat text-xl text-accent'>
+            銘
+          </span>
         </div>
-      </main>
-    </>
+
+        {/* Subtitle */}
+        <p className='mt-3 max-w-[42ch] text-body'>
+          A CS student at NTU who researches NLP &amp; LLMs and builds games &amp; graphics — writing down everything he figures out on the way up.
+        </p>
+
+        {/* Button row */}
+        <div className='mt-5 flex flex-wrap items-center gap-4'>
+          <Link
+            href='/projects'
+            className='inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wide text-background transition hover:opacity-90 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+          >
+            View projects →
+          </Link>
+          <Link
+            href={`mailto:${site.email}`}
+            className='font-mono text-sm text-muted transition-colors hover:text-primary'
+          >
+            ↳ {site.email}
+          </Link>
+        </div>
+
+        {/* Thin dimension rule */}
+        <div className='relative mt-5 h-px bg-primary/20'>
+          <span className='absolute -top-5 right-0 font-mono text-[9px] tracking-[0.1em] text-primary/60'>
+            ↤ 1440px ↦
+          </span>
+        </div>
+      </Container>
+    </main>
   );
 };
 

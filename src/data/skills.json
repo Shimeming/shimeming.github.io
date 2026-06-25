@@ -1,0 +1,12 @@
+{
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["C#", "C/C++", "CUDA", "Python", "TypeScript", "SQL"]
+    },
+    {
+      "category": "Technologies",
+      "items": ["Unity", "Git", "React", "TailwindCSS", "GitHub CI", "Linux", "AI-integrated workflows"]
+    }
+  ]
+}

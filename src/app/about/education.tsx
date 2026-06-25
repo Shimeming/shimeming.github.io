@@ -1,188 +1,157 @@
 'use client';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { FaChevronDown, FaLink, FaGithub } from 'react-icons/fa';
-import { FaPlus, FaMinus } from 'react-icons/fa6';
-import { IoSchool } from 'react-icons/io5';
-import { PiNotePencilBold } from 'react-icons/pi';
-import { Tag, Collapsible } from '@/components/capsules';
+import { useState } from 'react';
+import { FaGithub, FaLink } from 'react-icons/fa';
+import { Collapsible } from '@/components/ui/collapsible';
+import SectionLabel from '@/components/ui/section-label';
 import { CourseData, EducationData } from '@/types/about';
+import { Timeline, TimelineNode } from './timeline';
 
+const VISIBLE_COURSES = 6;
 
-const Education = () => {
-  const [educationData, setEducationData] = useState<EducationData[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/about/education.json');
-      if (!res.ok) {
-        console.error('Failed to fetch education data');
-        return;
-      }
-      const data: { education: EducationData[] } = await res.json();
-      setEducationData(data.education);
-    })();
-  }, []);
+/* ── course chip ──────────────────────────────────────────────────── */
+const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSkills?: boolean }) => {
+  const hasLinks =
+    course.link || course.repoLink || course.projectPageLink;
 
   return (
-    <section>
-      <h2 className='mb-2 text-xl font-bold opacity-75'>
-        Education
-      </h2>
-      <ul className='relative border-s-2 pt-2 pb-1 ml-6'>
-        {educationData.map((education, index) => (
-          <School education={education} key={index} />
-        ))}
-      </ul>
-    </section>
-  );
-};
-
-const School = ({
-  education,
-}: {
-  education: EducationData
-}) => {
-  const [isOpen, setIsOpen] = useState(education.defaultDisplay ?? false);
-
-  return (
-    <li className='group flex flex-col mb-4 ms-6 -translate-x-12 rounded-lg overflow-hidden'>
-      <button
-        className='relative flex gap-4 group-hover:bg-hovered hover:bg-hovered p-3 rounded-lg'
-        onClick={() => setIsOpen(!isOpen)}
-        disabled={education.courses === undefined}
-      >
-        <span className='w-6 h-6 rounded-full bg-foreground flex justify-center items-center -translate-x-[1px]'>
-          <IoSchool className='text-background' />
-        </span>
-        <div className='flex flex-col items-start'>
-          <h3 className='mb-1 text-lg font-semibold'>
-            {education.school}
-          </h3>
-          <p className='block mb-2 text-sm font-normal leading-none text-decorative'>
-            {education.years}
-          </p>
-          <p className='text-base font-normal'>
-            {education.degree}
-          </p>
-        </div>
-        {education.courses && (
-          <motion.span
-            animate={{ rotate: isOpen ? 180 : 360 }}
-            transition={{ duration: 0.5 }}
-            className='absolute right-6 bottom-2 transform -translate-y-1/2'
-          >
-            <FaChevronDown />
-          </motion.span>
+    <div className='flex flex-col gap-1'>
+      <div className='flex items-center gap-1.5 rounded-[5px] border border-primary/25 bg-surface px-2 py-1 font-mono text-[11px] text-body'>
+        <span className='truncate max-w-[180px]'>{course.englishName}</span>
+        {course.grade && (
+          <span className='font-bold text-grade shrink-0'>{course.grade}</span>
         )}
-      </button>
-      {education.courses && (
-        <Collapsible isOpen={isOpen} className='pl-10 pt-3'>
-          {education.courses.map((course, index) => (
-            <div key={index} className=''>
-              <Course course={course} />
-            </div>
-          ))}
-        </Collapsible>
-      )}
-    </li>
-  );
-};
-
-const Course = ({
-  course: {
-    courseNumber,
-    chineseName,
-    englishName,
-    credits,
-    grade,
-    semester,
-    skills,
-    ...additionalInformation
-  },
-}: {
-  course: CourseData;
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const hasAdditionalInformation = Object.keys(additionalInformation).length > 0;
-
-  return (
-    <div>
-      <button
-        className='relative w-full hover:bg-hovered px-3 pt-1 pb-1.5 rounded-lg items-center pr-5'
-        disabled={!hasAdditionalInformation}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className='flex justify-between items-baseline'>
-          <div className='flex gap-4 items-baseline'>
-            <h3 className='text-lg font-semibold'>
-              {englishName}
-            </h3>
-            <h3>
-              {chineseName}
-            </h3>
-            <p className='text-decorative'>
-              {grade}
-            </p>
-          </div>
-          {hasAdditionalInformation && (
-            <motion.span
-              // initial={false}
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.5 }}
+      </div>
+      {hasLinks && (
+        <div className='flex gap-2 pl-1'>
+          {course.link && (
+            <Link
+              href={course.link}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-muted hover:text-primary transition-colors'
+              aria-label={`${course.englishName} link`}
             >
-              {isOpen ? <FaMinus className="text-xl" /> : <FaPlus className="text-xl" />}
-            </motion.span>
+              <FaLink className='text-[10px]' />
+            </Link>
+          )}
+          {course.repoLink && (
+            <Link
+              href={course.repoLink}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-muted hover:text-primary transition-colors'
+              aria-label={`${course.englishName} repository`}
+            >
+              <FaGithub className='text-[10px]' />
+            </Link>
+          )}
+          {course.projectPageLink && (
+            <Link
+              href={course.projectPageLink}
+              className='text-muted hover:text-primary transition-colors font-mono text-[9px]'
+            >
+              ↗ project
+            </Link>
           )}
         </div>
-        <div className='flex'>
-          {skills ? (
-            <div className='flex gap-2 ml-auto mt-1'>
-              {skills.map((skill, index) => (
-                <Tag key={index}>
-                  {skill}
-                </Tag>
-              ))}
-            </div>
-          ) :
-            <div className='ml-auto mt-1 invisible'>
-              <Tag>Placeholder</Tag>
-            </div>
-          }
+      )}
+      {showSkills && course.skills && course.skills.length > 0 && (
+        <div className='flex flex-wrap gap-1 pl-1'>
+          {course.skills.map((skill) => (
+            <span
+              key={skill}
+              className='rounded-sm border border-foreground/20 px-1.5 py-px font-mono text-[9px] text-muted'
+            >
+              {skill}
+            </span>
+          ))}
         </div>
-      </button>
-      {hasAdditionalInformation && (
-        <Collapsible isOpen={isOpen} className='pl-10 pb-2 pt-1'>
-          <div className='flex flex-col gap-2'>
-            {additionalInformation.link && (
-              <Link href={additionalInformation.link}>
-                <span className='flex gap-2 items-baseline'>
-                  <FaLink />
-                  {additionalInformation.link}
-                </span>
-              </Link>
-            )}
-            {additionalInformation.repoLink && (
-              <Link href={additionalInformation.repoLink}>
-                <span className='flex gap-2 items-baseline'>
-                  <FaGithub />
-                  {additionalInformation.repoLink}
-                </span>
-              </Link>
-            )}
-            {additionalInformation.projectPageLink && (
-              <Link href={additionalInformation.projectPageLink}>
-                <span className='flex gap-2 items-baseline'>
-                  <PiNotePencilBold />
-                  Note
-                </span>
-              </Link>
-            )}
-          </div>
-        </Collapsible>
       )}
     </div>
+  );
+};
+
+/* ── school node ─────────────────────────────────────────────────── */
+const SchoolNode = ({ school }: { school: EducationData }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const courses = school.courses ?? [];
+  const visible = courses.slice(0, VISIBLE_COURSES);
+  const hidden  = courses.slice(VISIBLE_COURSES);
+
+  return (
+    <TimelineNode>
+      {/* Years */}
+      <p className='font-mono text-[11px] font-bold text-primary'>
+        {school.years}
+      </p>
+
+      {/* School name + CGPA */}
+      <h3 className='mt-0.5 font-display text-[19px] font-semibold leading-snug tracking-[-0.01em] text-foreground'>
+        {school.school}
+        {school.CGPA != null && (
+          <span className='ml-2 font-mono text-[11px] font-bold text-accent'>
+            CGPA {school.CGPA}
+          </span>
+        )}
+      </h3>
+
+      {/* Degree */}
+      <p className='font-sans text-[13px] text-muted'>{school.degree}</p>
+
+      {/* Research / advisor note */}
+      {school.note && (
+        <p className='mt-0.5 font-mono text-[11px] leading-snug text-muted'>
+          {school.note}
+        </p>
+      )}
+
+      {/* Course chips */}
+      {courses.length > 0 && (
+        <div className='mt-3'>
+          <div className='flex flex-wrap gap-1.5'>
+            {visible.map((c) => (
+              <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} />
+            ))}
+          </div>
+
+          {hidden.length > 0 && (
+            <>
+              <Collapsible isOpen={expanded} className='mt-1.5'>
+                <div className='flex flex-wrap gap-1.5'>
+                  {hidden.map((c) => (
+                    <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} showSkills={true} />
+                  ))}
+                </div>
+              </Collapsible>
+              <button
+                onClick={() => setExpanded((v) => !v)}
+                className='mt-2 font-mono text-[11px] font-semibold text-primary hover:underline'
+              >
+                {expanded
+                  ? '▴ show less'
+                  : `+ ${hidden.length} more ▾`}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </TimelineNode>
+  );
+};
+
+/* ── section ─────────────────────────────────────────────────────── */
+const Education = ({ education }: { education: EducationData[] }) => {
+  return (
+    <section>
+      <SectionLabel en='Education' zh='學歷' />
+      <Timeline>
+        {education.map((school, i) => (
+          <SchoolNode key={i} school={school} />
+        ))}
+      </Timeline>
+    </section>
   );
 };
 

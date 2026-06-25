@@ -1,40 +1,19 @@
-'use client';
-import { motion } from 'framer-motion';
-import articleList from '@/data/articles';
+import type { ArticleSummary } from '@/lib/articles';
 import ArticleCard from './article-card';
 
-const ArticleList = () => {
-
+const ArticleList = ({
+  articles,
+}: {
+  articles: ArticleSummary[]
+}) => {
   return (
-    <>
-      <motion.ul
-        role='list'
-        className='grid grid-cols-1 gap-4'
-        variants={{
-          animate: {
-            transition: {
-              staggerChildren: 0.15,
-            },
-          },
-        }}
-        initial='initial'
-        animate='animate'
-      >
-        {articleList.map((name) => (
-          <motion.li key={name}
-            variants={{
-              initial: { opacity: 0, y: 50 },
-              animate: {
-                opacity: 1, y: 0,
-                transition: { duration: 1 },
-              },
-            }}
-          >
-            <ArticleCard article={name} />
-          </motion.li>
-        ))}
-      </motion.ul>
-    </>
+    <ul role='list' className='border-t border-foreground/10'>
+      {articles.map((article) => (
+        <li key={article.slug}>
+          <ArticleCard article={article} />
+        </li>
+      ))}
+    </ul>
   );
 };
 

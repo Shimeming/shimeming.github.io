@@ -1,4 +1,6 @@
 ---
+year: 2024
+category: 'Systems'
 projectName: 'Computer Network and Security Final Project'
 coverImage: 'cover.png'
 description: 'A survey of Quishing in restaurants'

@@ -1,4 +1,6 @@
 ---
+year: 2025
+category: 'Web'
 projectName: 'Personal Website'
 description: 'My personal website made with Next.js and Tailwind CSS.'
 overview: [

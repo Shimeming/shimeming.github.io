@@ -1,4 +1,6 @@
 ---
+year: 2023
+category: 'Game'
 projectName: 'Hogwarts Tag - 2023 CSIE Camp Challenge Game'
 coverImage: 'cover.png'
 description: 'A 2D tag game with various items and abilities for educational purposes using Python.'

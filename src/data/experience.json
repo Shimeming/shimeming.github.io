@@ -1,0 +1,30 @@
+{
+  "experience": [
+    {
+      "role": "Machine Learning Scientist Intern",
+      "org": "Appier",
+      "period": "Summer 2026 – Spring 2027",
+      "location": "Taipei, Taiwan"
+    },
+    {
+      "role": "Quantitative Researcher Intern",
+      "org": "WorldQuant",
+      "period": "Summer 2025",
+      "location": "Taipei, Taiwan",
+      "bullets": [
+        "Analyzed US equity markets to identify patterns and predictive indicators.",
+        "Developed alphas (predictive signals) from academic literature and market analysis, tested with statistical modeling."
+      ]
+    },
+    {
+      "role": "Teaching Assistant, CSIE Core Courses",
+      "org": "National Taiwan University",
+      "period": "Spring 2024 & Fall 2025",
+      "location": "Taipei, Taiwan",
+      "bullets": [
+        "Data Structures & Algorithms (Spring 2024); C Programming (Fall 2025).",
+        "Designed and reviewed programming problems."
+      ]
+    }
+  ]
+}

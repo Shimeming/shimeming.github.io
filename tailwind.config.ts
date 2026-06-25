@@ -4,42 +4,36 @@ import typography from '@tailwindcss/typography';
 export default {
   darkMode: ['selector', '[data-mode="dark"]'],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/helpers/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        foreground: 'var(--foreground)',
-        background: 'var(--background)',
-        hovered: 'var(--color-hovered)',
-        decorative: 'var(--color-decorative)',
-        surface: 'var(--color-surface)',
+        /* blueprint tokens */
+        background:  'var(--background)',
+        surface:     'var(--surface)',
+        surfaceFlat: 'var(--surface-flat)',
+        foreground:  'var(--foreground)',
+        body:        'var(--body)',
+        muted:       'var(--muted)',
+        primary:     'var(--primary)',
+        accent:      'var(--accent)',
+        grade:       'var(--grade)',
+        hand:        'var(--hand)',
       },
       fontFamily: {
-        sans: ['var(--font-noto-sans)'],
-        sanstc: ['var(--font-noto-sans-tc)'],
-        mono: ['var(--font-geist-mono)'],
-        caveat: ['var(--font-caveat)', 'cursive'],
+        display: ['var(--font-space-grotesk)'],
+        mono:    ['var(--font-space-mono)'],
+        sans:    ['var(--font-noto-sans)'],
+        sanstc:  ['var(--font-noto-sans-tc)'],
+        caveat:  ['var(--font-caveat)', 'var(--font-hand-tc)', 'cursive'],
         poppins: ['var(--font-poppins-semi-bold)'],
       },
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '64rem',
-            pre: {
-              // backgroundColor: 'var(--foreground)',
-              'border-width': '2px',
-              'border-color': '#ededed',
-              'padding': '0',
-            },
-            'pre code': {
-              'line-height': '1.2',
-            },
+            maxWidth: 'none',
           },
         },
       },

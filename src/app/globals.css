@@ -4,55 +4,82 @@
 @tailwind utilities;
 
 @layer utilities {
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Hide scrollbar across browsers (used for horizontal-scroll regions). */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
+  }
+
+  /* Blueprint grid background utility */
+  .bp-grid {
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  /* Subtle fade for the projects split-pane preview swap. */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-primary: #1d4ed8;
-  /* blue-700 */
-  --color-secondary: #6b7280;
-  /* gray-500 */
-  --color-hovered: oklch(0.967 0.003 264.542);
-  /* gray-100 */
-  --color-decorative: oklch(0.554 0.046 257.417);
-  /* slate-500 */
-  --color-surface: oklch(96.8% 0.007 247.896);
-  /* slate-200 */
+  /* blueprint light tokens */
+  --background:    #F5F8F6;
+  --surface:       #FFFFFF;
+  --surface-flat:  #F4F7F5;
+  --foreground:    #16202A;
+  --body:          #33414F;
+  --muted:         #41576A;
+  --primary:       #1E5FCC;
+  --accent:        #C8402F;
+  --grade:         #1E8A4C;
+  --hand:          #C8402F; /* same as accent in light */
+  --grid-line:     rgba(30,95,204,.07);
 }
 
 [data-mode='dark'] {
-  --background: oklch(14.1% 0.005 285.823);
-  /* zinc-950 */
-  --foreground: #ededed;
-  --color-primary: #a78bfa;
-  /* violet-400 */
-  --color-secondary: #d1d5db;
-  /* gray-300 */
-  --color-hovered: oklch(0.279 0.041 260.031);
-  /* slate-800 */
-  --color-decorative: oklch(0.704 0.04 256.788);
-  /* slate-400 */
-  --color-surface: oklch(20.8% 0.042 265.755);
-  /* slate-900 */
+  /* blueprint dark tokens */
+  --background:    #0E1A24;
+  --surface:       #13242F;
+  --surface-flat:  #10202A;
+  --foreground:    #E6EEF3;
+  --body:          #9FB6C4;
+  --muted:         #8FA6B5;
+  --primary:       #5BA8FF;
+  --accent:        #FF6B5A;
+  --grade:         #34D399; /* brighter green for contrast on dark surface */
+  --hand:          #FF9A6B;
+  --grid-line:     rgba(56,189,248,.07);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  @apply transition-colors duration-1000;
-  /* font-family: Arial, Helvetica, sans-serif; */
+  @apply transition-colors duration-500;
+}
+
+/* Respect users who prefer reduced motion (covers CSS transitions/animations;
+   framer-motion is handled via <MotionConfig reducedMotion="user">). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

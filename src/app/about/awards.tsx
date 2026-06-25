@@ -1,61 +1,51 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { FaAward } from 'react-icons/fa';
+import SectionLabel from '@/components/ui/section-label';
 import { AwardData } from '@/types/about';
 
+/* Alternate ★ / ✓ stamps */
+const STAMPS = ['★', '✓'] as const;
 
-const Awards = () => {
-  const [awards, setAwards] = useState<AwardData[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('/about/awards.json');
-      if (!res.ok) {
-        console.error('Failed to fetch awards data');
-        return;
-      }
-      const data: { awards: AwardData[] } = await res.json();
-      setAwards(data.awards);
-    })();
-  }, []);
+const AwardCard = ({
+  award,
+  index,
+}: {
+  award: AwardData;
+  index: number;
+}) => {
+  const stamp = STAMPS[index % STAMPS.length];
 
   return (
-    <section>
-      <h2 className='mb-2 text-xl font-bold opacity-75'>
-        Awards
-      </h2>
-      <ul className='relative border-s-2 pt-2 pb-1 ml-6'>
-        {awards.map((award, index) => (
-          <Award award={award} key={index} />
-        ))}
-      </ul>
-    </section>
+    <div className='flex items-start gap-3 rounded-[9px] border border-primary/20 bg-surface p-3'>
+      {/* Seal / medal marker */}
+      <span
+        className='grid h-[26px] w-[26px] shrink-0 -rotate-[4deg] place-items-center rounded-[6px] bg-accent font-mono text-[11px] font-bold text-white shadow-[0_2px_0_rgba(154,44,32,0.6)]'
+        aria-hidden='true'
+      >
+        {stamp}
+      </span>
+      <div>
+        <p className='font-display text-[13.5px] font-semibold leading-[1.25] text-foreground'>
+          {award.englishTitle}
+        </p>
+        {award.chineseTitle && (
+          <p className='mt-0.5 font-sanstc text-[11px] text-muted'>
+            {award.chineseTitle}
+          </p>
+        )}
+      </div>
+    </div>
   );
 };
 
-const Award = ({
-  award,
-}: {
-  award: AwardData
-}) => {
+const Awards = ({ awards }: { awards: AwardData[] }) => {
   return (
-    <li className='group flex flex-col mb-4 ms-6 -translate-x-12 rounded-lg overflow-hidden'>
-      <div
-        className='relative flex gap-4 group-hover:bg-hovered hover:bg-hovered px-3 py-1 rounded-lg items-baseline'
-      >
-        <span className='w-6 h-6 rounded-full bg-foreground flex justify-center items-center -translate-x-[1px]'>
-          <FaAward className='text-background' />
-        </span>
-        <div className='flex flex-col items-start'>
-          <h3 className='text-lg font-semibold'>
-            {award.englishTitle}
-          </h3>
-          <p className='text-sm font-medium opacity-75'>
-            {award.chineseTitle?? <span className='invisible'>Placeholder</span>}
-          </p>
-        </div>
+    <section>
+      <SectionLabel en='Awards' zh='獲獎' />
+      <div className='grid grid-cols-1 gap-2.5 sm:grid-cols-2'>
+        {awards.map((award, i) => (
+          <AwardCard key={i} award={award} index={i} />
+        ))}
       </div>
-    </li>
+    </section>
   );
 };
 

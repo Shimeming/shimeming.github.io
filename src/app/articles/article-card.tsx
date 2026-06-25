@@ -1,76 +1,75 @@
-'use client';
-import path from 'path';
-import clsx from 'clsx';
-// import { motion } from 'framer-motion';
-import matter from 'gray-matter';
-// import { AnimatePresence } from 'motion/react';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import React, { useState, useEffect, useCallback } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { ArticleMetadata } from '@/types/article';
-// import { MdLibraryBooks } from "react-icons/md";
+import type { ArticleSummary } from '@/lib/articles';
+import { formatIsoDate } from '@/lib/format';
 
 const ArticleCard = ({
   article,
 }: {
-  article: string
+  article: ArticleSummary
 }) => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const { slug, metadata, excerpt, readingMinutes } = article;
+  const isoDate = metadata.date ? formatIsoDate(metadata.date) : undefined;
 
-  const createQueryString = useCallback((name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(name, value);
-    return params.toString();
-  }, [searchParams]);
-
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [articleData, setArticleData] = useState<{
-    href: string, metadata: ArticleMetadata, content: string,
-  }>();
-
-  useEffect(() => {
-    (async () => {
-      const href = path.join(pathname, 'article-page') + '?' + createQueryString('articleName', article);
-      const res = await fetch(`/articles/${article}.md`);
-      if (res.ok) {
-        const text = await res.text();
-        const parsed = matter(text); // Parse without generics
-        const content = parsed.content;
-        const metadata = parsed.data as ArticleMetadata;
-        setArticleData({ href, metadata, content });
-      } else {
-        console.error('Error fetching project metadata');
-      }
-    })();
-  }, [createQueryString, article, pathname]);
-
-  if (!articleData) return <Skeleton count={3} />;
   return (
     <Link
-      href={articleData.href}
-      className={clsx(`
-        relative block border rounded-lg shadow-lg overflow-hidden
-      dark:bg-gray-800
-      border-gray-200 dark:border-gray-700
-        px-6 py-3
-        hover:bg-gray-100 dark:hover:bg-gray-700
-      `)}
+      href={`/articles/${slug}`}
+      className='group flex gap-[18px] border-b border-foreground/10 px-1.5 py-4 transition-colors hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
     >
-      <div className='flex w-full justify-between items-end'>
-        <div className='flex gap-2 items-end'>
-          <h5 className="text-xl font-bold tracking-tight text-black dark:text-white">
-            {articleData.metadata.title}
-          </h5>
+      {/* Left date rail */}
+      <div className='w-[92px] shrink-0 pt-[3px]'>
+        {metadata.date ? (
+          isoDate ? (
+            <time
+              dateTime={isoDate}
+              className='font-mono text-[11px] font-bold leading-none text-primary'
+            >
+              {metadata.date}
+            </time>
+          ) : (
+            <span className='font-mono text-[11px] font-bold leading-none text-primary'>
+              {metadata.date}
+            </span>
+          )
+        ) : (
+          <span className='font-mono text-[11px] font-bold leading-none text-muted'>
+            DRAFT
+          </span>
+        )}
+        <span className='mt-1 block font-mono text-[11px] text-muted'>
+          {readingMinutes > 0 ? `${readingMinutes} min` : '—'}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className='min-w-0 flex-1'>
+        <div>
+          <span className='font-display text-[20px] font-semibold leading-tight tracking-[-0.01em] text-foreground'>
+            {metadata.title}
+          </span>
         </div>
-        {articleData.metadata.date && (
-          <div className='text-sm opacity-70'>
-            {articleData.metadata.date}
+
+        {/* Full-width excerpt — NO max-width */}
+        {excerpt && (
+          <p className='mt-1.5 font-sans text-[13px] leading-[1.55] text-muted'>
+            {excerpt}
+          </p>
+        )}
+
+        {/* Meta chips — only rendered when at least one chip is present */}
+        {metadata.lang && (
+          <div className='mt-2.5 flex flex-wrap gap-2'>
+            <span className='rounded bg-surface px-1.5 py-[3px] font-mono text-[9px] font-bold uppercase tracking-wide text-body'>
+              {metadata.lang}
+            </span>
           </div>
         )}
       </div>
-    </Link >
+
+      {/* Arrow */}
+      <span className='ml-auto self-center font-mono text-[13px] font-bold text-foreground/25 transition-colors group-hover:text-primary'>
+        →
+      </span>
+    </Link>
   );
 };
 

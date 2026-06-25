@@ -1,23 +1,33 @@
-'use client';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/lib/animations';
-import ProjectsList from './projects-list';
+import { type Metadata } from 'next';
+import Container from '@/components/layout/container';
+import PageHeader from '@/components/ui/page-header';
+import { getProjectSummaries } from '@/lib/projects';
+import ProjectsIndex from './projects-index';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+};
 
 const Page = () => {
+  const projects = getProjectSummaries();
+
   return (
-    <>
-      <main className='mb-20 md:px-32'>
-        <div className="container max-w-7xl mx-auto px-4">
-          <motion.h1
-            className="text-3xl font-bold mb-12 text-center"
-            {...fadeInUp}
-          >
-            Projects
-          </motion.h1>
-          <ProjectsList />
-        </div>
-      </main>
-    </>
+    <main className='mb-20'>
+      <Container className='py-10 sm:py-14'>
+        <PageHeader
+          fig="FIG. INDEX"
+          zh="作品集"
+          title="Projects"
+          aside={
+            <span className='font-mono text-sm text-muted'>
+              {projects.length} {projects.length === 1 ? 'build' : 'builds'}
+            </span>
+          }
+        />
+
+        <ProjectsIndex projects={projects} />
+      </Container>
+    </main>
   );
 };
 

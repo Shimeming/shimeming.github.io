@@ -3,14 +3,14 @@ import CelesteProgressJournal, { CelesteProgressData } from '@/components/celest
 import celesteBackgroundImage from '@public/pictures/celeste/celeste-background.jpg';
 
 const progressData: CelesteProgressData = {
-  lastUpdate: '2025-03-05',
+  lastUpdate: '2026-06-25',
   chapterData: [
     {
       name: 'Forsaken City',
       flag: true, tape: true, hearts: ['blue', 'red', 'yellow'],
       strawberries: '21/20',
-      aSideDeaths: 570, bSideDeaths: 344, cSideDeaths: 185,
-      time: '4:48:29.247',
+      aSideDeaths: 572, bSideDeaths: 1009, cSideDeaths: 185,
+      time: '6:55:02.637',
     },
     {
       name: 'Old Site',
@@ -23,8 +23,8 @@ const progressData: CelesteProgressData = {
       name: 'Celestial Resort',
       flag: true, tape: true, hearts: ['blue', 'red', 'yellow'],
       strawberries: '25/25',
-      aSideDeaths: 745, bSideDeaths: 769, cSideDeaths: 312,
-      time: '5:05:59.133',
+      aSideDeaths: 1060, bSideDeaths: 769, cSideDeaths: 312,
+      time: '6:06:12.636',
     },
     {
       name: 'Golden Ridge',
@@ -64,16 +64,16 @@ const progressData: CelesteProgressData = {
     {
       name: 'Farewell',
       bird: true,
-      strawberries: '-',
-      aSideDeaths: -1, bSideDeaths: 8310, cSideDeaths: -1,
-      time: '23:45:46.839',
+      strawberries: '1/0',
+      aSideDeaths: -1, bSideDeaths: 8770, cSideDeaths: -1,
+      time: '26:33:49.029',
     },
   ],
 };
 
 const Page = () => {
   return (
-    <>
+    <div className='relative flex flex-1 items-center overflow-hidden'>
       <Image
         alt="Celeste background"
         src={celesteBackgroundImage}
@@ -81,18 +81,21 @@ const Page = () => {
         quality={100}
         fill
         sizes="100vw"
-        style={{
-          objectFit: 'cover',
-        }}
-        className='-z-40'
+        style={{ objectFit: 'cover' }}
+        className='-z-10'
       />
-      <div className='relative flex-1 overflow-hidden'>
-        <CelesteProgressJournal
-          celesteProgress={progressData}
-          className='-rotate-2 -translate-x-32 translate-y-16'
-        />
+      <div className='no-scrollbar w-full overflow-x-auto'>
+        <div className='flex min-w-fit justify-center px-4 py-10'>
+          <CelesteProgressJournal
+            celesteProgress={progressData}
+            className='-rotate-1'
+          />
+        </div>
       </div>
-    </>
+      <div className='absolute bottom-4 right-4 font-mono text-xs text-white/70 bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full'>
+        Last sync · {progressData.lastUpdate}
+      </div>
+    </div>
   );
 };
 

@@ -17,6 +17,7 @@ export interface EducationData {
   degree: string;
   years: string;
   defaultDisplay?: boolean;
+  note?: string;
   courses?: CourseData[];
   CGPA?: number;
 }
@@ -25,4 +26,17 @@ export interface AwardData {
   englishTitle: string;
   chineseTitle?: string;
   description?: string;
+}
+
+export interface RoleData {
+  role: string;
+  org: string;
+  period: string;
+  location?: string;
+  bullets?: string[];
+}
+
+export interface SkillGroup {
+  category: string;
+  items: string[];
 }
