@@ -3,14 +3,14 @@ import CelesteProgressJournal, { CelesteProgressData } from '@/components/celest
 import celesteBackgroundImage from '@public/pictures/celeste/celeste-background.jpg';
 
 const progressData: CelesteProgressData = {
-  lastUpdate: '2025-03-05',
+  lastUpdate: '2026-06-25',
   chapterData: [
     {
       name: 'Forsaken City',
       flag: true, tape: true, hearts: ['blue', 'red', 'yellow'],
       strawberries: '21/20',
-      aSideDeaths: 570, bSideDeaths: 344, cSideDeaths: 185,
-      time: '4:48:29.247',
+      aSideDeaths: 572, bSideDeaths: 1009, cSideDeaths: 185,
+      time: '6:55:02.637',
     },
     {
       name: 'Old Site',
@@ -23,8 +23,8 @@ const progressData: CelesteProgressData = {
       name: 'Celestial Resort',
       flag: true, tape: true, hearts: ['blue', 'red', 'yellow'],
       strawberries: '25/25',
-      aSideDeaths: 745, bSideDeaths: 769, cSideDeaths: 312,
-      time: '5:05:59.133',
+      aSideDeaths: 1060, bSideDeaths: 769, cSideDeaths: 312,
+      time: '6:06:12.636',
     },
     {
       name: 'Golden Ridge',
@@ -64,9 +64,9 @@ const progressData: CelesteProgressData = {
     {
       name: 'Farewell',
       bird: true,
-      strawberries: '-',
-      aSideDeaths: -1, bSideDeaths: 8310, cSideDeaths: -1,
-      time: '23:45:46.839',
+      strawberries: '1/0',
+      aSideDeaths: -1, bSideDeaths: 8770, cSideDeaths: -1,
+      time: '26:33:49.029',
     },
   ],
 };
