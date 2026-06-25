@@ -27,7 +27,7 @@ export default {
         mono:    ['var(--font-space-mono)'],
         sans:    ['var(--font-noto-sans)'],
         sanstc:  ['var(--font-noto-sans-tc)'],
-        caveat:  ['var(--font-caveat)', 'cursive'],
+        caveat:  ['var(--font-caveat)', 'var(--font-hand-tc)', 'cursive'],
         poppins: ['var(--font-poppins-semi-bold)'],
       },
       typography: {
