@@ -30,6 +30,22 @@ export interface CelesteProgressData {
   chapterData: ChapterData[];
 }
 
+const CategoryImage = ({
+  src, alt, className,
+}: {
+  src: StaticImageData; alt: string; className?: string;
+}) => {
+  return (
+    <th className="justify-center items-center w-auto">
+      <Image
+        src={src}
+        alt={alt}
+        className={`max-h-10 w-auto object-contain m-auto block ${className}`}
+      />
+    </th>
+  );
+};
+
 const CelesteProgressJournal = ({
   celesteProgress,
   className,
@@ -37,22 +53,6 @@ const CelesteProgressJournal = ({
   celesteProgress: CelesteProgressData;
   className?: string;
 }) => {
-  const CategoryImage = ({
-    src, alt, className,
-  }: {
-    src: StaticImageData; alt: string; className?: string;
-  }) => {
-    return (
-      <th className="justify-center items-center w-auto">
-        <Image
-          src={src}
-          alt={alt}
-          className={`max-h-10 w-auto object-contain m-auto block ${className}`}
-        />
-      </th>
-    );
-  };
-
   const totalStrawberries = celesteProgress.chapterData.reduce((total, chapter) => {
     const [collected] = chapter.strawberries.split('/').map(Number);
     return total + (isNaN(collected) ? 0 : collected);

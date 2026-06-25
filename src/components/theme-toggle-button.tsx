@@ -31,6 +31,9 @@ const ThemeToggleButton = ({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Mount guard for next-themes: resolvedTheme is only known on the client,
+    // so flip `mounted` after hydration to avoid a server/client mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
