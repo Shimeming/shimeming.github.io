@@ -1,4 +1,9 @@
 ---
+year: 2024
+role: 'Game Designer & Developer'
+category: 'Game'
+stack: ['Unity', 'C#']
+featured: true
 projectName: 'Hallucination'
 coverImage: 'cover.png'
 description: 'A single player 2D platformer game made by Unity.'

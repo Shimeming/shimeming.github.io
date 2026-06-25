@@ -100,12 +100,19 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
       {/* Degree */}
       <p className='font-sans text-[13px] text-muted'>{school.degree}</p>
 
+      {/* Research / advisor note */}
+      {school.note && (
+        <p className='mt-0.5 font-mono text-[11px] leading-snug text-muted'>
+          {school.note}
+        </p>
+      )}
+
       {/* Course chips */}
       {courses.length > 0 && (
         <div className='mt-3'>
           <div className='flex flex-wrap gap-1.5'>
             {visible.map((c) => (
-              <CourseChip key={c.courseNumber} course={c} />
+              <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} />
             ))}
           </div>
 
@@ -114,7 +121,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
               <Collapsible isOpen={expanded} className='mt-1.5'>
                 <div className='flex flex-wrap gap-1.5'>
                   {hidden.map((c) => (
-                    <CourseChip key={c.courseNumber} course={c} showSkills={true} />
+                    <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} showSkills={true} />
                   ))}
                 </div>
               </Collapsible>

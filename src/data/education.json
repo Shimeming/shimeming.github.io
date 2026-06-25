@@ -2,8 +2,14 @@
   "education": [
     {
       "school": "National Taiwan University",
-      "degree": "Bachelor of Science in Computer Science",
-      "years": "2022-2026",
+      "degree": "MSc, Computer Science & Information Engineering",
+      "years": "2026-2027 (expected)",
+      "note": "MIU Lab · Advisor: Yun-Nung Chen · Research: model routing for LLMs"
+    },
+    {
+      "school": "National Taiwan University",
+      "degree": "BSc, Computer Science & Information Engineering",
+      "years": "2022-2025",
       "defaultDisplay": true,
       "courses": [
         {
@@ -226,7 +232,7 @@
           "englishName": "Computer Networks",
           "credits": 3,
           "grade": "A+",
-          "semester": "1st Semester 2023/2024",
+          "semester": "1st Semester 2024/2025",
           "skills": [
             "C++",
             "Network",
@@ -241,7 +247,7 @@
           "englishName": "Computer Architecture",
           "credits": 3,
           "grade": "A",
-          "semester": "1st Semester 2023/2024",
+          "semester": "1st Semester 2024/2025",
           "skills": [
             "computer architecture",
             "Verilog",
@@ -254,7 +260,7 @@
           "englishName": "Game Programming",
           "credits": 3,
           "grade": "A+",
-          "semester": "1st Semester 2023/2024",
+          "semester": "1st Semester 2024/2025",
           "repoLink": "https://github.com/seantsao00/Hallucination",
           "projectPageLink": "/projects/hallucination",
           "skills": [
@@ -269,7 +275,7 @@
           "englishName": "Applied Deep Learning",
           "credits": 3,
           "grade": "A+",
-          "semester": "1st Semester 2023/2024",
+          "semester": "1st Semester 2024/2025",
           "skills": [
             "Python",
             "TensorFlow",
@@ -286,16 +292,159 @@
           "englishName": "Introduction to Decentralized Finance",
           "credits": 3,
           "grade": "A+",
-          "semester": "1st Semester 2023/2024",
+          "semester": "1st Semester 2024/2025",
           "skills": [
             "blockchain",
             "smart contract",
             "Solidity",
             "DeFi"
           ]
+        },
+        {
+          "courseNumber": "CommE 5061",
+          "chineseName": "量子資訊與計算",
+          "englishName": "Quantum Information and Computation",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "quantum computing",
+            "quantum information"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3511",
+          "chineseName": "計算機網路實驗",
+          "englishName": "Computer Network Laboratory",
+          "credits": 2,
+          "grade": "A+",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "Network",
+            "Linux",
+            "socket programming"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 5085",
+          "chineseName": "計算機圖學",
+          "englishName": "Computer Graphics",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "OpenGL",
+            "C++",
+            "rendering"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 5452",
+          "chineseName": "智慧車輛導論",
+          "englishName": "Introduction to Intelligent Vehicles",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "autonomous driving",
+            "perception",
+            "deep learning"
+          ]
+        },
+        {
+          "courseNumber": "MATH 1008",
+          "chineseName": "基礎分析：度量空間導論",
+          "englishName": "Elementary Analysis: Introduction to Metric Spaces",
+          "credits": 2,
+          "grade": "A+",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "analysis",
+            "metric spaces",
+            "proof"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3512",
+          "chineseName": "專題研究",
+          "englishName": "Special Research",
+          "credits": 2,
+          "grade": "A-",
+          "semester": "2nd Semester 2024/2025",
+          "skills": [
+            "research",
+            "NLP",
+            "LLM"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3230",
+          "chineseName": "編譯器設計",
+          "englishName": "Compiler Design",
+          "credits": 3,
+          "grade": "A+",
+          "semester": "1st Semester 2025/2026",
+          "skills": [
+            "compiler",
+            "C++",
+            "LLVM"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 5213",
+          "chineseName": "平行程式設計",
+          "englishName": "Parallel Programming",
+          "credits": 3,
+          "grade": "A-",
+          "semester": "1st Semester 2025/2026",
+          "skills": [
+            "CUDA",
+            "OpenMP",
+            "MPI",
+            "parallel computing"
+          ]
+        },
+        {
+          "courseNumber": "CommE 5069",
+          "chineseName": "強化學習",
+          "englishName": "Reinforcement Learning",
+          "credits": 3,
+          "grade": "A-",
+          "semester": "1st Semester 2025/2026",
+          "skills": [
+            "reinforcement learning",
+            "Python",
+            "deep learning"
+          ]
+        },
+        {
+          "courseNumber": "IM 3008",
+          "chineseName": "資料庫管理",
+          "englishName": "Database Management",
+          "credits": 3,
+          "grade": "A",
+          "semester": "1st Semester 2025/2026",
+          "skills": [
+            "SQL",
+            "database",
+            "ER modeling"
+          ]
+        },
+        {
+          "courseNumber": "CSIE 3512 (II)",
+          "chineseName": "專題研究",
+          "englishName": "Special Research",
+          "credits": 2,
+          "grade": "A",
+          "semester": "1st Semester 2025/2026",
+          "skills": [
+            "research",
+            "NLP",
+            "model routing"
+          ]
         }
       ],
-      "CGPA": 4.16
+      "CGPA": 4.14
     },
     {
       "school": "The Affiliated Senior High School of National Taiwan Normal University",

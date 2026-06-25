@@ -17,6 +17,7 @@ export interface EducationData {
   degree: string;
   years: string;
   defaultDisplay?: boolean;
+  note?: string;
   courses?: CourseData[];
   CGPA?: number;
 }
