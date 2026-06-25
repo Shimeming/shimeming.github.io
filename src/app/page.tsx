@@ -19,7 +19,7 @@ const Page = () => {
             wordAppearInterval={0.12}
           />
           <span className='-rotate-3 inline-block font-caveat text-xl text-accent'>
-            銘 = to inscribe ↗
+            銘
           </span>
         </div>
 
