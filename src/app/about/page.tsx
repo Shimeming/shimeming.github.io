@@ -1,5 +1,6 @@
 import { type Metadata } from 'next';
 import Container from '@/components/layout/container';
+import PageHeader from '@/components/ui/page-header';
 import TitleBlock from '@/components/ui/title-block';
 import { getAwards, getEducation } from '@/lib/about';
 import Awards from './awards';
@@ -16,15 +17,7 @@ const Page = () => {
   return (
     <main className='pb-20'>
       <Container>
-        {/* Blueprint header */}
-        <div className='mb-6 border-b border-primary/25 pb-4 pt-6'>
-          <p className='font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-primary'>
-            FIG. 02 · 關於
-          </p>
-          <h1 className='mt-2 font-display text-[34px] font-semibold leading-tight tracking-[-0.02em] text-foreground'>
-            About
-          </h1>
-        </div>
+        <PageHeader fig="FIG. 02" zh="關於" title="About" />
 
         {/* Bio block: prose left + TitleBlock right */}
         <div className='mb-8 grid grid-cols-1 items-start gap-6 md:grid-cols-[1fr_270px]'>
