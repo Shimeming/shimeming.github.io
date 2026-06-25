@@ -1,4 +1,6 @@
 ---
+year: 2022
+category: 'School'
 projectName: '小朋友下樓梯 - Intro to Computer Science Final Project'
 coverImage: 'cover.png'
 description: 'My first game project was also my first time using Git for version control.'

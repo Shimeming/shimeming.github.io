@@ -1,4 +1,6 @@
 ---
+year: 2025
+category: 'Graphics'
 projectName: 'Realistic Water Shader and Optimizations'
 coverImage: 'cover.png'
 description: 'Realistic water surface simulation using Unity'

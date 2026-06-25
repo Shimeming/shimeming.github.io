@@ -1,4 +1,6 @@
 ---
+year: 2024
+category: 'Web'
 projectName: 'Taipei Townder - 2024臺北秋季程式設計節黑克松'
 coverImage: 'cover.png'
 description: 'A dating web app built within 24 hours, integrated into a Flutter mobile application.'
