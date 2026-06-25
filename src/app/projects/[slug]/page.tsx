@@ -6,10 +6,10 @@ import Container from '@/components/layout/container';
 import LinkIcon from '@/components/link-icon';
 import MarkdownWrapper from '@/components/markdown';
 import FigurePlate from '@/components/ui/figure-plate';
-import { getAllProjects, getProject } from '@/lib/projects';
+import { getProject, getProjectSlugs } from '@/lib/projects';
 
 export function generateStaticParams() {
-  return getAllProjects().map((project) => ({ slug: project.slug }));
+  return getProjectSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Container from '@/components/layout/container';
 import MarkdownWrapper from '@/components/markdown';
-import { getAllArticles, getArticle } from '@/lib/articles';
+import { getArticle, getArticleSlugs } from '@/lib/articles';
 import { formatIsoDate } from '@/lib/format';
 
 export function generateStaticParams() {
-  return getAllArticles().map((article) => ({ slug: article.slug }));
+  return getArticleSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
