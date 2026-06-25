@@ -31,6 +31,9 @@ const ThemeToggleButton = ({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Mount guard for next-themes: resolvedTheme is only known on the client,
+    // so flip `mounted` after hydration to avoid a server/client mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -50,7 +53,7 @@ const ThemeToggleButton = ({
       className={`
         rounded-md p-1 cursor-pointer text-body
         hover:text-primary transition-colors
-        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+        focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
         ${className}
       `}
     >

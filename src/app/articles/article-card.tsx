@@ -13,7 +13,7 @@ const ArticleCard = ({
   return (
     <Link
       href={`/articles/${slug}`}
-      className='group flex gap-[18px] border-b border-foreground/10 px-1.5 py-4 transition-colors hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+      className='group flex gap-[18px] border-b border-foreground/10 px-1.5 py-4 transition-colors hover:bg-surface focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
     >
       {/* Left date rail */}
       <div className='w-[92px] shrink-0 pt-[3px]'>
@@ -58,7 +58,7 @@ const ArticleCard = ({
         {/* Meta chips — only rendered when at least one chip is present */}
         {metadata.lang && (
           <div className='mt-2.5 flex flex-wrap gap-2'>
-            <span className='rounded bg-surface px-1.5 py-[3px] font-mono text-[9px] font-bold uppercase tracking-wide text-body'>
+            <span className='rounded-sm bg-surface px-1.5 py-[3px] font-mono text-[9px] font-bold uppercase tracking-wide text-body'>
               {metadata.lang}
             </span>
           </div>

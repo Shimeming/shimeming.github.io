@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vitest/config';
 
 const src = fileURLToPath(new URL('./src/', import.meta.url));
 const pub = fileURLToPath(new URL('./public/', import.meta.url));

@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+# this project uses pnpm; avoid stray npm lockfile
+package-lock.json
 /.pnp
 .pnp.*
 .yarn/*
@@ -42,3 +44,6 @@ next-env.d.ts
 
 # Brainstorming visual companion
 .superpowers/
+
+.claude/skills
+private-docs

@@ -61,7 +61,7 @@ const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSk
           {course.skills.map((skill) => (
             <span
               key={skill}
-              className='rounded-sm border border-foreground/20 px-1.5 py-px font-mono text-[9px] text-muted'
+              className='rounded-xs border border-foreground/20 px-1.5 py-px font-mono text-[9px] text-muted'
             >
               {skill}
             </span>

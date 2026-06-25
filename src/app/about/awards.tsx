@@ -17,13 +17,13 @@ const AwardCard = ({
     <div className='flex items-start gap-3 rounded-[9px] border border-primary/20 bg-surface p-3'>
       {/* Seal / medal marker */}
       <span
-        className='grid h-[26px] w-[26px] shrink-0 -rotate-[4deg] place-items-center rounded-[6px] bg-accent font-mono text-[11px] font-bold text-white shadow-[0_2px_0_rgba(154,44,32,0.6)]'
+        className='grid h-[26px] w-[26px] shrink-0 rotate-[-4deg] place-items-center rounded-[6px] bg-accent font-mono text-[11px] font-bold text-white shadow-[0_2px_0_rgba(154,44,32,0.6)]'
         aria-hidden='true'
       >
         {stamp}
       </span>
       <div>
-        <p className='font-display text-[13.5px] font-semibold leading-[1.25] text-foreground'>
+        <p className='font-display text-[13.5px] font-semibold leading-tight text-foreground'>
           {award.englishTitle}
         </p>
         {award.chineseTitle && (

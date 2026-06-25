@@ -11,7 +11,7 @@ const NavBar = (): React.JSX.Element => {
   const pathName = usePathname();
 
   return (
-    <header className='sticky top-0 z-40 border-b border-primary/20 bg-background/80 backdrop-blur'>
+    <header className='sticky top-0 z-40 border-b border-primary/20 bg-background/80 backdrop-blur-sm'>
       <Container className='flex items-center justify-between gap-4 py-3'>
         {/* Brand: seal + wordmark */}
         <div className='flex items-center gap-2.5 shrink-0'>
@@ -38,7 +38,7 @@ const NavBar = (): React.JSX.Element => {
                   group relative shrink-0
                   font-mono text-xs font-bold uppercase tracking-widest
                   transition-colors hover:text-primary
-                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+                  focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
                   ${active ? 'text-primary' : 'text-body'}
                 `}
               >
@@ -60,7 +60,7 @@ const NavBar = (): React.JSX.Element => {
             target='_blank'
             rel='noopener noreferrer'
             aria-label='GitHub profile'
-            className='shrink-0 text-lg text-body transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-sm'
+            className='shrink-0 text-lg text-body transition-colors hover:text-primary focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-xs'
           >
             <FaGithub />
           </Link>

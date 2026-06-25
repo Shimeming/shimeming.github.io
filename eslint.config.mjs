@@ -1,20 +1,11 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
+// Note: eslint-config-next already registers eslint-plugin-import, so the
+// `import/*` rules below work without separately adding the plugin.
 const eslintConfig = [
-  ...compat.extends(
-    'next/core-web-vitals',
-    'next/typescript',
-    'plugin:import/recommended',
-  ),
+  ...nextCoreWebVitals,
+  ...nextTypescript,
   {
     rules: {
       'semi': ['warn', 'always'],
@@ -48,6 +39,9 @@ const eslintConfig = [
         },
       ],
     },
+  },
+  {
+    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
   },
 ];
 

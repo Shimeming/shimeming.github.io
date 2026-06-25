@@ -6,7 +6,7 @@ export const Tag = ({
   children: string;
 }) => {
   return (
-    <span className={`rounded-sm border border-foreground px-2.5 py-0.5 text-xs font-medium ${className}`}>
+    <span className={`rounded-xs border border-foreground px-2.5 py-0.5 text-xs font-medium ${className}`}>
       {children}
     </span>
   );
