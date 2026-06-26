@@ -76,7 +76,7 @@ export default function OGImage(): ImageResponse {
             fontStyle: 'italic',
           }}
         >
-          worth doing badly
+          writing down everything I figure out on the way up
         </div>
 
         {/* Bottom-right URL */}

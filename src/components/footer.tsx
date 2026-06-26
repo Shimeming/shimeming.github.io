@@ -22,16 +22,13 @@ const Footer = (): React.JSX.Element => {
                 {site.name}
               </span>
             </div>
-            <span className='font-caveat text-accent mt-2 block text-base font-bold'>
-              worth doing badly ↗
-            </span>
           </div>
 
           {/* Pages column */}
           <div>
-            <h5 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
+            <h2 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
               Pages
-            </h5>
+            </h2>
             {navPages.map((page) => (
               <Link
                 key={page.href}
@@ -45,9 +42,9 @@ const Footer = (): React.JSX.Element => {
 
           {/* Elsewhere column */}
           <div>
-            <h5 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
+            <h2 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
               Elsewhere
-            </h5>
+            </h2>
             <a
               href={site.github}
               target='_blank'
@@ -66,9 +63,9 @@ const Footer = (): React.JSX.Element => {
 
           {/* Drawing column */}
           <div>
-            <h5 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
+            <h2 className='font-mono mb-2.5 text-[9px] font-bold uppercase tracking-widest text-primary'>
               Drawing
-            </h5>
+            </h2>
             <a
               href={site.repo}
               target='_blank'

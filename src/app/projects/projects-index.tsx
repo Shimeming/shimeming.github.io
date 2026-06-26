@@ -1,8 +1,10 @@
 'use client';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import LinkIcon from '@/components/link-icon';
+import { revealContainer, revealItem, revealViewport } from '@/components/ui/reveal';
 import type { ProjectSummary } from '@/lib/projects';
 
 /** Image shown in both the thumbnail and the preview surface. */
@@ -134,14 +136,20 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
   return (
     <div className='grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]'>
       {/* LEFT — the list (always visible) */}
-      <ul className='flex flex-col gap-0.5'>
+      <motion.ul
+        className='flex flex-col gap-0.5'
+        variants={revealContainer}
+        initial='hidden'
+        whileInView='visible'
+        viewport={revealViewport}
+      >
         {projects.map((project, i) => {
           const { slug, metadata } = project;
           const meta = rowMeta(metadata);
           const isActive = i === active;
 
           return (
-            <li key={slug}>
+            <motion.li key={slug} variants={revealItem}>
               <Link
                 href={`/projects/${slug}`}
                 onMouseEnter={() => setActive(i)}
@@ -190,22 +198,27 @@ const ProjectsIndex = ({ projects }: { projects: ProjectSummary[] }) => {
                   {String(i + 1).padStart(2, '0')}
                 </span>
               </Link>
-            </li>
+            </motion.li>
           );
         })}
-      </ul>
+      </motion.ul>
 
       {/* RIGHT — flat preview surface (wide-screen enhancement) */}
-      <div
-        aria-live='polite'
-        aria-label='Project preview'
+      {/* Visual enhancement that mirrors the hovered/focused list row. Not a
+          live region: announcing it on every hover would flood screen readers,
+          and the list links already expose every project. */}
+      <motion.div
         className='hidden rounded-xl bg-surfaceFlat p-5 md:flex'
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={revealViewport}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
       >
         {/* keyed so the subtle fade replays on swap (respects reduced-motion via globals.css) */}
         <div key={activeProject.slug} className='flex w-full flex-col motion-safe:animate-[fadeIn_0.16s_ease]'>
           <Preview project={activeProject} />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

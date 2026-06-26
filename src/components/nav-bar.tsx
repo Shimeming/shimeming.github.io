@@ -6,6 +6,7 @@ import Container from '@/components/layout/container';
 import ThemeToggleButton from '@/components/theme-toggle-button';
 import Seal from '@/components/ui/seal';
 import { navPages } from '@/data/nav';
+import site from '@/data/site';
 
 const NavBar = (): React.JSX.Element => {
   const pathName = usePathname();
@@ -56,7 +57,7 @@ const NavBar = (): React.JSX.Element => {
           })}
 
           <Link
-            href='https://github.com/Shimeming'
+            href={site.github}
             target='_blank'
             rel='noopener noreferrer'
             aria-label='GitHub profile'

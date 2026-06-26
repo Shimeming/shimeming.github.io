@@ -42,8 +42,8 @@ const RoleTimeline = ({
   <section>
     <SectionLabel en={en} zh={zh} />
     <Timeline>
-      {roles.map((role, i) => (
-        <RoleNode key={i} role={role} />
+      {roles.map((role) => (
+        <RoleNode key={`${role.period}-${role.role}`} role={role} />
       ))}
     </Timeline>
   </section>

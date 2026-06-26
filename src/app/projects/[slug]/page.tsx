@@ -1,11 +1,12 @@
 import { type Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import Container from '@/components/layout/container';
 import LinkIcon from '@/components/link-icon';
 import MarkdownWrapper from '@/components/markdown';
+import BackLink from '@/components/ui/back-link';
 import FigurePlate from '@/components/ui/figure-plate';
+import Reveal from '@/components/ui/reveal';
 import { getProject, getProjectSlugs } from '@/lib/projects';
 
 export function generateStaticParams() {
@@ -24,9 +25,12 @@ export async function generateMetadata({
   return {
     title: project.metadata.projectName,
     description: project.metadata.description,
+    alternates: { canonical: `/projects/${slug}` },
     openGraph: {
+      type: 'article',
       title: project.metadata.projectName,
       description: project.metadata.description,
+      url: `/projects/${slug}`,
       images: [project.coverImage],
     },
   };
@@ -64,85 +68,88 @@ const ProjectPage = async ({
   return (
     <main className='pb-20 pt-6'>
       <Container>
-        {/* Back link */}
-        <Link
-          href='/projects'
-          className='mb-6 inline-flex items-center gap-2 font-mono text-sm text-primary transition-colors hover:text-muted'
-        >
-          <FaArrowLeftLong /> All projects
-        </Link>
+        <Reveal>
+          <BackLink href='/projects'>All projects</BackLink>
+        </Reveal>
 
         {/* Figure plate */}
-        <FigurePlate
-          src={coverImage}
-          alt={metadata.projectName}
-          fig='FIG.01'
-          caption={metadata.projectName}
-        />
+        <Reveal delay={0.05}>
+          <FigurePlate
+            src={coverImage}
+            alt={metadata.projectName}
+            fig='FIG.01'
+            caption={metadata.projectName}
+          />
+        </Reveal>
 
-        {/* Title */}
-        <h1 className='mt-6 font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl'>
-          {metadata.projectName}
-        </h1>
+        {/* Title, spec table, abstract, links */}
+        <Reveal delay={0.1}>
+          {/* Title */}
+          <h1 className='mt-6 font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl'>
+            {metadata.projectName}
+          </h1>
 
-        {/* Mono spec table — only rendered if any row exists */}
-        {specRows.length > 0 && (
-          <dl
-            className='mt-4 overflow-hidden rounded-lg border border-primary/20 bg-surface'
-            style={{ display: 'grid', gridTemplateColumns: `repeat(${specRows.length}, 1fr)` }}
-          >
-            {specRows.map((row, i) => (
-              <div
-                key={row.label}
-                className={`px-3 py-2.5 ${i > 0 ? 'border-l border-primary/20' : ''}`}
-              >
-                <dt className='font-mono text-[9px] font-bold uppercase tracking-widest text-primary'>
-                  {row.label}
-                </dt>
-                <dd className='mt-1 font-mono text-[13px] font-semibold text-foreground'>
-                  {row.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        )}
+          {/* Mono spec table — only rendered if any row exists */}
+          {specRows.length > 0 && (
+            <dl
+              className='mt-4 overflow-hidden rounded-lg border border-primary/20 bg-surface'
+              style={{ display: 'grid', gridTemplateColumns: `repeat(${specRows.length}, 1fr)` }}
+            >
+              {specRows.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`px-3 py-2.5 ${i > 0 ? 'border-l border-primary/20' : ''}`}
+                >
+                  <dt className='font-mono text-[9px] font-bold uppercase tracking-widest text-primary'>
+                    {row.label}
+                  </dt>
+                  <dd className='mt-1 font-mono text-[13px] font-semibold text-foreground'>
+                    {row.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
 
-        {/* Abstract + overview */}
-        <p className='mt-4 text-base leading-relaxed text-body'>
-          {metadata.description}
-        </p>
+          {/* Abstract + overview */}
+          <p className='mt-4 text-base leading-relaxed text-body'>
+            {metadata.description}
+          </p>
 
-        {metadata.overview && metadata.overview.length > 0 && (
-          <ul className='mt-3 list-disc space-y-1 pl-5 text-muted'>
-            {metadata.overview.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        )}
+          {metadata.overview && metadata.overview.length > 0 && (
+            <ul className='mt-3 list-disc space-y-1 pl-5 text-muted'>
+              {metadata.overview.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          )}
 
-        {/* External links */}
-        {metadata.links && metadata.links.length > 0 && (
-          <div className='mt-5 flex flex-wrap gap-4 border-t border-primary/10 pt-4'>
-            {metadata.links.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-2 font-mono text-sm text-primary transition-colors hover:text-muted active:scale-95'
-              >
-                <LinkIcon iconName={link.icon} />
-                {link.description && <span>{link.description}</span>}
-              </Link>
-            ))}
-          </div>
-        )}
+          {/* External links */}
+          {metadata.links && metadata.links.length > 0 && (
+            <div className='mt-5 flex flex-wrap gap-4 border-t border-primary/10 pt-4'>
+              {metadata.links.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-2 font-mono text-sm text-primary transition-colors hover:text-muted active:scale-95'
+                >
+                  <LinkIcon iconName={link.icon} />
+                  {link.description && <span>{link.description}</span>}
+                </Link>
+              ))}
+            </div>
+          )}
+        </Reveal>
 
         {/* Long-form notes */}
         {hasNote && (
-          <section className='mt-10 border-t border-dashed border-primary/25 pt-6'>
-            <MarkdownWrapper content={content} />
-          </section>
+          <Reveal>
+            <section className='mt-10 border-t border-dashed border-primary/25 pt-6'>
+              <MarkdownWrapper content={content} />
+            </section>
+          </Reveal>
         )}
       </Container>
     </main>

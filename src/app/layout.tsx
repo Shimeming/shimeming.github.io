@@ -1,6 +1,7 @@
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav-bar';
 import ThemeProviderWrapper from '@/components/providers/theme-provider';
+import site from '@/data/site';
 import { poppinsSemiBold, notoSans, notoSansTC, spaceGrotesk, spaceMono, caveat, handTC } from '@/lib/fonts';
 import type { Metadata } from 'next';
 
@@ -9,7 +10,7 @@ import './globals.css';
 const description = 'Personal site of Shimeming — projects, notes, and more.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shimeming.github.io'),
+  metadataBase: new URL(site.url),
   title: {
     template: '%s | Shimeming',
     default: 'Shimeming',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Shimeming',
     description,
-    url: 'https://shimeming.github.io',
+    url: site.url,
     siteName: 'Shimeming',
     locale: 'en_US',
     type: 'website',

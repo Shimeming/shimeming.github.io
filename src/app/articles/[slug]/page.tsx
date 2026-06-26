@@ -1,8 +1,11 @@
 import { type Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Container from '@/components/layout/container';
 import MarkdownWrapper from '@/components/markdown';
+import JsonLd from '@/components/seo/json-ld';
+import BackLink from '@/components/ui/back-link';
+import Reveal from '@/components/ui/reveal';
+import site from '@/data/site';
 import { getArticle, getArticleSlugs } from '@/lib/articles';
 import { formatIsoDate } from '@/lib/format';
 
@@ -19,7 +22,21 @@ export async function generateMetadata({
   const article = getArticle(slug);
   if (!article) return {};
 
-  return { title: article.metadata.title };
+  const { metadata, excerpt } = article;
+  const published = metadata.date ? formatIsoDate(metadata.date) : undefined;
+
+  return {
+    title: metadata.title,
+    description: excerpt,
+    alternates: { canonical: `/articles/${slug}` },
+    openGraph: {
+      type: 'article',
+      title: metadata.title,
+      description: excerpt,
+      url: `/articles/${slug}`,
+      ...(published ? { publishedTime: published } : {}),
+    },
+  };
 }
 
 const ArticlePage = async ({
@@ -31,42 +48,56 @@ const ArticlePage = async ({
   const article = getArticle(slug);
   if (!article) notFound();
 
-  const { metadata, content } = article;
+  const { metadata, content, excerpt } = article;
   const isoDate = metadata.date ? formatIsoDate(metadata.date) : undefined;
+
+  const blogPostingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: metadata.title,
+    description: excerpt,
+    url: `${site.url}/articles/${slug}`,
+    author: { '@type': 'Person', name: site.name, url: site.url },
+    ...(isoDate ? { datePublished: isoDate } : {}),
+    ...(metadata.lang
+      ? { inLanguage: metadata.lang === '中文' ? 'zh-TW' : 'en' }
+      : {}),
+  };
 
   return (
     <main className='pb-20'>
+      <JsonLd data={blogPostingSchema} />
       <Container className='pt-8'>
-        {/* Back link */}
-        <Link
-          href='/articles'
-          className='mb-6 inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary/70'
-        >
-          ← All articles
-        </Link>
+        <Reveal>
+          <BackLink href='/articles'>All articles</BackLink>
+        </Reveal>
 
         {/* Blueprint header */}
-        <header className='mb-8 border-b border-primary/25 pb-4'>
-          <h1 className='font-display text-[28px] font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px]'>
-            {metadata.title}
-          </h1>
-          {metadata.date && (
-            isoDate ? (
-              <time
-                dateTime={isoDate}
-                className='mt-2 block font-mono text-[11px] text-muted'
-              >
-                {metadata.date}
-              </time>
-            ) : (
-              <p className='mt-2 font-mono text-[11px] text-muted'>
-                {metadata.date}
-              </p>
-            )
-          )}
-        </header>
+        <Reveal delay={0.05}>
+          <header className='mb-8 border-b border-primary/25 pb-4'>
+            <h1 className='font-display text-[28px] font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-[34px]'>
+              {metadata.title}
+            </h1>
+            {metadata.date && (
+              isoDate ? (
+                <time
+                  dateTime={isoDate}
+                  className='mt-2 block font-mono text-[11px] text-muted'
+                >
+                  {metadata.date}
+                </time>
+              ) : (
+                <p className='mt-2 font-mono text-[11px] text-muted'>
+                  {metadata.date}
+                </p>
+              )
+            )}
+          </header>
+        </Reveal>
 
-        <MarkdownWrapper content={content} />
+        <Reveal delay={0.1}>
+          <MarkdownWrapper content={content} />
+        </Reveal>
       </Container>
     </main>
   );

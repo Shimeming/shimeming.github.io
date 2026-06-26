@@ -1,3 +1,6 @@
+'use client';
+import { motion } from 'motion/react';
+import { revealContainer, revealItem, revealViewport } from '@/components/ui/reveal';
 import type { ArticleSummary } from '@/lib/articles';
 import ArticleCard from './article-card';
 
@@ -7,13 +10,20 @@ const ArticleList = ({
   articles: ArticleSummary[]
 }) => {
   return (
-    <ul role='list' className='border-t border-foreground/10'>
+    <motion.ul
+      role='list'
+      className='border-t border-foreground/10'
+      variants={revealContainer}
+      initial='hidden'
+      whileInView='visible'
+      viewport={revealViewport}
+    >
       {articles.map((article) => (
-        <li key={article.slug}>
+        <motion.li key={article.slug} variants={revealItem}>
           <ArticleCard article={article} />
-        </li>
+        </motion.li>
       ))}
-    </ul>
+    </motion.ul>
   );
 };
 

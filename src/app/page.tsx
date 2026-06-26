@@ -1,31 +1,54 @@
+import { type Metadata } from 'next';
 import Link from 'next/link';
 import AnimatedHeading from '@/components/animated-heading';
 import Container from '@/components/layout/container';
+import JsonLd from '@/components/seo/json-ld';
+import ViewportWidth from '@/components/ui/viewport-width';
 import site from '@/data/site';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  sameAs: [site.github],
+  jobTitle: 'CS Student & Researcher',
+  affiliation: {
+    '@type': 'CollegeOrUniversity',
+    name: 'National Taiwan University',
+  },
+  knowsAbout: ['NLP', 'LLMs', 'Game development', 'Computer graphics'],
+};
 
 const Page = () => {
   return (
     <main className='bp-grid flex flex-1 items-center'>
+      <JsonLd data={personSchema} />
       <Container as='section' className='w-full py-12'>
         {/* Mono eyebrow */}
         <p className='font-mono text-xs uppercase tracking-[0.14em] text-primary'>
           Personal site · 個人網站
         </p>
 
-        {/* Heading + Caveat note */}
-        <div className='flex flex-wrap items-baseline gap-x-3'>
-          <AnimatedHeading
-            text="Hi, I'm Shimeming"
-            wordAppearInterval={0.12}
-          />
-          <span className='-rotate-3 inline-block font-caveat text-xl text-accent'>
-            銘
-          </span>
-        </div>
+        {/* Heading */}
+        <AnimatedHeading
+          text="Hi, I'm Shimeming"
+          wordAppearInterval={0.12}
+        />
 
         {/* Subtitle */}
         <p className='mt-3 max-w-[42ch] text-body'>
           A CS student at NTU who researches NLP &amp; LLMs and builds games &amp; graphics — writing down everything he figures out on the way up.
+        </p>
+
+        {/* Handwritten tagline */}
+        <p className='mt-3 -rotate-1 font-caveat text-lg font-bold text-accent'>
+          if it&apos;s worth doing, it&apos;s worth doing badly
         </p>
 
         {/* Button row */}
@@ -46,9 +69,7 @@ const Page = () => {
 
         {/* Thin dimension rule */}
         <div className='relative mt-5 h-px bg-primary/20'>
-          <span className='absolute -top-5 right-0 font-mono text-[9px] tracking-widest text-primary/60'>
-            ↤ 1440px ↦
-          </span>
+          <ViewportWidth className='absolute -top-5 right-0 font-mono text-[9px] tracking-widest text-primary/60' />
         </div>
       </Container>
     </main>
