@@ -4,9 +4,20 @@
       "role": "Co-Minister, Academic Department",
       "org": "NTUCSIE Student Association",
       "period": "Fall 2024 – Fall 2025",
+      "logo": "/logos/ntu-csie-council.png",
       "bullets": [
         "Led 20+ students planning and running academic events.",
         "Organized the Freshmen ICPC, a student-run programming & CTF contest."
+      ]
+    },
+    {
+      "role": "Vice Coordinator",
+      "org": "2025 IOI Camp",
+      "period": "Fall 2024 – Spring 2025",
+      "logo": "/logos/ioic-2025.jpg",
+      "bullets": [
+        "Camp designed to teach advanced algorithms to top high school students.",
+        "Coordinated a team of over 50 members, ensuring smooth organization and execution of the camp."
       ]
     }
   ]

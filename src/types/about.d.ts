@@ -25,6 +25,10 @@ export interface EducationData {
   school: string;
   degree: string;
   years: string;
+  /** Public path to the institution logo, e.g. "/logos/ntu.png". */
+  logo?: string;
+  /** Override the default logo-plate background (e.g. "#ffffff" for a mark that needs true white). */
+  logoBg?: string;
   defaultDisplay?: boolean;
   note?: string;
   specializations?: SpecializationData[];
@@ -44,6 +48,10 @@ export interface RoleData {
   period: string;
   location?: string;
   bullets?: string[];
+  /** Public path to the org logo, e.g. "/logos/appier.png". */
+  logo?: string;
+  /** Override the default logo-plate background (e.g. "#ffffff" for a mark that needs true white). */
+  logoBg?: string;
 }
 
 export interface SkillGroup {
