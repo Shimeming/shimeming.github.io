@@ -3,61 +3,51 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FaGithub, FaLink } from 'react-icons/fa';
 import { Collapsible } from '@/components/ui/collapsible';
+import HoverCard from '@/components/ui/hover-card';
 import SectionLabel from '@/components/ui/section-label';
 import { CourseData, EducationData } from '@/types/about';
 import { Timeline, TimelineNode } from './timeline';
 
 const VISIBLE_COURSES = 6;
 
-/* ── course chip ──────────────────────────────────────────────────── */
-const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSkills?: boolean }) => {
+/* ── course chip + hover card ─────────────────────────────────────── */
+const CourseChip = ({ course }: { course: CourseData }) => {
   const hasLinks =
     course.link || course.repoLink || course.projectPageLink;
 
+  const trigger = (
+    <button
+      type='button'
+      className='flex items-center rounded-[5px] border border-primary/25 bg-surface px-2 py-1 font-mono text-[11px] text-body transition-colors hover:border-primary/50 cursor-default'
+    >
+      <span className='truncate max-w-[180px]'>{course.englishName}</span>
+    </button>
+  );
+
   return (
-    <div className='flex flex-col gap-1'>
-      <div className='flex items-center gap-1.5 rounded-[5px] border border-primary/25 bg-surface px-2 py-1 font-mono text-[11px] text-body'>
-        <span className='truncate max-w-[180px]'>{course.englishName}</span>
+    <HoverCard
+      trigger={trigger}
+      className='w-[280px] max-w-[calc(100vw-2rem)] rounded-md border border-primary/25 bg-surface p-3 shadow-lg'
+    >
+      <p className='font-sans text-[13px] font-semibold leading-snug text-foreground'>
+        {course.englishName}
+      </p>
+      <p className='font-sans text-[12px] leading-snug text-muted'>
+        {course.chineseName}
+      </p>
+
+      <p className='mt-1.5 font-mono text-[10px] text-muted'>
+        {course.courseNumber} · {course.credits} cr · {course.semester}
         {course.grade && (
-          <span className='font-bold text-grade shrink-0'>{course.grade}</span>
+          <>
+            {' · '}
+            <span className='font-bold text-grade'>{course.grade}</span>
+          </>
         )}
-      </div>
-      {hasLinks && (
-        <div className='flex gap-2 pl-1'>
-          {course.link && (
-            <Link
-              href={course.link}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-muted hover:text-primary transition-colors'
-              aria-label={`${course.englishName} link`}
-            >
-              <FaLink className='text-[10px]' />
-            </Link>
-          )}
-          {course.repoLink && (
-            <Link
-              href={course.repoLink}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-muted hover:text-primary transition-colors'
-              aria-label={`${course.englishName} repository`}
-            >
-              <FaGithub className='text-[10px]' />
-            </Link>
-          )}
-          {course.projectPageLink && (
-            <Link
-              href={course.projectPageLink}
-              className='text-muted hover:text-primary transition-colors font-mono text-[9px]'
-            >
-              ↗ project
-            </Link>
-          )}
-        </div>
-      )}
-      {showSkills && course.skills && course.skills.length > 0 && (
-        <div className='flex flex-wrap gap-1 pl-1'>
+      </p>
+
+      {course.skills && course.skills.length > 0 && (
+        <div className='mt-2 flex flex-wrap gap-1'>
           {course.skills.map((skill) => (
             <span
               key={skill}
@@ -68,7 +58,42 @@ const CourseChip = ({ course, showSkills = false }: { course: CourseData; showSk
           ))}
         </div>
       )}
-    </div>
+
+      {hasLinks && (
+        <div className='mt-2 flex items-center gap-3 border-t border-primary/15 pt-2'>
+          {course.link && (
+            <Link
+              href={course.link}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex items-center gap-1 font-mono text-[10px] text-muted transition-colors hover:text-primary'
+              aria-label={`${course.englishName} link`}
+            >
+              <FaLink className='text-[10px]' /> link
+            </Link>
+          )}
+          {course.repoLink && (
+            <Link
+              href={course.repoLink}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex items-center gap-1 font-mono text-[10px] text-muted transition-colors hover:text-primary'
+              aria-label={`${course.englishName} repository`}
+            >
+              <FaGithub className='text-[10px]' /> repo
+            </Link>
+          )}
+          {course.projectPageLink && (
+            <Link
+              href={course.projectPageLink}
+              className='flex items-center gap-1 font-mono text-[10px] text-muted transition-colors hover:text-primary'
+            >
+              ↗ project
+            </Link>
+          )}
+        </div>
+      )}
+    </HoverCard>
   );
 };
 
@@ -121,7 +146,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
               <Collapsible isOpen={expanded} className='mt-1.5'>
                 <div className='flex flex-wrap gap-1.5'>
                   {hidden.map((c) => (
-                    <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} showSkills={true} />
+                    <CourseChip key={`${c.courseNumber}-${c.semester}`} course={c} />
                   ))}
                 </div>
               </Collapsible>
