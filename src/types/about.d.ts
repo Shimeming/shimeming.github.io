@@ -12,12 +12,22 @@ export interface CourseData {
   projectPageLink?: string;
 }
 
+export interface SpecializationData {
+  /** Official 領域專長 code, e.g. "902007". */
+  code: string;
+  englishName: string;
+  chineseName: string;
+  /** Course numbers (matching CourseData.courseNumber) that count toward this specialization. */
+  courses: string[];
+}
+
 export interface EducationData {
   school: string;
   degree: string;
   years: string;
   defaultDisplay?: boolean;
   note?: string;
+  specializations?: SpecializationData[];
   courses?: CourseData[];
   CGPA?: number;
 }

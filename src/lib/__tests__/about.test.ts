@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getActivities, getExperience, getSkills } from '../about';
+import { getActivities, getEducation, getExperience, getSkills } from '../about';
 
 test('experience entries are well-formed', () => {
   const roles = getExperience();
@@ -18,6 +18,23 @@ test('activities entries are well-formed', () => {
     expect(r.role).toBeTruthy();
     expect(r.org).toBeTruthy();
     expect(r.period).toBeTruthy();
+  }
+});
+
+test('every specialization course number resolves to exactly one real course', () => {
+  for (const school of getEducation()) {
+    const courseNumbers = (school.courses ?? []).map((c) => c.courseNumber);
+    for (const spec of school.specializations ?? []) {
+      expect(spec.code).toBeTruthy();
+      expect(spec.courses.length).toBeGreaterThan(0);
+      for (const ref of spec.courses) {
+        const matches = courseNumbers.filter((cn) => cn === ref);
+        expect(
+          matches.length,
+          `specialization ${spec.code} references "${ref}", which matched ${matches.length} courses in ${school.school}`,
+        ).toBe(1);
+      }
+    }
   }
 });
 

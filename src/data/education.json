@@ -11,6 +11,20 @@
       "degree": "BSc, Computer Science & Information Engineering",
       "years": "2022-2025",
       "defaultDisplay": true,
+      "specializations": [
+        {
+          "code": "902002",
+          "englishName": "Machine Learning and Artificial Intelligence",
+          "chineseName": "機器學習與人工智慧",
+          "courses": ["CSIE 1212", "CSIE 3005", "CSIE 5043", "CSIE5431"]
+        },
+        {
+          "code": "902007",
+          "englishName": "Computer Architecture",
+          "chineseName": "計算機結構",
+          "courses": ["CSIE 1000", "CSIE 2344", "CSIE3340", "CSIE 5213"]
+        }
+      ],
       "courses": [
         {
           "courseNumber": "CSIE 1000",
