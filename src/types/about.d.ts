@@ -40,6 +40,10 @@ export interface AwardData {
   englishTitle: string;
   chineseTitle?: string;
   description?: string;
+  /** Public path to the award/issuer logo, e.g. "/logos/awards/icpc.png". */
+  logo?: string;
+  /** Override the default logo-plate background (e.g. "#ffffff" for a white-bg mark). */
+  logoBg?: string;
 }
 
 export interface RoleData {

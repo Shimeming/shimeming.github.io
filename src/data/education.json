@@ -4,14 +4,14 @@
       "school": "National Taiwan University",
       "degree": "MSc, Computer Science & Information Engineering",
       "years": "2026-2027 (expected)",
-      "logo": "/logos/ntu.png",
+      "logo": "/logos/orgs/ntu.png",
       "note": "MIU Lab · Advisor: Yun-Nung Chen · Research: model routing for LLMs"
     },
     {
       "school": "National Taiwan University",
       "degree": "BSc, Computer Science & Information Engineering",
       "years": "2022-2025",
-      "logo": "/logos/ntu.png",
+      "logo": "/logos/orgs/ntu.png",
       "defaultDisplay": true,
       "specializations": [
         {
@@ -466,7 +466,7 @@
       "school": "The Affiliated Senior High School of National Taiwan Normal University",
       "degree": "High School (Science Class)",
       "years": "2019-2022",
-      "logo": "/logos/hsnu.svg"
+      "logo": "/logos/orgs/hsnu.svg"
     }
   ]
 }

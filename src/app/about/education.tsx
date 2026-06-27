@@ -201,126 +201,125 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
       (courseToSpecs.get(hoveredCourse) ?? []).some((s) => s.code === code));
 
   return (
-    <TimelineNode>
-      <div className='flex items-start gap-3'>
-        {school.logo && (
+    <TimelineNode
+      marker={
+        school.logo ? (
           <OrgLogo src={school.logo} alt={school.school} bg={school.logoBg} />
-        )}
-        <div className='min-w-0 flex-1'>
-          {/* Years */}
-          <p className='font-mono text-[11px] font-bold text-primary'>
-            {school.years}
-          </p>
+        ) : undefined
+      }
+    >
+      {/* Years */}
+      <p className='font-mono text-[11px] font-bold text-primary'>
+        {school.years}
+      </p>
 
-          {/* School name + CGPA */}
-          <h3 className='mt-0.5 font-display text-[19px] font-semibold leading-snug tracking-[-0.01em] text-foreground'>
-            {school.school}
-            {school.CGPA != null && (
-              <span className='ml-2 font-mono text-[11px] font-bold text-accent'>
+      {/* School name + CGPA */}
+      <h3 className='mt-0.5 font-display text-[19px] font-semibold leading-snug tracking-[-0.01em] text-foreground'>
+        {school.school}
+        {school.CGPA != null && (
+          <span className='ml-2 font-mono text-[11px] font-bold text-accent'>
             CGPA {school.CGPA}
-              </span>
-            )}
-          </h3>
+          </span>
+        )}
+      </h3>
 
-          {/* Degree */}
-          <p className='font-sans text-[13px] text-muted'>{school.degree}</p>
+      {/* Degree */}
+      <p className='font-sans text-[13px] text-muted'>{school.degree}</p>
 
-          {/* Research / advisor note */}
-          {school.note && (
-            <p className='mt-0.5 font-mono text-[11px] leading-snug text-muted'>
-              {school.note}
-            </p>
-          )}
+      {/* Research / advisor note */}
+      {school.note && (
+        <p className='mt-0.5 font-mono text-[11px] leading-snug text-muted'>
+          {school.note}
+        </p>
+      )}
 
-          {/*
+      {/*
         Specializations + courses share one hover region: the trace set by a
         spec chip stays lit while the pointer travels down into the surfaced
         course chips, and only clears when it leaves this whole block.
       */}
-          {(specs.length > 0 || courses.length > 0) && (
-            <div onMouseLeave={() => setActiveSpec(null)}>
-              {/* Specializations (領域專長) — interactive trace triggers */}
-              {specs.length > 0 && (
-                <>
-                  <div className='mt-2 flex flex-wrap items-center gap-1.5'>
-                    <span className='font-mono text-[10px] text-muted'>
+      {(specs.length > 0 || courses.length > 0) && (
+        <div onMouseLeave={() => setActiveSpec(null)}>
+          {/* Specializations (領域專長) — interactive trace triggers */}
+          {specs.length > 0 && (
+            <>
+              <div className='mt-2 flex flex-wrap items-center gap-1.5'>
+                <span className='font-mono text-[10px] text-muted'>
                   Specialization
-                    </span>
-                    {specs.map((s) => {
-                      const lit = specLit(s.code);
-                      return (
-                        <button
-                          key={s.code}
-                          type='button'
-                          onMouseEnter={() => setActiveSpec(s.code)}
-                          onFocus={() => setActiveSpec(s.code)}
-                          onBlur={() => setActiveSpec(null)}
-                          onClick={() =>
-                            setActiveSpec((p) => (p === s.code ? null : s.code))
-                          }
-                          aria-pressed={activeSpec === s.code}
-                          title={`${s.chineseName} 領域專長`}
-                          className={`flex items-center gap-1.5 rounded-[5px] border px-2 py-0.5 font-mono text-[10px] font-medium transition-colors ${
-                            lit
-                              ? 'border-primary bg-primary/12 text-primary'
-                              : 'border-primary/25 bg-primary/[0.04] text-primary/80 hover:border-primary/50 hover:bg-primary/[0.07]'
-                          }`}
-                        >
-                          {s.englishName}
-                          <span className='text-primary/50'>{s.code}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {courses.length > 0 && (
-                    <p className='mt-1 font-mono text-[10px] text-muted/70'>
-                  hover a specialization to trace its courses
-                    </p>
-                  )}
-                </>
-              )}
-
-              {/* Course chips */}
-              {courses.length > 0 && (
-                <div className='mt-3'>
-                  <motion.div layout className='flex flex-wrap gap-1.5'>
-                    <AnimatePresence initial={false} mode='popLayout'>
-                      {renderList.map((c) => (
-                        <motion.div
-                          layout
-                          key={`${c.courseNumber}-${c.semester}`}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.18, ease: 'easeOut' }}
-                        >
-                          <CourseChip
-                            course={c}
-                            state={stateFor(c)}
-                            specs={specsOf(c)}
-                            onHover={(h) =>
-                              setHoveredCourse(h ? c.courseNumber : null)
-                            }
-                          />
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
-                  </motion.div>
-
-                  {hidden.length > 0 && (
+                </span>
+                {specs.map((s) => {
+                  const lit = specLit(s.code);
+                  return (
                     <button
-                      onClick={() => setExpanded((v) => !v)}
-                      className='mt-2 font-mono text-[11px] font-semibold text-primary hover:underline'
+                      key={s.code}
+                      type='button'
+                      onMouseEnter={() => setActiveSpec(s.code)}
+                      onFocus={() => setActiveSpec(s.code)}
+                      onBlur={() => setActiveSpec(null)}
+                      onClick={() =>
+                        setActiveSpec((p) => (p === s.code ? null : s.code))
+                      }
+                      aria-pressed={activeSpec === s.code}
+                      title={`${s.chineseName} 領域專長`}
+                      className={`flex items-center gap-1.5 rounded-[5px] border px-2 py-0.5 font-mono text-[10px] font-medium transition-colors ${
+                        lit
+                          ? 'border-primary bg-primary/12 text-primary'
+                          : 'border-primary/25 bg-primary/[0.04] text-primary/80 hover:border-primary/50 hover:bg-primary/[0.07]'
+                      }`}
                     >
-                      {expanded ? '▴ show less' : `+ ${hidden.length} more ▾`}
+                      {s.englishName}
+                      <span className='text-primary/50'>{s.code}</span>
                     </button>
-                  )}
-                </div>
+                  );
+                })}
+              </div>
+              {courses.length > 0 && (
+                <p className='mt-1 font-mono text-[10px] text-muted/70'>
+                  hover a specialization to trace its courses
+                </p>
+              )}
+            </>
+          )}
+
+          {/* Course chips */}
+          {courses.length > 0 && (
+            <div className='mt-3'>
+              <motion.div layout className='flex flex-wrap gap-1.5'>
+                <AnimatePresence initial={false} mode='popLayout'>
+                  {renderList.map((c) => (
+                    <motion.div
+                      layout
+                      key={`${c.courseNumber}-${c.semester}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.18, ease: 'easeOut' }}
+                    >
+                      <CourseChip
+                        course={c}
+                        state={stateFor(c)}
+                        specs={specsOf(c)}
+                        onHover={(h) =>
+                          setHoveredCourse(h ? c.courseNumber : null)
+                        }
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+
+              {hidden.length > 0 && (
+                <button
+                  onClick={() => setExpanded((v) => !v)}
+                  className='mt-2 font-mono text-[11px] font-semibold text-primary hover:underline'
+                >
+                  {expanded ? '▴ show less' : `+ ${hidden.length} more ▾`}
+                </button>
               )}
             </div>
           )}
         </div>
-      </div>
+      )}
     </TimelineNode>
   );
 };

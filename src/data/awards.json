@@ -2,33 +2,44 @@
   "awards": [
     {
       "englishTitle": "NTU CSIE 112 Presidential Award",
-      "chineseTitle": "國立臺灣大學資訊工程學系 112 學年度校長獎"
+      "chineseTitle": "國立臺灣大學資訊工程學系 112 學年度校長獎",
+      "logo": "/logos/orgs/ntu.png"
     },
     {
       "englishTitle": "NTU CSIE 112-2 Dean's List Award",
-      "chineseTitle": "國立臺灣大學資訊工程學系 112 學年度第 2 學期書卷獎"
+      "chineseTitle": "國立臺灣大學資訊工程學系 112 學年度第 2 學期書卷獎",
+      "logo": "/logos/orgs/ntu.png"
     },
     {
       "englishTitle": "2023 ICPC Asia Taoyuan, Bronze Award",
-      "chineseTitle": "2023 ICPC 亞洲桃園站銅牌"
+      "chineseTitle": "2023 ICPC 亞洲桃園站銅牌",
+      "logo": "/logos/awards/icpc.png"
     },
     {
-      "englishTitle": "2022 Regeneron ISEF at Atlanta, Mathematics, Mu Alpha Theta Second Award"
+      "englishTitle": "2022 Regeneron ISEF at Atlanta, Mathematics, Mu Alpha Theta Second Award",
+      "logo": "/logos/awards/isef-2022.jpg",
+      "logoBg": "#ffffff"
     },
     {
       "englishTitle": "2022 TISF, Mathematics, First Award",
+      "logo": "/logos/awards/tisf.png",
       "chineseTitle": "2022 台灣國際科學展覽會數學科第一名"
     },
     {
       "englishTitle": "2021 Macronix Science Awards, Gold Award",
-      "chineseTitle": "2021 旺宏科學獎金牌獎"
+      "chineseTitle": "2021 旺宏科學獎金牌獎",
+      "logo": "/logos/awards/macronix-20.jpg",
+      "logoBg": "#ffffff"
     },
     {
-      "englishTitle": "2021 NPSC, Second Award"
+      "englishTitle": "2021 NPSC, Second Award",
+      "logo": "/logos/awards/npsc.png",
+      "logoBg": "#ffffff"
     },
     {
       "englishTitle": "58th National Primary and High School Science Fair, Mathematics, First Award",
-      "chineseTitle": "第 58 屆全國中小學科展數學科第一名"
+      "chineseTitle": "第 58 屆全國中小學科展數學科第一名",
+      "logo": "/logos/awards/58-nphssf.png"
     }
   ]
 }
