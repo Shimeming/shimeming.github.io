@@ -42,7 +42,7 @@ const CourseChip = ({
   // un-dim on direct hover so they stay readable and clickable.
   const stateClass =
     state === 'active'
-      ? 'border-accent bg-accent/10 text-foreground shadow-[0_0_12px_-3px_var(--accent)]'
+      ? 'border-primary bg-primary/10 text-foreground shadow-[0_0_14px_-3px_var(--primary)]'
       : state === 'dimmed'
         ? 'border-primary/25 bg-surface text-body opacity-30 hover:opacity-100'
         : 'border-primary/25 bg-surface text-body hover:border-primary/50';
@@ -85,11 +85,11 @@ const CourseChip = ({
 
       {/* Specialization linkage — shown for the courses that count toward one */}
       {specs.length > 0 && (
-        <p className='mt-2 font-mono text-[10px] leading-snug text-accent'>
-          <span className='uppercase tracking-[0.08em] text-accent/70'>
-            Counts toward
-          </span>{' '}
-          {specs.map((s) => `${s.englishName} (${s.code})`).join(' · ')}
+        <p className='mt-2 font-mono text-[10px] leading-snug text-muted'>
+          Counts toward{' '}
+          <span className='text-primary/80'>
+            {specs.map((s) => `${s.englishName} (${s.code})`).join(' · ')}
+          </span>
         </p>
       )}
 
@@ -237,7 +237,7 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
           {specs.length > 0 && (
             <>
               <div className='mt-2 flex flex-wrap items-center gap-1.5'>
-                <span className='font-mono text-[10px] uppercase tracking-[0.08em] text-muted'>
+                <span className='font-mono text-[10px] text-muted'>
                   Specialization
                 </span>
                 {specs.map((s) => {
@@ -256,12 +256,12 @@ const SchoolNode = ({ school }: { school: EducationData }) => {
                       title={`${s.chineseName} 領域專長`}
                       className={`flex items-center gap-1.5 rounded-[5px] border px-2 py-0.5 font-mono text-[10px] font-medium transition-colors ${
                         lit
-                          ? 'border-accent bg-accent/15 text-accent'
-                          : 'border-accent/30 bg-accent/5 text-accent/90 hover:border-accent/60 hover:bg-accent/10'
+                          ? 'border-primary bg-primary/12 text-primary'
+                          : 'border-primary/25 bg-primary/[0.04] text-primary/80 hover:border-primary/50 hover:bg-primary/[0.07]'
                       }`}
                     >
                       {s.englishName}
-                      <span className='text-accent/60'>{s.code}</span>
+                      <span className='text-primary/50'>{s.code}</span>
                     </button>
                   );
                 })}
