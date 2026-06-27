@@ -11,6 +11,8 @@ import strawberry from '@public/pictures/celeste/strawberry.png';
 import tape from '@public/pictures/celeste/tape.png';
 import yellowHeart from '@public/pictures/celeste/yellow-heart.png';
 
+type HeartColor = 'blue' | 'red' | 'yellow';
+
 interface ChapterData {
   name: string;
   strawberries: string;
@@ -21,14 +23,21 @@ interface ChapterData {
   flag?: boolean;
   tape?: boolean;
   bird?: boolean;
-  hearts?: ('blue' | 'red' | 'yellow')[];
-
+  hearts?: HeartColor[];
 }
 
 export interface CelesteProgressData {
   lastUpdate: string;
   chapterData: ChapterData[];
 }
+
+const heartImages: Record<HeartColor, StaticImageData> = {
+  blue: blueHeart,
+  red: redHeart,
+  yellow: yellowHeart,
+};
+
+const pad2 = (value: number) => String(value).padStart(2, '0');
 
 const CategoryImage = ({
   src, alt, className,
@@ -67,7 +76,13 @@ const CelesteProgressJournal = ({
     const [hours, minutes, seconds] = chapter.time.split(':').map(Number);
     return total + hours * 3600 + minutes * 60 + seconds;
   }, 0);
-  const totalTimeFormatted = `${Math.floor(totalTime / 3600)}:${Math.floor(totalTime / 60) % 60}:${(totalTime % 60).toFixed(3)}`;
+  // Mirror the per-row format (e.g. 6:55:02.637): hours unpadded, mm and ss
+  // zero-padded so the totals row stays consistent regardless of the values.
+  const totalTimeFormatted = [
+    Math.floor(totalTime / 3600),
+    pad2(Math.floor(totalTime / 60) % 60),
+    (totalTime % 60).toFixed(3).padStart(6, '0'),
+  ].join(':');
 
   return (
     <div className={`
@@ -80,63 +95,60 @@ const CelesteProgressJournal = ({
           <thead>
             <tr className="[&>th]:px-3 [&>th]:py-5">
               <th className="text-3xl font-bold uppercase">Progress</th>
-              <th className=""></th>
-              <CategoryImage src={strawberry} alt="strawberry" className='mx-4' />
-              <CategoryImage src={skullA} alt="skull A" className='mx-2' />
-              <CategoryImage src={skullB} alt="skull B" className='mx-2' />
-              <CategoryImage src={skullC} alt="skull C" className='mx-2' />
+              <th></th>
+              <CategoryImage src={strawberry} alt="strawberries collected" className='mx-4' />
+              <CategoryImage src={skullA} alt="A-side deaths" className='mx-2' />
+              <CategoryImage src={skullB} alt="B-side deaths" className='mx-2' />
+              <CategoryImage src={skullC} alt="C-side deaths" className='mx-2' />
               <CategoryImage src={clock} alt="time spent" className='mx-16' />
             </tr>
           </thead>
           <tbody
             className="from-blue-300/50 bg-linear-to-br to-rose-300/35 [&_td]:p-1.5 [&_td]:text-center"
           >
-            {celesteProgress.chapterData.map((chapter, index) => (
-              <tr key={index} className="odd:bg-white">
+            {celesteProgress.chapterData.map((chapter) => (
+              <tr key={chapter.name} className="odd:bg-white">
                 <td className="font-semibold text-right!">{chapter.name}</td>
-                <td className="flex gap-3 mx-8 justify-center items-center">
-                  {chapter.flag && (
-                    <Image
-                      src={flag}
-                      alt="flag"
-                      className="max-h-8 w-auto"
-                    />
-                  )}
-                  {chapter.tape && (
-                    <Image
-                      src={tape}
-                      alt="tape"
-                      className="max-h-8 w-auto"
-                    />
-                  )}
-                  <div className='flex'>
-                    {chapter.hearts?.map((heart, index) => (
+                <td>
+                  <div className="flex gap-3 mx-8 justify-center items-center">
+                    {chapter.flag && (
                       <Image
-                        key={index}
-                        src={
-                          heart === 'blue' ? blueHeart :
-                            heart === 'red' ? redHeart :
-                              heart === 'yellow' ? yellowHeart :
-                                ''
-                        }
-                        alt={heart}
-                        className={`max-h-8 w-auto -rotate-6 ${index !== 0 ? '-ml-6' : ''}`}
+                        src={flag}
+                        alt="flag"
+                        className="max-h-8 w-auto"
                       />
-                    ))}
+                    )}
+                    {chapter.tape && (
+                      <Image
+                        src={tape}
+                        alt="tape"
+                        className="max-h-8 w-auto"
+                      />
+                    )}
+                    <div className='flex'>
+                      {chapter.hearts?.map((heart, index) => (
+                        <Image
+                          key={heart}
+                          src={heartImages[heart]}
+                          alt={heart}
+                          className={`max-h-8 w-auto -rotate-6 ${index !== 0 ? '-ml-6' : ''}`}
+                        />
+                      ))}
+                    </div>
+                    {chapter.bird && (
+                      <Image
+                        src={bird}
+                        alt="bird"
+                        className="max-h-8 w-auto"
+                      />
+                    )}
                   </div>
-                  {chapter.bird && (
-                    <Image
-                      src={bird}
-                      alt="bird"
-                      className="max-h-8 w-auto"
-                    />
-                  )}
                 </td>
-                <td className="">{chapter.strawberries}</td>
-                <td className="">{(chapter.aSideDeaths >= 0) ? chapter.aSideDeaths : ''}</td>
-                <td className="">{(chapter.bSideDeaths >= 0) ? chapter.bSideDeaths : ''}</td>
-                <td className="">{(chapter.cSideDeaths >= 0) ? chapter.cSideDeaths : ''}</td>
-                <td className="">{chapter.time}</td>
+                <td>{chapter.strawberries}</td>
+                <td>{(chapter.aSideDeaths >= 0) ? chapter.aSideDeaths : ''}</td>
+                <td>{(chapter.bSideDeaths >= 0) ? chapter.bSideDeaths : ''}</td>
+                <td>{(chapter.cSideDeaths >= 0) ? chapter.cSideDeaths : ''}</td>
+                <td>{chapter.time}</td>
               </tr>
             ))}
             <tr
@@ -146,16 +158,14 @@ const CelesteProgressJournal = ({
               "
             >
               <td className="text-right! uppercase text-2xl">Totals</td>
-              <td className=""></td>
-              <td className="">{totalStrawberries}</td>
-              <td className=""></td>
-              <td className="">{totalDeaths}</td>
-              <td className=""></td>
-              <td className="">{totalTimeFormatted}</td>
+              <td></td>
+              <td>{totalStrawberries}</td>
+              <td></td>
+              <td>{totalDeaths}</td>
+              <td></td>
+              <td>{totalTimeFormatted}</td>
             </tr>
           </tbody>
-          {/* <tfoot>
-          </tfoot> */}
         </table>
       </div>
     </div>
