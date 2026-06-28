@@ -89,6 +89,56 @@ body {
   @apply transition-colors duration-500;
 }
 
+/* ----------------------------------------------------------------------------
+   Ink-bleed theme transition (View Transitions API).
+   The toggle button sets --vt-x / --vt-y (icon centre), --vt-r (reach to the
+   farthest corner) and data-vt on <html>; see src/lib/theme-transition.ts.
+---------------------------------------------------------------------------- */
+@property --ink-r {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+/* Hold the outgoing theme still beneath; bleed the incoming theme over it. */
+[data-vt='ink']::view-transition-old(root) {
+  animation: none;
+  z-index: 0;
+}
+[data-vt='ink']::view-transition-new(root) {
+  z-index: 1;
+  animation: ink-bleed 0.7s ease-out forwards;
+  /* Soft, feathered radial mask = watercolour/ink edge spreading from the icon. */
+  -webkit-mask: radial-gradient(
+    circle at var(--vt-x) var(--vt-y),
+    #000 max(0px, calc(var(--ink-r) - 110px)),
+    transparent var(--ink-r)
+  );
+  mask: radial-gradient(
+    circle at var(--vt-x) var(--vt-y),
+    #000 max(0px, calc(var(--ink-r) - 110px)),
+    transparent var(--ink-r)
+  );
+}
+@keyframes ink-bleed {
+  from { --ink-r: 0px; }
+  to   { --ink-r: var(--vt-r); }
+}
+
+/* Fallback for browsers without the View Transitions API: ease every colour
+   together for the span of the switch (data-vt is removed afterwards) so the
+   whole page changes at once instead of only the background fading. */
+[data-vt='fade'] *,
+[data-vt='fade'] *::before,
+[data-vt='fade'] *::after {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease,
+    fill 0.5s ease,
+    stroke 0.5s ease;
+}
+
 /* Respect users who prefer reduced motion (covers CSS transitions/animations;
    framer-motion is handled via <MotionConfig reducedMotion="user">). */
 @media (prefers-reduced-motion: reduce) {
