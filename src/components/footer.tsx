@@ -74,12 +74,6 @@ const Footer = (): React.JSX.Element => {
             >
               View source ↗
             </a>
-            <span className='font-mono mb-1.5 block text-xs font-semibold text-muted'>
-              Next.js · static
-            </span>
-            <span className='font-mono mb-1.5 block text-xs font-semibold text-muted'>
-              Blueprint v2.0
-            </span>
           </div>
         </div>
 
@@ -87,9 +81,6 @@ const Footer = (): React.JSX.Element => {
         <div className='flex flex-wrap items-center justify-between gap-2 border-t border-primary/20 py-3'>
           <span className='font-mono text-[10px] font-semibold text-muted'>
             © {year} SHIMEMING · 銘
-          </span>
-          <span className='font-mono text-[10px] font-semibold text-muted'>
-            <b className='text-primary'>REV 2.0</b>
           </span>
           <span className='font-mono text-[10px] font-semibold text-muted'>
             LAST UPDATED · {lastUpdated.toUpperCase()}

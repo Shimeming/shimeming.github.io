@@ -2,6 +2,7 @@
 import { motion } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
+import { runThemeTransition } from '@/lib/theme-transition';
 
 // ref: https://jfelix.info/blog/using-react-spring-to-animate-svg-icons-dark-mode-toggle
 
@@ -39,8 +40,12 @@ const ThemeToggleButton = ({
 
   const isDarkMode = mounted && resolvedTheme === 'dark';
 
-  const toggleDarkMode = () => {
-    setTheme(isDarkMode ? 'light' : 'dark');
+  const toggleDarkMode = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const next = isDarkMode ? 'light' : 'dark';
+    // Ink bleed spreads from the centre of the toggle icon.
+    const rect = event.currentTarget.getBoundingClientRect();
+    const origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    runThemeTransition(next, origin, setTheme);
   };
 
   const { r, transform, cx, cy, opacity } = isDarkMode ? properties.sun : properties.moon;
