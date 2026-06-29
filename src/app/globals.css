@@ -106,23 +106,29 @@ body {
   z-index: 0;
 }
 [data-vt='ink']::view-transition-new(root) {
+  /* Width of the soft edge between revealed and not-yet-revealed. */
+  --ink-feather: 110px;
   z-index: 1;
   animation: ink-bleed 0.7s ease-out forwards;
   /* Soft, feathered radial mask = watercolour/ink edge spreading from the icon. */
   -webkit-mask: radial-gradient(
     circle at var(--vt-x) var(--vt-y),
-    #000 max(0px, calc(var(--ink-r) - 110px)),
+    #000 max(0px, calc(var(--ink-r) - var(--ink-feather))),
     transparent var(--ink-r)
   );
   mask: radial-gradient(
     circle at var(--vt-x) var(--vt-y),
-    #000 max(0px, calc(var(--ink-r) - 110px)),
+    #000 max(0px, calc(var(--ink-r) - var(--ink-feather))),
     transparent var(--ink-r)
   );
 }
+/* Animate to vt-r + feather so the *solid* front (which trails the leading edge
+   by one feather width) sweeps fully past the farthest corner before the View
+   Transition snapshot is torn down — otherwise that corner is still mid-feather
+   and snaps to solid, looking "unsmooth" (most visible at the bottom-left). */
 @keyframes ink-bleed {
   from { --ink-r: 0px; }
-  to   { --ink-r: var(--vt-r); }
+  to   { --ink-r: calc(var(--vt-r) + var(--ink-feather)); }
 }
 
 /* Fallback for browsers without the View Transitions API: ease every colour
