@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import Link from 'next/link';
 import AnimatedHeading from '@/components/animated-heading';
+import GridInkTrail from '@/components/grid-ink-trail';
 import Container from '@/components/layout/container';
 import JsonLd from '@/components/seo/json-ld';
 import ViewportWidth from '@/components/ui/viewport-width';
@@ -27,9 +28,10 @@ const personSchema = {
 
 const Page = () => {
   return (
-    <main className='bp-grid flex flex-1 items-center'>
+    <main className='bp-grid relative flex flex-1 items-center overflow-hidden'>
       <JsonLd data={personSchema} />
-      <Container as='section' className='w-full py-12'>
+      <GridInkTrail />
+      <Container as='section' className='relative z-10 w-full py-12'>
         {/* Mono eyebrow */}
         <p className='font-mono text-xs uppercase tracking-[0.14em] text-primary'>
           Personal site · 個人網站
